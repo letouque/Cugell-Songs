@@ -6,7 +6,7 @@ const songs = [
     year: "1975",
     style: ["Soft Rock"],
     category: "70s Music",
-    cover: "img/10cc-not-in-love.jpg"
+    cover: "img/10cc - Im not in love.jpg"
   },
   {
     artist: "ABBA",
@@ -15,7 +15,7 @@ const songs = [
     year: "",
     style: ["Pop","Disco"],
     category: "70s Music",
-    cover: "img/abba-gimme.jpg"
+    cover: "img/ABBA - Gimme  Gimme  Gimmie .jpg"
   },
   {
     artist: "ABBA",
@@ -24,7 +24,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "70s Music",
-    cover: "img/abba-mammamia.jpg"
+    cover: "img/ABBA - Mammamia.jpg"
   },
   {
     artist: "Ace Of Base",
@@ -33,7 +33,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "90s Music",
-    cover: "img/ace-of-base-all-that-she-wants.jpg"
+    cover: "img/Ace Of Base - All that she wants.jpg"
   },
   {
     artist: "Ace Of Base",
@@ -42,7 +42,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "90s Music",
-    cover: "img/ace-of-base-happy-nation.jpg"
+    cover: "img/Ace Of Base - Happy Nation.jpg"
   },
   {
     artist: "Ace Of Base",
@@ -51,7 +51,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "90s Music",
-    cover: "img/ace-of-base-the-sign.jpg"
+    cover: "img/Ace Of Base - The Sign.jpg"
   },
   {
     artist: "Aha",
@@ -60,7 +60,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "80s Music",
-    cover: "img/take-on-me.jpg"
+    cover: "img/Aha - Take on me.jpg"
   },
   {
     artist: "Air",
@@ -69,7 +69,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "90s Music",
-    cover: "img/air-kelly-watch-the-stars.jpg"
+    cover: "img/Air - Kelly watch the stars.jpg"
   },
   {
     artist: "Alannah Myles",
@@ -78,7 +78,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "80s Music",
-    cover: "img/black-velvet.jpg"
+    cover: "img/Alannah Myles - Black Velvet.jpg"
   },
   {
     artist: "Alice Deejay",
@@ -87,7 +87,7 @@ const songs = [
     year: "",
     style: ["Dance"],
     category: "90s Music",
-    cover: "img/alice-deejay-better-off-alone.jpg"
+    cover: "img/Alice Deejay - Better off alone.jpg"
   },
   {
     artist: "Alicia Keys",
@@ -96,7 +96,7 @@ const songs = [
     year: "",
     style: ["R&B"],
     category: "2000s Music",
-    cover: "img/alicia-keys-no-one.jpg"
+    cover: "img/Alicia Keys - No one.jpg"
   },
   {
     artist: "Alizee",
@@ -105,7 +105,7 @@ const songs = [
     year: "",
     style: ["French Pop"],
     category: "2000s Music",
-    cover: "img/alizee-moi-lolita.jpg"
+    cover: "img/Alizee - Moi Lolita.jpg"
   },
   {
     artist: "Alphaville",
@@ -114,7 +114,7 @@ const songs = [
     year: "",
     style: ["New Wave"],
     category: "80s Music",
-    cover: "img/alphaville-big-in-japan.jpg"
+    cover: "img/Alphaville - Big in Japan.jpg"
   },
   {
     artist: "Alphaville",
@@ -123,7 +123,7 @@ const songs = [
     year: "",
     style: ["New Wave"],
     category: "80s Music",
-    cover: "img/alphaville-forever-young.jpg"
+    cover: "img/Alphaville - Forever Young.jpg"
   },
   {
     artist: "Amy Winehouse",
@@ -132,7 +132,7 @@ const songs = [
     year: "",
     style: ["Soul"],
     category: "2000s Music",
-    cover: "img/Amy-Winehouse-Back-To-Black.jpg"
+    cover: "img/Amy Winehouse - Back to Black.jpg"
   },
   {
     artist: "Amy Winehouse",
@@ -141,16 +141,16 @@ const songs = [
     year: "",
     style: ["Soul"],
     category: "2000s Music",
-    cover: "img/Amy-Winehouse-Back-To-Black.jpg"
+    cover: "img/Amy Winehouse - You know Im no good.jpg"
   },
-  {
+    {
     artist: "Andrea Bocelli",
     title: "Vivo por Ella",
     duration: "",
-    year: "1995",
-    style: ["Pop","Classic"],
-    category: "90s Music",
-    cover: "img/default-cover.jpg"
+    year: "",
+    style: [],
+    category: "",
+    cover: "img/Andrea Bocelli - Vivo por Ella.jpg"
   },
   {
     artist: "Animals",
@@ -159,7 +159,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "60s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Animals - House of the rising sun.jpg"
   },
   {
     artist: "Anita Ward",
@@ -168,7 +168,7 @@ const songs = [
     year: "",
     style: ["Disco"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Anita Ward - Ring My Bell.jpg"
   },
   {
     artist: "Ann Lee",
@@ -177,7 +177,7 @@ const songs = [
     year: "",
     style: ["Dance-Pop"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Ann Lee - 2 Times.jpg"
   },
   {
     artist: "Arctic Monkeys",
@@ -186,7 +186,7 @@ const songs = [
     year: "",
     style: ["Indie Rock"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Arctic Monkeys - 505.jpg"
   },
   {
     artist: "Artemas",
@@ -195,7 +195,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "2020s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Artemas - I like the way you kiss me.jpg"
   },
   {
     artist: "Avicii",
@@ -204,7 +204,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Avicii - Levels.jpg"
   },
   {
     artist: "Awolnation",
@@ -213,7 +213,7 @@ const songs = [
     year: "",
     style: ["Alternative Rock"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Awolnation - Sail.jpg"
   },
   {
     artist: "Backstreet Boys",
@@ -222,7 +222,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Backstreet Boys - I Want It That Way.jpg"
   },
   {
     artist: "Bag Raiders",
@@ -231,7 +231,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Bag Raiders - Shooting Star.jpg"
   },
   {
     artist: "Bangles",
@@ -240,7 +240,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Bangles - Eternal Flame.jpg"
   },
   {
     artist: "Bangles",
@@ -249,7 +249,7 @@ const songs = [
     year: "",
     style: ["Pop Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Bangles - Walk like an Egyptian.jpg"
   },
   {
     artist: "Barry White",
@@ -258,7 +258,7 @@ const songs = [
     year: "",
     style: ["Soul"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Barry White - Youre the first the last my everything.jpg"
   },
   {
     artist: "Billie Eilish",
@@ -267,7 +267,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Billie Eilish - Bad Guy.jpg"
   },
   {
     artist: "Billie Eilish",
@@ -276,7 +276,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "2020s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Billie Eilish - Birds of a feather.jpg"
   },
   {
     artist: "Billy Idol",
@@ -285,7 +285,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Billy Idol - Eyes Without A Face.jpg"
   },
   {
     artist: "Billy Idol",
@@ -294,7 +294,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Billy Idol - Flesh for Fantasy.jpg"
   },
   {
     artist: "Billy Idol",
@@ -303,7 +303,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Billy Idol - White Wedding.jpg"
   },
   {
     artist: "Black",
@@ -312,7 +312,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Black - Wonderful Life.jpg"
   },
   {
     artist: "Black Eyed Peas",
@@ -321,7 +321,7 @@ const songs = [
     year: "",
     style: ["Dance-Pop"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Black Eyed Peas - I got a feeling.jpg"
   },
   {
     artist: "Black Eyed Peas",
@@ -330,7 +330,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Black Eyed Peas - Meet me halfway.jpg"
   },
   {
     artist: "Black Eyed Peas",
@@ -339,7 +339,7 @@ const songs = [
     year: "",
     style: ["Hip Hop"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Black Eyed Peas - Pump It.jpg"
   },
   {
     artist: "Blondie",
@@ -348,7 +348,7 @@ const songs = [
     year: "",
     style: ["New Wave"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Blondie - Atomic.jpg"
   },
   {
     artist: "Blondie",
@@ -357,7 +357,7 @@ const songs = [
     year: "",
     style: ["New Wave"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Blondie - Heart of glass.jpg"
   },
   {
     artist: "Blues Brothers",
@@ -366,7 +366,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/Blues Brothers - Peter Gunn Theme.jpg"
   },
   {
     artist: "Bon Jovi",
@@ -375,7 +375,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/Bon Jovi - Its my life.jpg"
   },
   {
     artist: "Boney M",
@@ -384,7 +384,7 @@ const songs = [
     year: "",
     style: ["Disco"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Boney M - Rasputin.jpg"
   },
   {
     artist: "Bonnie Tyler",
@@ -393,7 +393,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Bonnie Tyler - Holding outta hero.jpg"
   },
   {
     artist: "BTS",
@@ -402,7 +402,7 @@ const songs = [
     year: "",
     style: ["K-Pop"],
     category: "2020s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/BTS - Standing Next to You.jpg"
   },
   {
     artist: "Cake",
@@ -411,7 +411,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/Cake - Never There.jpg"
   },
   {
     artist: "Camila Cabello",
@@ -420,7 +420,7 @@ const songs = [
     year: "",
     style: ["Latin Pop"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Camila Cabello - Havana ft. Young Thug.jpg"
   },
   {
     artist: "Carlos Santana",
@@ -429,7 +429,7 @@ const songs = [
     year: "",
     style: ["Latin Rock"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Carlos Santana - Maria Maria.jpg"
   },
   {
     artist: "Chaka Khan",
@@ -438,7 +438,7 @@ const songs = [
     year: "",
     style: ["Funk"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Chaka Khan - Aint Nobody.jpg"
   },
   {
     artist: "Cock Robin",
@@ -447,7 +447,7 @@ const songs = [
     year: "",
     style: ["Pop Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Cock Robin - The promise you made.jpg"
   },
   {
     artist: "Coldplay",
@@ -456,7 +456,7 @@ const songs = [
     year: "",
     style: ["Alternative Rock"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Coldplay - Viva La Vida.jpg"
   },
   {
     artist: "Coldplay",
@@ -465,7 +465,7 @@ const songs = [
     year: "",
     style: ["Alternative Rock"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Coldplay - Yellow.jpg"
   },
   {
     artist: "Cyndi Lauper",
@@ -474,7 +474,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Cyndi Lauper - Time after Time.jpg"
   },
   {
     artist: "Cyndi Lauper",
@@ -483,7 +483,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Cyndi Lauper - True Colors.jpg"
   },
   {
     artist: "Da Hool",
@@ -492,7 +492,7 @@ const songs = [
     year: "",
     style: ["Dance"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Da Hool - Meet Her At The Love Parade.jpg"
   },
   {
     artist: "Daft Punk",
@@ -501,7 +501,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2000s Music",
-    cover: "img/daft-punk-discovery.jpg"
+    cover: "img/Daft Punk - Aerodynamic.jpg"
   },
   {
     artist: "Daft Punk",
@@ -510,7 +510,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2000s Music",
-    cover: "img/daft-punk-discovery.jpg"
+    cover: "img/Daft Punk - Digital Love.jpg"
   },
   {
     artist: "Daft Punk",
@@ -519,7 +519,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Daft Punk - Giorgio.jpg"
   },
   {
     artist: "Daft Punk",
@@ -528,7 +528,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2000s Music",
-    cover: "img/daft-punk-discovery.jpg"
+    cover: "img/Daft Punk - Harder better faster stronger.jpg"
   },
   {
     artist: "Daft Punk",
@@ -537,7 +537,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Daft Punk - Instant Crush.jpg"
   },
   {
     artist: "Daft Punk",
@@ -546,7 +546,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Daft Punk - Lose yourself to dance.jpg"
   },
   {
     artist: "Daft Punk",
@@ -555,7 +555,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2000s Music",
-    cover: "img/daft-punk-discovery.jpg"
+    cover: "img/Daft Punk - One More Time.jpg"
   },
   {
     artist: "Daft Punk",
@@ -564,7 +564,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Daft Punk - Robot Rock.jpg"
   },
   {
     artist: "Daft Punk",
@@ -573,7 +573,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Daft Punk - Television Rules the Nation.jpg"
   },
   {
     artist: "Daft Punk",
@@ -582,7 +582,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2000s Music",
-    cover: "img/daft-punk-discovery.jpg"
+    cover: "img/Daft Punk - Veridis Quo.jpg"
   },
   {
     artist: "Daft Punk",
@@ -591,7 +591,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Daft Punk - Within.jpg"
   },
   {
     artist: "Daniel Balavoine",
@@ -600,7 +600,7 @@ const songs = [
     year: "",
     style: ["French Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Daniel Balavoine - Tout les cris les SOS.jpg"
   },
   {
     artist: "Dario G",
@@ -609,7 +609,7 @@ const songs = [
     year: "",
     style: ["Dance"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Dario G - Sunchyme.jpg"
   },
   {
     artist: "David Bowie",
@@ -618,7 +618,7 @@ const songs = [
     year: "",
     style: ["Glam Rock"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/David Bowie - Life on mars.jpg"
   },
   {
     artist: "Desireless",
@@ -627,7 +627,7 @@ const songs = [
     year: "",
     style: ["French Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Desireless - Voyage Voyage.jpg"
   },
   {
     artist: "Dexys Midnight Runners",
@@ -636,7 +636,7 @@ const songs = [
     year: "",
     style: ["Pop Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Dexys Midnight Runners - Come on Eileen.jpg"
   },
   {
     artist: "Dire Straits",
@@ -645,7 +645,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Dire Straits - Brothers in arms.jpg"
   },
   {
     artist: "DJ Okawari",
@@ -654,7 +654,7 @@ const songs = [
     year: "",
     style: ["Instrumental"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/DJ Okawari - Flower Dance.jpg"
   },
   {
     artist: "Donna Summer",
@@ -663,7 +663,7 @@ const songs = [
     year: "",
     style: ["Disco"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Donna Summer - Hot Stuff.jpg"
   },
   {
     artist: "Dune (1984)",
@@ -672,7 +672,7 @@ const songs = [
     year: "",
     style: ["Soundtrack"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Dune 1984 - Take My Hand Credits music.jpg"
   },
   {
     artist: "Duran Duran",
@@ -681,7 +681,7 @@ const songs = [
     year: "",
     style: ["Pop Rock"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Duran Duran - Ordinary World.jpg"
   },
   {
     artist: "Elvis Presley",
@@ -690,7 +690,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "60s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Elvis Presley - Suspicious Minds.jpg"
   },
   {
     artist: "Ennio Moriconne",
@@ -699,7 +699,7 @@ const songs = [
     year: "",
     style: ["Soundtrack"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Ennio Moriconne - Chi Mai.jpg"
   },
   {
     artist: "Eurythmics",
@@ -708,7 +708,7 @@ const songs = [
     year: "",
     style: ["Synthpop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Eurythmics - Here comes the rain again.jpg"
   },
   {
     artist: "Evanescence",
@@ -717,7 +717,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Evanescence - My immortal.jpg"
   },
   {
     artist: "Everything But The Girl",
@@ -726,7 +726,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Everything But The Girl - Missing.jpg"
   },
   {
     artist: "Flashdance - Irene Cara",
@@ -735,7 +735,7 @@ const songs = [
     year: "",
     style: ["Disco"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Flashdance - Irene Cara - What a feeling.jpg"
   },
   {
     artist: "Fleetwood Mac",
@@ -744,7 +744,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Fleetwood Mac - Dreams.jpg"
   },
   {
     artist: "Florence and the machines",
@@ -753,7 +753,7 @@ const songs = [
     year: "",
     style: ["Indie Pop"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Florence and the machines - Cosmic love.jpg"
   },
   {
     artist: "Fools Garden",
@@ -762,7 +762,7 @@ const songs = [
     year: "",
     style: ["Pop Rock"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Fools Garden - Lemon Tree.jpg"
   },
   {
     artist: "FR David",
@@ -771,7 +771,7 @@ const songs = [
     year: "",
     style: ["Synthpop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/FR David - Words.jpg"
   },
   {
     artist: "Frank Sinatra",
@@ -780,7 +780,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "60s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Frank Sinatra - My Way.jpg"
   },
   {
     artist: "Franz Ferdinand",
@@ -789,7 +789,7 @@ const songs = [
     year: "",
     style: ["Indie Rock"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Franz Ferdinand - Take me out.jpg"
   },
   {
     artist: "Freaks",
@@ -798,7 +798,7 @@ const songs = [
     year: "",
     style: ["Dance"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Freaks - When Mama Isnt Home.jpg"
   },
   {
     artist: "Fugees",
@@ -807,7 +807,7 @@ const songs = [
     year: "",
     style: ["Hip Hop"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Fugees - Fu Gee La.jpg"
   },
   {
     artist: "Fun",
@@ -816,7 +816,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/Fun - Some nights.jpg"
   },
   {
     artist: "Futari No Kimochi",
@@ -825,7 +825,7 @@ const songs = [
     year: "",
     style: ["Soundtrack"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Futari No Kimochi - Inuyasha Sad Song.jpg"
   },
   {
     artist: "Game of Thrones",
@@ -834,7 +834,7 @@ const songs = [
     year: "",
     style: ["Soundtrack"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Game of Thrones - Light of The Seven.jpg"
   },
   {
     artist: "Gerry Rafferty",
@@ -843,7 +843,7 @@ const songs = [
     year: "",
     style: ["Soft Rock"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Gerry Rafferty - Baker Street.jpg"
   },
   {
     artist: "Gorillaz",
@@ -852,7 +852,7 @@ const songs = [
     year: "",
     style: ["Alternative"],
     category: "2020s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Gorillaz - Baby Queen.jpg"
   },
   {
     artist: "Gorillaz",
@@ -861,7 +861,7 @@ const songs = [
     year: "",
     style: ["Alternative"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Gorillaz - Clint Eastwood.jpg"
   },
   {
     artist: "Gorillaz",
@@ -870,7 +870,7 @@ const songs = [
     year: "",
     style: ["Alternative"],
     category: "2020s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Gorillaz - Silent Running.jpg"
   },
   {
     artist: "Gotye",
@@ -879,7 +879,7 @@ const songs = [
     year: "",
     style: ["Indie Pop"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Gotye - Somebody That I Used To Know ft. Kimbra.jpg"
   },
   {
     artist: "Green Day",
@@ -888,7 +888,7 @@ const songs = [
     year: "",
     style: ["Alternative Rock"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Green Day - Boulevard of Broken Dreams.jpg"
   },
   {
     artist: "Highway Men",
@@ -897,7 +897,7 @@ const songs = [
     year: "",
     style: ["Country"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Highway Men - Highwayman.jpg"
   },
   {
     artist: "Indila - Derniere Danse",
@@ -906,7 +906,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Indila - Derniere Danse - Derniere Danse.jpg"
   },
   {
     artist: "Indochine",
@@ -915,7 +915,7 @@ const songs = [
     year: "",
     style: ["Pop Rock"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Indochine - Jai demande a la Lune.jpg"
   },
   {
     artist: "Indochine",
@@ -924,7 +924,7 @@ const songs = [
     year: "",
     style: ["New Wave"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Indochine - Laventurier.jpg"
   },
   {
     artist: "Inuyasha OST",
@@ -933,7 +933,7 @@ const songs = [
     year: "",
     style: ["Soundtrack"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Inuyasha OST - Aika sad song.jpg"
   },
   {
     artist: "Iron Maiden",
@@ -942,7 +942,7 @@ const songs = [
     year: "",
     style: ["Heavy Metal"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Iron Maiden - Killers.jpg"
   },
   {
     artist: "Iron Maiden",
@@ -951,7 +951,7 @@ const songs = [
     year: "",
     style: ["Heavy Metal"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Iron Maiden - The Trooper.jpg"
   },
   {
     artist: "Jamiroquai",
@@ -960,7 +960,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/Jamiroquai - Virtual Insanity.jpg"
   },
   {
     artist: "Jamiroquai",
@@ -969,7 +969,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/Jamiroquai - Deeper Underground.jpg"
   },
   {
     artist: "Janet Jackson",
@@ -978,7 +978,7 @@ const songs = [
     year: "",
     style: ["Dance Pop"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Janet Jackson - Together again.jpg"
   },
   {
     artist: "Jim Noir - My Patch",
@@ -987,7 +987,7 @@ const songs = [
     year: "",
     style: ["Indie Pop"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Jim Noir - My Patch - My Patch.jpg"
   },
   {
     artist: "John Paul Young",
@@ -996,7 +996,7 @@ const songs = [
     year: "",
     style: ["Disco"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/John Paul Young - Love Is In The Air.jpg"
   },
   {
     artist: "Johnny Cash",
@@ -1005,7 +1005,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/Johnny Cash - Hurt.jpg"
   },
   {
     artist: "Johnny Hallyday",
@@ -1014,7 +1014,7 @@ const songs = [
     year: "",
     style: ["French Rock"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Johnny Hallyday - Allumer le feu.jpg"
   },
   {
     artist: "Justice",
@@ -1023,7 +1023,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Justice - Civilization.jpg"
   },
   {
     artist: "Justice",
@@ -1032,7 +1032,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Justice - D.A.N.C.E.jpg"
   },
   {
     artist: "Justice",
@@ -1041,7 +1041,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Justice - On N On.jpg"
   },
   {
     artist: "Justice & Simian",
@@ -1050,7 +1050,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Justice  Simian - We Are Your Friends.jpg"
   },
   {
     artist: "Keane",
@@ -1059,7 +1059,7 @@ const songs = [
     year: "",
     style: ["Pop Rock"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Keane - Somewhere Only We Know.jpg"
   },
   {
     artist: "Kid Francescoli",
@@ -1068,7 +1068,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Kid Francescoli - Moon.jpg"
   },
   {
     artist: "Killers",
@@ -1077,7 +1077,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/Killers - Human.jpg"
   },
   {
     artist: "Kim Carnes",
@@ -1086,7 +1086,7 @@ const songs = [
     year: "",
     style: ["Pop Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Kim Carnes - Bette Davis Eyes.jpg"
   },
   {
     artist: "Kool & the Gang",
@@ -1095,7 +1095,7 @@ const songs = [
     year: "",
     style: ["Funk"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Kool  the Gang - Fresh.jpg"
   },
   {
     artist: "Kraftwerk",
@@ -1104,7 +1104,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/Kraftwerk - The Model.jpg"
   },
   {
     artist: "Laura Branigan",
@@ -1113,7 +1113,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Laura Branigan - Self Control.jpg"
   },
   {
     artist: "Liquido",
@@ -1122,7 +1122,7 @@ const songs = [
     year: "",
     style: ["Alternative Rock"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Liquido - Narcotic.jpg"
   },
   {
     artist: "LocoRoco",
@@ -1131,7 +1131,7 @@ const songs = [
     year: "",
     style: ["Video Game Music"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/LocoRoco - Menu.jpg"
   },
   {
     artist: "Lykke Li",
@@ -1140,7 +1140,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Lykke Li - I Follow Rivers Tiesto Remix.jpg"
   },
   {
     artist: "Macklemore & Ryan Lewis",
@@ -1149,7 +1149,7 @@ const songs = [
     year: "",
     style: ["Hip Hop"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Macklemore  Ryan Lewis - Thrift Shop.jpg"
   },
   {
     artist: "Madonna",
@@ -1158,7 +1158,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Madonna - La Isla Bonita.jpg"
   },
   {
     artist: "Madonna",
@@ -1167,7 +1167,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Madonna - Like A Prayer.jpg"
   },
   {
     artist: "Major Lazer",
@@ -1176,7 +1176,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Major Lazer - Lean on.jpg"
   },
   {
     artist: "Marvin Gaye",
@@ -1185,7 +1185,7 @@ const songs = [
     year: "",
     style: ["Soul"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Marvin Gaye - Sexual Healing.jpg"
   },
   {
     artist: "Massive Attack",
@@ -1194,7 +1194,7 @@ const songs = [
     year: "",
     style: ["Trip-Hop"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Massive Attack - Angel.jpg"
   },
   {
     artist: "Massive Attack",
@@ -1203,7 +1203,7 @@ const songs = [
     year: "",
     style: ["Trip-Hop"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Massive Attack - Teardrop.jpg"
   },
   {
     artist: "Medley - Sweet Dreams vs Seven Nation Army",
@@ -1212,7 +1212,7 @@ const songs = [
     year: "",
     style: ["Mashup"],
     category: "Mixed Years",
-    cover: "img/default-cover.jpg"
+    cover: "img/Medley - Sweet Dreams vs Seven Nation Army - Sweet Dreams vs Seven Nation Army.jpg"
   },
   {
     artist: "Meute",
@@ -1221,7 +1221,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Meute - You and Me Flume Remix.jpg"
   },
   {
     artist: "MGMT",
@@ -1230,7 +1230,7 @@ const songs = [
     year: "",
     style: ["Indie Pop"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/MGMT - Kids.jpg"
   },
   {
     artist: "Michael Jackson",
@@ -1239,7 +1239,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Michael Jackson - Beat it.jpg"
   },
   {
     artist: "Michael Jackson",
@@ -1248,7 +1248,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Michael Jackson - Billie Jean.jpg"
   },
   {
     artist: "Michel Polnareff",
@@ -1257,7 +1257,7 @@ const songs = [
     year: "",
     style: ["French Pop"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Michel Polnareff - Lettre a France.jpg"
   },
   {
     artist: "Michel Sardou",
@@ -1266,7 +1266,7 @@ const songs = [
     year: "",
     style: ["French Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Michel Sardou - Les lacs du connemara.jpg"
   },
   {
     artist: "Mike Oldfield",
@@ -1275,7 +1275,7 @@ const songs = [
     year: "",
     style: ["Pop Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Mike Oldfield - Moonlight Shadow.jpg"
   },
   {
     artist: "Miki Matsubara",
@@ -1284,7 +1284,7 @@ const songs = [
     year: "",
     style: ["City Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Miki Matsubara - Stay With Me.jpg"
   },
   {
     artist: "Modjo",
@@ -1293,7 +1293,7 @@ const songs = [
     year: "",
     style: ["House"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Modjo - Lady Hear Me Tonight.jpg"
   },
   {
     artist: "Monty Python",
@@ -1302,7 +1302,7 @@ const songs = [
     year: "",
     style: ["Comedy"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Monty Python - Always look on the bright side of life.jpg"
   },
   {
     artist: "Myrskyluodon Maija",
@@ -1311,7 +1311,7 @@ const songs = [
     year: "",
     style: ["Classical"],
     category: "Modern Classical",
-    cover: "img/default-cover.jpg"
+    cover: "img/Myrskyluodon Maija - Myrskyluodon Maija.jpg"
   },
   {
     artist: "Nathalie Cardone",
@@ -1320,7 +1320,7 @@ const songs = [
     year: "",
     style: ["Latin Folk"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Nathalie Cardone - Hasta Siempre.jpg"
   },
   {
     artist: "New Order",
@@ -1329,7 +1329,7 @@ const songs = [
     year: "",
     style: ["Synthpop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/New Order - Blue Monday.jpg"
   },
   {
     artist: "Nick Cave & the Bad Seeds",
@@ -1338,7 +1338,7 @@ const songs = [
     year: "",
     style: ["Alternative Rock"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Nick Cave  the Bad Seeds - Red Right Hand.jpg"
   },
   {
     artist: "Nik Kershaw",
@@ -1347,7 +1347,7 @@ const songs = [
     year: "",
     style: ["New Wave"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Nik Kershaw - Wouldnt it be good.jpg"
   },
   {
     artist: "NSync",
@@ -1356,7 +1356,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/NSync - Bye Bye Bye.jpg"
   },
   {
     artist: "Offspring",
@@ -1365,7 +1365,7 @@ const songs = [
     year: "",
     style: ["Punk Rock"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Offspring - Pretty Fly.jpg"
   },
   {
     artist: "Outkast",
@@ -1374,7 +1374,7 @@ const songs = [
     year: "",
     style: ["Hip Hop"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Outkast - Hey ya.jpg"
   },
   {
     artist: "Paolo Conte",
@@ -1383,7 +1383,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/Paolo Conte - Via con me.jpg"
   },
   {
     artist: "Paul Kalkbrenner & Fritz Kalkbrenner",
@@ -1392,7 +1392,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Paul Kalkbrenner  Fritz Kalkbrenner - Sky and sand.jpg"
   },
   {
     artist: "Peter Gabriel",
@@ -1401,7 +1401,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Peter Gabriel - Solsbury Hill.jpg"
   },
   {
     artist: "Phil Collins",
@@ -1410,7 +1410,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Phil Collins - In the air tonight.jpg"
   },
   {
     artist: "Pixies",
@@ -1419,7 +1419,7 @@ const songs = [
     year: "",
     style: ["Alternative Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Pixies - Where is my mind.jpg"
   },
   {
     artist: "Placebo",
@@ -1428,7 +1428,7 @@ const songs = [
     year: "",
     style: ["Alternative Rock"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Placebo - Running up that hill.jpg"
   },
   {
     artist: "Placebo",
@@ -1437,7 +1437,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/Placebo - Pure Morning.jpg"
   },
   {
     artist: "Police",
@@ -1446,7 +1446,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Police - Every breath you take.jpg"
   },
   {
     artist: "Prince",
@@ -1455,7 +1455,7 @@ const songs = [
     year: "",
     style: ["Pop Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Prince - Purple rain.jpg"
   },
   {
     artist: "Queen",
@@ -1464,7 +1464,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Queen - Dont stop me now.jpg"
   },
   {
     artist: "Queen",
@@ -1473,7 +1473,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Queen - Radio Ga Ga.jpg"
   },
   {
     artist: "Queen",
@@ -1482,7 +1482,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Queen - The show must go on.jpg"
   },
   {
     artist: "Queen & David Bowie",
@@ -1491,7 +1491,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Queen  David Bowie - Under pressure.jpg"
   },
   {
     artist: "Queen of the Stone Age",
@@ -1500,7 +1500,7 @@ const songs = [
     year: "",
     style: ["Alternative Rock"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Queen of the Stone Age - Burn the Witch.jpg"
   },
   {
     artist: "R3HAB",
@@ -1509,7 +1509,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/R3HAB - All Around The World La La La.jpg"
   },
   {
     artist: "Radiohead",
@@ -1518,7 +1518,7 @@ const songs = [
     year: "",
     style: ["Alternative Rock"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Radiohead - No Surprises.jpg"
   },
   {
     artist: "Radiohead",
@@ -1527,7 +1527,7 @@ const songs = [
     year: "",
     style: ["Alternative Rock"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Radiohead - Street Spirit Faded out.jpg"
   },
   {
     artist: "Ram Jam",
@@ -1536,7 +1536,7 @@ const songs = [
     year: "",
     style: ["Hard Rock"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Ram Jam - Black Betty.jpg"
   },
   {
     artist: "Rammstein",
@@ -1545,7 +1545,7 @@ const songs = [
     year: "",
     style: ["Industrial Metal"],
     category: "2020s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Rammstein - Adieu.jpg"
   },
   {
     artist: "Ramones",
@@ -1554,7 +1554,7 @@ const songs = [
     year: "",
     style: ["Punk Rock"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Ramones - Blitzkrieg Bop.jpg"
   },
   {
     artist: "Red Hot Chili Peppers",
@@ -1563,7 +1563,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/Red Hot Chili Peppers - Cant Stop.jpg"
   },
   {
     artist: "Red Hot Chili Peppers",
@@ -1572,7 +1572,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/Red Hot Chili Peppers - Road Trippin.jpg"
   },
   {
     artist: "Ricchi e Poveri",
@@ -1581,7 +1581,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Ricchi e Poveri - Sara perche ti amo.jpg"
   },
   {
     artist: "Robert Miles",
@@ -1590,7 +1590,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Robert Miles - Children.jpg"
   },
   {
     artist: "Rosé and Bruno Mars",
@@ -1599,7 +1599,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "2020s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Rosé and Bruno Mars - APT.jpg"
   },
   {
     artist: "Royksopp",
@@ -1608,7 +1608,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2020s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Royksopp - Me and Youphoria.jpg"
   },
   {
     artist: "Ryan Paris",
@@ -1617,7 +1617,7 @@ const songs = [
     year: "",
     style: ["Disco"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Ryan Paris - La Dolce Vita.jpg"
   },
   {
     artist: "Ryuichi Sakamoto",
@@ -1626,7 +1626,7 @@ const songs = [
     year: "",
     style: ["Soundtrack"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Ryuichi Sakamoto - Merry Christmas Mr. Lawrence.jpg"
   },
   {
     artist: "Sabrina",
@@ -1635,7 +1635,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Sabrina - Boys Summertime Love.jpg"
   },
   {
     artist: "Santa Esmeralda",
@@ -1644,7 +1644,7 @@ const songs = [
     year: "",
     style: ["Disco"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Santa Esmeralda - Dont let me be misunderstood.jpg"
   },
   {
     artist: "Sash",
@@ -1653,7 +1653,7 @@ const songs = [
     year: "",
     style: ["Dance"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Sash - Equador.jpg"
   },
   {
     artist: "Scorpions",
@@ -1662,7 +1662,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Scorpions - Wind of change.jpg"
   },
   {
     artist: "Seal",
@@ -1671,7 +1671,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/Seal - Kiss for a Rose.jpg"
   },
   {
     artist: "Shaggy",
@@ -1680,7 +1680,7 @@ const songs = [
     year: "",
     style: ["Reggae Fusion"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Shaggy - Boombastic.jpg"
   },
   {
     artist: "Shakira",
@@ -1689,7 +1689,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Shakira - Hips dont lie.jpg"
   },
   {
     artist: "Shivaree",
@@ -1698,7 +1698,7 @@ const songs = [
     year: "",
     style: ["Alternative Rock"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Shivaree - Goodnight moon.jpg"
   },
   {
     artist: "Shostakovich",
@@ -1707,7 +1707,7 @@ const songs = [
     year: "",
     style: ["Classical"],
     category: "Early 20th Century",
-    cover: "img/default-cover.jpg"
+    cover: "img/Shostakovich - Waltz N2.jpg"
   },
   {
     artist: "Stevie Wonder",
@@ -1716,7 +1716,7 @@ const songs = [
     year: "",
     style: ["Soul"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Stevie Wonder - Isnt She Lovely.jpg"
   },
   {
     artist: "Stromae",
@@ -1725,7 +1725,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Stromae - Alors on Danse.jpg"
   },
   {
     artist: "Stromae & Pomme",
@@ -1734,7 +1734,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "2020s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Stromae  Pomme - Ma Meilleure Ennemie Arcane soundtrack.jpg"
   },
   {
     artist: "Survivors",
@@ -1743,7 +1743,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Survivors - Eye of the Tiger.jpg"
   },
   {
     artist: "Suzanne Vega",
@@ -1752,7 +1752,7 @@ const songs = [
     year: "",
     style: ["Folk Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Suzanne Vega - Luka.jpg"
   },
   {
     artist: "Talk Talk",
@@ -1761,7 +1761,7 @@ const songs = [
     year: "",
     style: ["New Wave"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Talk Talk - Its my life.jpg"
   },
   {
     artist: "Talk Talk",
@@ -1770,7 +1770,7 @@ const songs = [
     year: "",
     style: ["New Wave"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Talk Talk - Such a shame.jpg"
   },
   {
     artist: "Tame Impala",
@@ -1779,7 +1779,7 @@ const songs = [
     year: "",
     style: ["Psychedelic Pop"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Tame Impala - Borderline.jpg"
   },
   {
     artist: "Tame Impala",
@@ -1788,7 +1788,7 @@ const songs = [
     year: "",
     style: ["Psychedelic Rock"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Tame Impala - Elephant.jpg"
   },
   {
     artist: "Tame Impala",
@@ -1797,7 +1797,7 @@ const songs = [
     year: "",
     style: ["Psychedelic Pop"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Tame Impala - The Less I know the better.jpg"
   },
   {
     artist: "Tanita Tikaram",
@@ -1806,7 +1806,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Tanita Tikaram - Twist in My Sobriety.jpg"
   },
   {
     artist: "The Buggles",
@@ -1815,7 +1815,7 @@ const songs = [
     year: "",
     style: ["Synthpop"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/The Buggles - Video killed the radio star.jpg"
   },
   {
     artist: "The Cranberries",
@@ -1824,7 +1824,7 @@ const songs = [
     year: "",
     style: ["Alternative Rock"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/The Cranberries - Zombie.jpg"
   },
   {
     artist: "The Cure",
@@ -1833,7 +1833,7 @@ const songs = [
     year: "",
     style: ["New Wave"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/The Cure - Close to me.jpg"
   },
   {
     artist: "The Cure",
@@ -1842,7 +1842,7 @@ const songs = [
     year: "",
     style: ["New Wave"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/The Cure - Lullaby.jpg"
   },
   {
     artist: "The Doors",
@@ -1851,7 +1851,7 @@ const songs = [
     year: "",
     style: ["Psychedelic Rock"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/The Doors - Riders on the storm.jpg"
   },
   {
     artist: "The Pointer Sisters",
@@ -1860,7 +1860,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/The Pointer Sisters - Im so excited.jpg"
   },
   {
     artist: "The Weeknd",
@@ -1869,7 +1869,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "2020s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/The Weeknd - Save your tears.jpg"
   },
   {
     artist: "The XX",
@@ -1878,7 +1878,7 @@ const songs = [
     year: "",
     style: ["Indie Pop"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/The XX - Intro.jpg"
   },
   {
     artist: "Timbaland",
@@ -1887,7 +1887,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/Timbaland - The way I are.jpg"
   },
   {
     artist: "Tomoyasu Hotei",
@@ -1896,7 +1896,7 @@ const songs = [
     year: "",
     style: ["Soundtrack"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Tomoyasu Hotei - Battle Without Honor or Humanity.jpg"
   },
   {
     artist: "Toto",
@@ -1905,7 +1905,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Toto - Africa.jpg"
   },
   {
     artist: "Toto",
@@ -1914,7 +1914,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Toto - Rosana.jpg"
   },
   {
     artist: "Tracy Chapman",
@@ -1923,7 +1923,7 @@ const songs = [
     year: "",
     style: ["Folk Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Tracy Chapman - Talkin about a revolution.jpg"
   },
   {
     artist: "Twenty One Pilots",
@@ -1932,7 +1932,7 @@ const songs = [
     year: "",
     style: ["Alternative"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Twenty One Pilots - Stressed out.jpg"
   },
   {
     artist: "U2",
@@ -1941,7 +1941,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/U2 - One.jpg"
   },
   {
     artist: "U2",
@@ -1950,7 +1950,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/U2 - Sunday Bloody Sunday.jpg"
   },
   {
     artist: "U96",
@@ -1959,7 +1959,7 @@ const songs = [
     year: "",
     style: ["Techno"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/U96 - Das Boot.jpg"
   },
   {
     artist: "UB40",
@@ -1968,7 +1968,7 @@ const songs = [
     year: "",
     style: ["Reggae"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/UB40 - Cant Help Falling in Love.jpg"
   },
   {
     artist: "UB40",
@@ -1977,7 +1977,7 @@ const songs = [
     year: "",
     style: ["Reggae"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/UB40 - Red Red Wine.jpg"
   },
   {
     artist: "Vampire Weekend",
@@ -1986,7 +1986,7 @@ const songs = [
     year: "",
     style: ["Indie Rock"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Vampire Weekend - A-Punk.jpg"
   },
   {
     artist: "Vampire Weekend",
@@ -1995,7 +1995,7 @@ const songs = [
     year: "",
     style: ["Indie Rock"],
     category: "2010s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Vampire Weekend - White Sky.jpg"
   },
   {
     artist: "Van Halen",
@@ -2004,7 +2004,7 @@ const songs = [
     year: "",
     style: ["Hard Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Van Halen - Jump.jpg"
   },
   {
     artist: "Weezer",
@@ -2013,7 +2013,7 @@ const songs = [
     year: "",
     style: ["Alternative Rock"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Weezer - Buddy Holly.jpg"
   },
   {
     artist: "Weezer",
@@ -2022,7 +2022,7 @@ const songs = [
     year: "",
     style: ["Alternative Rock"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Weezer - Only in dreams.jpg"
   },
   {
     artist: "Weezer",
@@ -2031,7 +2031,7 @@ const songs = [
     year: "",
     style: ["Alternative Rock"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Weezer - Undone.jpg"
   },
   {
     artist: "Yazoo",
@@ -2040,7 +2040,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/Yazoo - Dont Go.jpg"
   },
   {
     artist: "Yeah Yeah Yeah",
@@ -2049,7 +2049,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Yeah Yeah Yeah - Heads will roll.jpg"
   },
   {
     artist: "Yes",
@@ -2058,7 +2058,7 @@ const songs = [
     year: "",
     style: ["Progressive Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Yes - Owner of a lonely heart.jpg"
   },
   {
     artist: "Zombie Nation",
@@ -2067,7 +2067,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Zombie Nation - Kernkraft 400.jpg"
   },
   {
     artist: "ZZ Top",
@@ -2076,7 +2076,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/ZZ Top - Gimme All Your Lovin.jpg"
   },
   {
     artist: "",
@@ -2085,7 +2085,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/- .jpg"
   },
   {
     artist: "",
@@ -2094,7 +2094,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/- .jpg"
   },
   {
     artist: "",
@@ -2103,7 +2103,7 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/- .jpg"
   },
   {
     artist: "Wet Wet Wet",
@@ -2112,6 +2112,6 @@ const songs = [
     year: "",
     style: [],
     category: "",
-    cover: "img/default-cover.jpg"
+    cover: "img/Wet Wet Wet - Love is all around.jpg"
   },
 ];
