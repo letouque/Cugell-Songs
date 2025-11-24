@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Song Repertoire</title>
+    <title>Cugell – Song Repertoire</title>
 
     <style>
         body {
@@ -22,6 +22,30 @@
             border-radius: 16px;
             box-shadow: 0 0 25px rgba(0,0,0,0.7);
             border: 2px solid #c79b53;
+        }
+
+        /* Top navigation */
+        .top-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .top-nav a {
+            text-decoration: none;
+            color: #f7f1e3;
+            font-size: 14px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1px solid #c79b53;
+            background: #2b1d16;
+        }
+
+        .top-nav a.active {
+            background: #c79b53;
+            color: #2b1d16;
+            font-weight: bold;
         }
 
         /* Header section (image + text) */
@@ -222,17 +246,24 @@
 <body>
 <div class="container">
 
+    <!-- Top navigation -->
+    <nav class="top-nav">
+        <a href="index.html" class="active">Songs</a>
+        <a href="soundtracks.html">Soundtracks</a>
+    </nav>
+
+    <!-- Header with your image + text -->
     <div class="page-header">
         <div class="header-image">
-            <img src="img/header.png" alt="Song list header image">
+            <img src="img/header.jpg" alt="Song list header image">
         </div>
         <div class="header-text">
             <h1>Cugell’s Song Repertoire</h1>
-            <h2>Browse, filter and search my setlist</h2>
+            <h2>Browse, filter and search the songs I can play live</h2>
             <p>
-                Use the search bar and filters below to explore the songs I can play live.
-                You can filter by decade and by genres. Some songs have multiple styles,
-                which are all taken into account by the filters.
+                This page lists the songs I can currently perform live. Use the search bar and filters below
+                to explore the repertoire, by decade and by genre. If you’re in the audience, you can use this
+                to find ideas and suggest your favorite tracks during the show.
             </p>
         </div>
     </div>
@@ -262,11 +293,10 @@
             </div>
         </div>
 
-        <!-- Filter by genre / styles (supports multiple styles per song) -->
+        <!-- Filter by genre / styles -->
         <div class="filter-row">
             <span class="filter-label">Genres:</span>
             <div class="filter-group">
-                <!-- Adapt this list to match your styles in songs.js -->
                 <label><input type="checkbox" class="category-filter" value="Pop">Pop</label>
                 <label><input type="checkbox" class="category-filter" value="Rock">Rock</label>
                 <label><input type="checkbox" class="category-filter" value="Electronic">Electronic</label>
@@ -275,7 +305,6 @@
                 <label><input type="checkbox" class="category-filter" value="New Wave">New Wave</label>
                 <label><input type="checkbox" class="category-filter" value="Soul">Soul</label>
                 <label><input type="checkbox" class="category-filter" value="Dance">Dance</label>
-                <!-- Add more if you want: Funk, Indie Rock, etc. -->
             </div>
         </div>
     </div>
@@ -285,17 +314,14 @@
     <div id="grid" class="grid"></div>
 </div>
 
-<!-- Load the external songs.js file which defines "const songs = [...]" -->
 <script src="songs.js"></script>
 
 <script>
-    // Get selected decades
     function getSelectedDecades() {
         return Array.from(document.querySelectorAll(".decade-filter:checked"))
             .map(cb => cb.value);
     }
 
-    // Get selected genres/categories (to match against song.style, which can be a string or an array)
     function getSelectedCategories() {
         return Array.from(document.querySelectorAll(".category-filter:checked"))
             .map(cb => cb.value);
@@ -304,7 +330,6 @@
     function normalizeStyles(styleField) {
         if (!styleField) return [];
         if (Array.isArray(styleField)) return styleField.filter(Boolean);
-        // string: may contain comma-separated values like "Pop, Disco"
         return styleField
             .split(",")
             .map(s => s.trim())
@@ -321,22 +346,19 @@
         grid.innerHTML = "";
 
         const filtered = (songs || []).filter(song => {
-            const category = (song.category || ""); // decade
+            const category = (song.category || "");
             const stylesArray = normalizeStyles(song.style);
             const title = (song.title || "");
             const artist = (song.artist || "");
 
-            // Decade filter (song.category, e.g. "80s Music")
             const matchesDecade =
                 selectedDecades.length === 0 ||
                 selectedDecades.includes(category);
 
-            // Genre filter: song matches if ANY of its styles is in selectedCategories
             const matchesCategory =
                 selectedCategories.length === 0 ||
                 stylesArray.some(s => selectedCategories.includes(s));
 
-            // Text search
             const text = (title + " " + artist + " " + stylesArray.join(" ") + " " + category).toLowerCase();
             const matchesSearch = text.includes(search);
 
@@ -353,7 +375,6 @@
             const category = song.category || "";
             const stylesArray = normalizeStyles(song.style);
             const duration = song.duration || "";
-
             const stylesText = stylesArray.join(", ");
 
             div.innerHTML = `
@@ -376,7 +397,6 @@
             filtered.length + " song(s) shown out of " + (songs ? songs.length : 0);
     }
 
-    // Events
     document.getElementById("search").addEventListener("input", updateGrid);
     document.querySelectorAll(".decade-filter").forEach(cb =>
         cb.addEventListener("change", updateGrid)
@@ -385,12 +405,8 @@
         cb.addEventListener("change", updateGrid)
     );
 
-    // First render
     updateGrid();
 </script>
 
 </body>
 </html>
-
-
-
