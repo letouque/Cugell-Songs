@@ -169,11 +169,11 @@ const songsB = [
   },
   {
     "artist": "Bon Jovi",
-    "title": "Its my life",
+    "title": "It's my life",
     "duration": "",
     "style": [],
     "category": "",
-    "cover": "img/Bon Jovi - It's my life.jpg"
+    "cover": "img/Bon Jovi - Its my life.jpg"
   },
   {
     "artist": "Boney M",
