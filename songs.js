@@ -145,12 +145,12 @@ const songs = [
   },
     {
     artist: "Andrea Bocelli",
-    title: "Vivo por Ella",
+    title: "Vivo per Lei",
     duration: "",
     year: "",
     style: [],
     category: "",
-    cover: "img/Andrea Bocelli - Vivo por Ella.jpg"
+    cover: "img/Andrea Bocelli - Vivo per Lei.jpg"
   },
   {
     artist: "Animals",
