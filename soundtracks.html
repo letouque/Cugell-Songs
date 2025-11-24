@@ -24,7 +24,6 @@
             border: 2px solid #c79b53;
         }
 
-        /* Top navigation */
         .top-nav {
             display: flex;
             justify-content: center;
@@ -48,7 +47,6 @@
             font-weight: bold;
         }
 
-        /* Header section */
         .page-header {
             display: grid;
             grid-template-columns: 220px 1fr;
@@ -71,7 +69,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
         }
 
         .header-text h1 {
@@ -91,7 +88,6 @@
             margin: 0;
             font-size: 14px;
             line-height: 1.4;
-            color: #f7f1e3;
         }
 
         @media (max-width: 700px) {
@@ -127,10 +123,6 @@
             flex: 1 1 260px;
         }
 
-        .search-row input::placeholder {
-            color: #bda88a;
-        }
-
         .filter-row {
             display: flex;
             flex-wrap: wrap;
@@ -162,17 +154,12 @@
             cursor: pointer;
         }
 
-        .filter-group input[type="checkbox"] {
-            cursor: pointer;
-        }
-
         .counter {
             font-size: 13px;
             color: #d3c2a5;
             margin-bottom: 10px;
         }
 
-        /* Grid of items */
         .grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -200,7 +187,6 @@
         .song {
             background: #4a3427;
             border-radius: 10px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.5);
             border: 1px solid #c79b53;
             padding: 10px;
             text-align: center;
@@ -220,7 +206,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
         }
 
         .song-title {
@@ -252,23 +237,20 @@
         <a href="soundtracks.html" class="active">Soundtracks</a>
     </nav>
 
-    <!-- Header -->
     <div class="page-header">
         <div class="header-image">
-            <img src="img/header.png" alt="Soundtracks">
+            <img src="img/header.jpg" alt="Soundtracks">
         </div>
         <div class="header-text">
             <h1>Cugell’s Soundtracks</h1>
             <h2>Game, anime, movies & TV music</h2>
             <p>
-                Explore all soundtrack material I arrange: game OST, anime openings, film scores,
-                and music from TV shows. Use the filters below to refine by media type, decade,
-                game universe, or specific Final Fantasy game.
+                Explore soundtrack music arranged for performances. Filter by franchise, decade,
+                Final Fantasy game, media type or universe.
             </p>
         </div>
     </div>
 
-    <!-- Controls -->
     <div class="controls">
 
         <!-- Search -->
@@ -314,7 +296,7 @@
             </div>
         </div>
 
-        <!-- Final Fantasy subfilters -->
+        <!-- Final Fantasy -->
         <div class="filter-row">
             <span class="filter-label">Final Fantasy:</span>
             <div class="filter-group final-fantasy-group">
@@ -334,12 +316,25 @@
                 <label><input type="checkbox" class="ff-filter" value="XIV">FF XIV</label>
                 <label><input type="checkbox" class="ff-filter" value="XV">FF XV</label>
                 <label><input type="checkbox" class="ff-filter" value="XVI">FF XVI</label>
-                <label><input type="checkbox" class="ff-filter" value="Tactics">Tactics</label>
-                <label><input type="checkbox" class="ff-filter" value="Type-0">Type-0</label>
-                <label><input type="checkbox" class="ff-filter" value="Crisis Core">Crisis Core</label>
-                <label><input type="checkbox" class="ff-filter" value="Dissidia">Dissidia</label>
-                <label><input type="checkbox" class="ff-filter" value="Advent Children">Advent Children</label>
-                <label><input type="checkbox" class="ff-filter" value="Dirge of Cerberus">Dirge of Cerberus</label>
+                <label><input type="checkbox" class="ff-filter" value="Other FF">Other FF</label>
+            </div>
+        </div>
+
+        <!-- Popular Series -->
+        <div class="filter-row">
+            <span class="filter-label">Popular Series:</span>
+            <div class="filter-group">
+                <label><input type="checkbox" class="license-filter" value="Mario">Mario</label>
+                <label><input type="checkbox" class="license-filter" value="Zelda">Zelda</label>
+                <label><input type="checkbox" class="license-filter" value="Pokémon">Pokémon</label>
+                <label><input type="checkbox" class="license-filter" value="Nier">Nier</label>
+                <label><input type="checkbox" class="license-filter" value="Chrono">Chrono</label>
+                <label><input type="checkbox" class="license-filter" value="Kingdom Hearts">Kingdom Hearts</label>
+                <label><input type="checkbox" class="license-filter" value="Sonic">Sonic</label>
+                <label><input type="checkbox" class="license-filter" value="Megaman">Megaman</label>
+                <label><input type="checkbox" class="license-filter" value="Persona">Persona</label>
+                <label><input type="checkbox" class="license-filter" value="Undertale">Undertale</label>
+                <label><input type="checkbox" class="license-filter" value="Hollow Knight">Hollow Knight</label>
             </div>
         </div>
 
@@ -350,30 +345,12 @@
 
 </div>
 
+<!-- MULTI-FILE SOUNDTRACK SYSTEM -->
 <script src="soundtracks/ff1.js"></script>
-<script src="soundtracks/ff2.js"></script>
-<script src="soundtracks/movies.js"></script>
-<script src="soundtracks/anime.js"></script>
-<script src="soundtracks/nintendo.js"></script>
-<script src="soundtracks/tv.js"></script>
-<script src="soundtracks/indies.js"></script>
-<script src="soundtracks/sega_oldschool.js"></script>
-<script src="soundtracks/modern_aaa.js"></script>
-
-<script>
-    const soundtracks = [
-        ...ff1,
-        ...ff2,
-        ...movies,
-        ...anime,
-        ...nintendo,
-        ...tv,
-        ...indies,
-        ...sega_oldschool,
-        ...modern_aaa
-    ];
-</script>
-
+<!-- Add more files like: -->
+<!-- <script src="soundtracks/anime.js"></script> -->
+<!-- <script src="soundtracks/movies.js"></script> -->
+<!-- <script src="soundtracks/nintendo.js"></script> -->
 
 <script>
     function getChecked(cls) {
@@ -387,48 +364,52 @@
     }
 
     function updateGrid() {
-
         const search = document.getElementById("search").value.toLowerCase();
         const decades = getChecked("decade-filter");
         const mediaTypes = getChecked("media-filter");
         const universes = getChecked("universe-filter");
         const ffGames = getChecked("ff-filter");
+        const licenses = getChecked("license-filter");
 
         const grid = document.getElementById("grid");
         const counter = document.getElementById("counter");
-
         grid.innerHTML = "";
 
-        const filtered = (soundtracks || []).filter(track => {
+        const allData = [
+            ...(typeof ff1 !== 'undefined' ? ff1 : []),
+            ...(typeof ff2 !== 'undefined' ? ff2 : []),
+            ...(typeof anime !== 'undefined' ? anime : []),
+            ...(typeof movies !== 'undefined' ? movies : []),
+            ...(typeof nintendo !== 'undefined' ? nintendo : []),
+            ...(typeof tv !== 'undefined' ? tv : []),
+            ...(typeof indies !== 'undefined' ? indies : []),
+            ...(typeof sega !== 'undefined' ? sega : []),
+        ];
 
+        const filtered = allData.filter(track => {
             const searchTarget = (
                 (track.title || "") + " " +
                 (track.artist || "") + " " +
                 (track.mediaType || "") + " " +
                 (track.gameUniverse || "") + " " +
                 (track.finalFantasy || "") + " " +
+                (track.license || "") + " " +
                 normArray(track.style).join(" ")
             ).toLowerCase();
 
             const matchesSearch = searchTarget.includes(search);
+            const matchesDecade = decades.length === 0 || decades.includes(track.category);
+            const matchesMedia = mediaTypes.length === 0 || mediaTypes.includes(track.mediaType);
+            const matchesUniverse = universes.length === 0 || universes.includes(track.gameUniverse);
+            const matchesFF = ffGames.length === 0 || ffGames.includes(track.finalFantasy);
+            const matchesLicense = licenses.length === 0 || licenses.includes(track.license);
 
-            const matchesDecade =
-                decades.length === 0 ||
-                decades.includes(track.category);
-
-            const matchesMedia =
-                mediaTypes.length === 0 ||
-                mediaTypes.includes(track.mediaType);
-
-            const matchesUniverse =
-                universes.length === 0 ||
-                universes.includes(track.gameUniverse);
-
-            const matchesFF =
-                ffGames.length === 0 ||
-                ffGames.includes(track.finalFantasy);
-
-            return matchesSearch && matchesDecade && matchesMedia && matchesUniverse && matchesFF;
+            return matchesSearch &&
+                   matchesDecade &&
+                   matchesMedia &&
+                   matchesUniverse &&
+                   matchesFF &&
+                   matchesLicense;
         });
 
         filtered.forEach(track => {
@@ -445,13 +426,12 @@
                 track.mediaType,
                 track.gameUniverse,
                 track.finalFantasy,
+                track.license,
                 normArray(track.style).join(", ")
             ].filter(x => x).join(" • ");
 
             div.innerHTML = `
-                <div class="song-cover">
-                    <img src="${cover}" alt="${title}">
-                </div>
+                <div class="song-cover"><img src="${cover}" alt="${title}"></div>
                 <div class="song-title">${title}</div>
                 <div class="song-artist">${artist}</div>
                 <div class="song-meta">
@@ -460,11 +440,10 @@
                     ${duration ? "Duration: " + duration : ""}
                 </div>
             `;
-
             grid.appendChild(div);
         });
 
-        counter.textContent = `${filtered.length} track(s) shown out of ${soundtracks.length}`;
+        counter.textContent = `${filtered.length} track(s) shown`;
     }
 
     document.querySelectorAll("input[type=checkbox]").forEach(cb =>
