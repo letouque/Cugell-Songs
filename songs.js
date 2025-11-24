@@ -42,7 +42,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/ace-of-base-happy-nation.jpg"
   },
   {
     artist: "Ace Of Base",
