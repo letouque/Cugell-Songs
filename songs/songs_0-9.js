@@ -6,29 +6,5 @@ const songs09 = [
     "style": ["Soft Rock"],
     "category": "70s Music",
     "cover": "img/10cc - I'm not in love.jpg"
-  },
-  {
-    "artist": "",
-    "title": "",
-    "duration": "",
-    "style": [],
-    "category": "",
-    "cover": "img/default-cover.jpg"
-  },
-  {
-    "artist": "",
-    "title": "",
-    "duration": "",
-    "style": [],
-    "category": "",
-    "cover": "img/default-cover.jpg"
-  },
-  {
-    "artist": "",
-    "title": "",
-    "duration": "",
-    "style": [],
-    "category": "",
-    "cover": "img/default-cover.jpg"
   }
 ];
