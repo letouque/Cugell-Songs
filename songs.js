@@ -15,7 +15,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "70s Music",
-    cover: "abba-gimme.jpg"
+    cover: "img/abba-gimme.jpg"
   },
   {
     artist: "ABBA",
@@ -24,7 +24,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "70s Music",
-    cover: "abba-mammamia.jpg"
+    cover: "img/abba-mammamia.jpg"
   },
   {
     artist: "Ace Of Base",
