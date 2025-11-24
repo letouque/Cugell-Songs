@@ -150,7 +150,7 @@ const songsA = [
     "duration": "",
     "style": [],
     "category": "",
-    "cover": "img/Andrea Bocelli - Vivo por Lei.jpg"
+    "cover": "img/Andrea Bocelli - Vivo per Lei.jpg"
   },
   {
     "artist": "Animals",
