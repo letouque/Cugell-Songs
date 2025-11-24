@@ -3,7 +3,7 @@ const songs = [
     artist: "10cc",
     title: "I'm not in love",
     duration: "5 min 06",
-    year: "",
+    year: "1975",
     style: ["Soft Rock"],
     category: "70s Music",
     cover: "img/10cc-not-in-love.jpg"
