@@ -1,178 +1,181 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Répertoire de chansons</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Répertoire de chansons</title>
 
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: "Trebuchet MS", Arial, sans-serif;
-        background: radial-gradient(circle at top, #55415f 0, #1c1024 40%, #050308 100%);
-        color: #f7f1e3;
-    }
-
-    .container {
-        max-width: 1300px;
-        margin: 30px auto 50px;
-        padding: 20px;
-        background: #3b2b22;
-        border-radius: 16px;
-        box-shadow: 0 0 25px rgba(0,0,0,0.7);
-        border: 2px solid #c79b53;
-    }
-
-    h1 {
-        text-align: center;
-        margin-top: 0;
-        font-size: 28px;
-        letter-spacing: 1px;
-    }
-
-    h1 span {
-        display: block;
-        font-size: 14px;
-        font-weight: normal;
-        margin-top: 4px;
-        color: #d3c2a5;
-    }
-
-    .controls {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin: 20px 0;
-    }
-
-    .search-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .search-row input {
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid #c79b53;
-        background: #2b1d16;
-        color: #f7f1e3;
-        font-size: 14px;
-        flex: 1 1 260px;
-    }
-
-    .search-row input::placeholder {
-        color: #bda88a;
-    }
-
-    .categories-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        align-items: center;
-        font-size: 13px;
-    }
-
-    .categories-label {
-        font-weight: bold;
-        color: #e5d3b0;
-        margin-right: 4px;
-    }
-
-    .category-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    .category-group label {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        background: #2b1d16;
-        border-radius: 999px;
-        padding: 3px 8px;
-        border: 1px solid #c79b53;
-        cursor: pointer;
-    }
-
-    .counter {
-        font-size: 13px;
-        color: #d3c2a5;
-        margin-bottom: 10px;
-    }
-
-    /* GRILLE */
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 15px;
-    }
-
-    @media (max-width: 1100px) {
-        .grid {
-            grid-template-columns: repeat(3, 1fr);
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Trebuchet MS", Arial, sans-serif;
+            background: radial-gradient(circle at top, #55415f 0, #1c1024 40%, #050308 100%);
+            color: #f7f1e3;
         }
-    }
 
-    @media (max-width: 700px) {
-        .grid {
-            grid-template-columns: repeat(2, 1fr);
+        .container {
+            max-width: 1300px;
+            margin: 30px auto 50px;
+            padding: 20px;
+            background: #3b2b22;
+            border-radius: 16px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.7);
+            border: 2px solid #c79b53;
         }
-    }
 
-    @media (max-width: 450px) {
-        .grid {
-            grid-template-columns: repeat(1, 1fr);
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            font-size: 28px;
+            letter-spacing: 1px;
         }
-    }
 
-    /* Carte chanson */
-    .song {
-        background: #4a3427;
-        border-radius: 10px;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.5);
-        border: 1px solid #c79b53;
-        padding: 10px;
-        text-align: center;
-    }
+        h1 span {
+            display: block;
+            font-size: 14px;
+            font-weight: normal;
+            margin-top: 4px;
+            color: #d3c2a5;
+        }
 
-    .song-cover {
-        width: 100%;
-        aspect-ratio: 1/1;
-        border-radius: 8px;
-        overflow: hidden;
-        border: 1px solid #c79b53;
-        background: #2b1d16;
-        margin-bottom: 8px;
-    }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
 
-    .song-cover img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
+        .search-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-    .song-title {
-        font-weight: bold;
-        font-size: 15px;
-    }
+        .search-row input {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #c79b53;
+            background: #2b1d16;
+            color: #f7f1e3;
+            font-size: 14px;
+            flex: 1 1 260px;
+        }
 
-    .song-artist {
-        font-size: 13px;
-        color: #e5d3b0;
-        margin: 4px 0;
-    }
+        .search-row input::placeholder {
+            color: #bda88a;
+        }
 
-    .song-meta {
-        font-size: 12px;
-        color: #d3c2a5;
-        margin-top: 4px;
-        line-height: 14px;
-    }
-</style>
+        .categories-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .categories-label {
+            font-weight: bold;
+            color: #e5d3b0;
+            margin-right: 4px;
+        }
+
+        .category-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .category-group label {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #2b1d16;
+            border-radius: 999px;
+            padding: 3px 8px;
+            border: 1px solid #c79b53;
+            cursor: pointer;
+        }
+
+        .category-group input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        .counter {
+            font-size: 13px;
+            color: #d3c2a5;
+            margin-bottom: 10px;
+        }
+
+        /* Grille de cartes */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+
+        @media (max-width: 1100px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 450px) {
+            .grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+        .song {
+            background: #4a3427;
+            border-radius: 10px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+            border: 1px solid #c79b53;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .song-cover {
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #c79b53;
+            background: #2b1d16;
+            margin-bottom: 8px;
+        }
+
+        .song-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .song-title {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .song-artist {
+            font-size: 13px;
+            color: #e5d3b0;
+            margin: 4px 0;
+        }
+
+        .song-meta {
+            font-size: 12px;
+            color: #d3c2a5;
+            margin-top: 4px;
+            line-height: 14px;
+        }
+    </style>
 </head>
 
 <body>
@@ -180,24 +183,47 @@
 
     <h1>
         Répertoire de chansons
-        <span>Recherche • Filtrage • Grille d’aperçus</span>
+        <span>Recherche • Décennies • Catégories • Grille d’aperçus</span>
     </h1>
 
     <div class="controls">
+        <!-- Recherche -->
         <div class="search-row">
-            <input type="text" id="search" placeholder="Rechercher un titre, un artiste, un style…" />
+            <input
+                type="text"
+                id="search"
+                placeholder="Rechercher un titre, un artiste, un style…"
+            />
         </div>
 
+        <!-- Filtres par décennie (basés sur song.category, ex: '70s Music') -->
         <div class="categories-row">
             <span class="categories-label">Décennies :</span>
             <div class="category-group">
-                <label><input type="checkbox" class="cat-filter" value="60s Music">60s</label>
-                <label><input type="checkbox" class="cat-filter" value="70s Music">70s</label>
-                <label><input type="checkbox" class="cat-filter" value="80s Music">80s</label>
-                <label><input type="checkbox" class="cat-filter" value="90s Music">90s</label>
-                <label><input type="checkbox" class="cat-filter" value="2000s Music">2000s</label>
-                <label><input type="checkbox" class="cat-filter" value="2010s Music">2010s</label>
-                <label><input type="checkbox" class="cat-filter" value="2020s Music">2020s</label>
+                <label><input type="checkbox" class="decade-filter" value="60s Music">60s</label>
+                <label><input type="checkbox" class="decade-filter" value="70s Music">70s</label>
+                <label><input type="checkbox" class="decade-filter" value="80s Music">80s</label>
+                <label><input type="checkbox" class="decade-filter" value="90s Music">90s</label>
+                <label><input type="checkbox" class="decade-filter" value="2000s Music">2000s</label>
+                <label><input type="checkbox" class="decade-filter" value="2010s Music">2010s</label>
+                <label><input type="checkbox" class="decade-filter" value="2020s Music">2020s</label>
+            </div>
+        </div>
+
+        <!-- Filtres par catégorie / style musical (basés sur song.style) -->
+        <div class="categories-row">
+            <span class="categories-label">Catégories :</span>
+            <div class="category-group">
+                <!-- Adapte cette liste aux valeurs que tu utilises dans songs.js -->
+                <label><input type="checkbox" class="category-filter" value="Pop">Pop</label>
+                <label><input type="checkbox" class="category-filter" value="Rock">Rock</label>
+                <label><input type="checkbox" class="category-filter" value="Electronic">Electronic</label>
+                <label><input type="checkbox" class="category-filter" value="R&B">R&B</label>
+                <label><input type="checkbox" class="category-filter" value="Disco">Disco</label>
+                <label><input type="checkbox" class="category-filter" value="New Wave">New Wave</label>
+                <label><input type="checkbox" class="category-filter" value="Soul">Soul</label>
+                <label><input type="checkbox" class="category-filter" value="Dance">Dance</label>
+                <!-- Tu peux en ajouter autant que tu veux -->
             </div>
         </div>
     </div>
@@ -207,301 +233,101 @@
     <div id="grid" class="grid"></div>
 </div>
 
+<!-- Chargement de la liste de chansons générée : songs.js doit définir "const songs = [...]" -->
+<script src="songs.js"></script>
+
 <script>
-// --------------------------
-// TA LISTE DE CHANSONS
-// --------------------------
-const songs = [
-    
-{
-    artist: "10cc",
-    title: "I'm not in love",
-    duration: "5 min 06",
-    style: "Soft Rock",
-    category: "70s Music",
-    cover: "img/10cc-not-in-love.jpg"
-},
-{
-    artist: "Abba",
-    title: "Gimme! Gimme! Gimme!",
-    duration: "3 min 07",
-    style: "Pop",
-    category: "70s Music",
-    cover: "img/abba-gimme.jpg"
-},
-{
-    artist: "Abba",
-    title: "Mammamia",
-    duration: "3 min 28",
-    style: "Pop",
-    category: "70s Music",
-    cover: "img/abba-mammamia.jpg"
-},
-{
-    artist: "Ace Of Base",
-    title: "All that she wants",
-    duration: "3 min 22",
-    style: "Pop",
-    category: "90s Music",
-    cover: "img/ace-of-base-all-that-she-wants.jpg"
-},
-{
-    artist: "Ace Of Base",
-    title: "Happy Nation",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Ace Of Base",
-    title: "The Sign",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Aha",
-    title: "Take on me",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Air",
-    title: "Kelly watch the stars",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Alan Parsons",
-    title: "Eye in the Sky",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Alannah Myles",
-    title: "Black Velvet",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Alice Deejay",
-    title: "Better off alone",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Alicia Keys",
-    title: "No one",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Alizee",
-    title: "Moi Lolita",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "All Saints",
-    title: "Lady Marmalade",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "All Saints",
-    title: "Pure shores",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Alphaville",
-    title: "Big in Japan",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Alphaville",
-    title: "Forever Young",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Amy Winehouse",
-    title: "Back to Black",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Amy Winehouse",
-    title: "You know im no good",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Andrea Bocelli",
-    title: "Vivo por Ella",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Animals",
-    title: "House of the rising sun",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Anita Ward",
-    title: "Ring My Bell",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Ann Lee",
-    title: "2 Times",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Arctic Monkeys",
-    title: "505",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Artemas",
-    title: "I like the way you kiss me",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Avicii",
-    title: "Levels",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
-{
-    artist: "Awolnation",
-    title: "Sail",
-    duration: "",
-    style: "",
-    category: "",
-    cover: "img/default-cover.jpg"
-},
+    // Récupère les décennies sélectionnées
+    function getSelectedDecades() {
+        return Array.from(document.querySelectorAll(".decade-filter:checked"))
+            .map(cb => cb.value);
+    }
 
-];
+    // Récupère les catégories (styles) sélectionnées
+    function getSelectedCategories() {
+        return Array.from(document.querySelectorAll(".category-filter:checked"))
+            .map(cb => cb.value);
+    }
 
-// --------------------------
-// Filtres
-// --------------------------
-function getSelectedCategories() {
-    return [...document.querySelectorAll(".cat-filter:checked")].map(cb => cb.value);
-}
+    function updateGrid() {
+        const search = document.getElementById("search").value.toLowerCase();
+        const selectedDecades = getSelectedDecades();
+        const selectedCategories = getSelectedCategories();
+        const grid = document.getElementById("grid");
+        const counter = document.getElementById("counter");
 
-// --------------------------
-// Mise à jour de la grille
-// --------------------------
-function updateGrid() {
-    const search = document.getElementById("search").value.toLowerCase();
-    const selected = getSelectedCategories();
-    const grid = document.getElementById("grid");
-    const counter = document.getElementById("counter");
+        grid.innerHTML = "";
 
-    grid.innerHTML = "";
+        const filtered = (songs || []).filter(song => {
+            const category = (song.category || "");
+            const style = (song.style || "");
 
-    const filtered = songs.filter(song => {
-        const inCategory =
-            selected.length === 0 || selected.includes(song.category);
+            // Filtrage par décennie (category)
+            const matchesDecade =
+                selectedDecades.length === 0 ||
+                selectedDecades.includes(category);
 
-        const text = (
-            song.title + " " +
-            song.artist + " " +
-            song.style + " " +
-            song.category
-        ).toLowerCase();
+            // Filtrage par style (style)
+            const matchesCategory =
+                selectedCategories.length === 0 ||
+                selectedCategories.includes(style);
 
-        const inSearch = text.includes(search);
-        return inCategory && inSearch;
-    });
+            // Recherche texte
+            const text = (
+                (song.title || "") + " " +
+                (song.artist || "") + " " +
+                style + " " +
+                category
+            ).toLowerCase();
 
-    filtered.forEach(song => {
-        const div = document.createElement("div");
-        div.className = "song";
+            const matchesSearch = text.includes(search);
 
-        div.innerHTML = `
-            <div class="song-cover">
-                <img src="${song.cover}" alt="${song.title}">
-            </div>
-            <div class="song-title">${song.title}</div>
-            <div class="song-artist">${song.artist}</div>
-            <div class="song-meta">
-                ${song.category}<br>
-                ${song.style}<br>
-                Durée : ${song.duration}
-            </div>
-        `;
+            return matchesDecade && matchesCategory && matchesSearch;
+        });
 
-        grid.appendChild(div);
-    });
+        filtered.forEach(song => {
+            const div = document.createElement("div");
+            div.className = "song";
 
-    counter.textContent =
-        `${filtered.length} chanson(s) affichée(s) sur ${songs.length}`;
-}
+            const cover = song.cover || "img/default-cover.jpg";
+            const title = song.title || "";
+            const artist = song.artist || "";
+            const category = song.category || "";
+            const style = song.style || "";
+            const duration = song.duration || "";
 
-// Événements
-document.getElementById("search").addEventListener("input", updateGrid);
-document.querySelectorAll(".cat-filter").forEach(cb =>
-    cb.addEventListener("change", updateGrid)
-);
+            div.innerHTML = `
+                <div class="song-cover">
+                    <img src="${cover}" alt="${title}">
+                </div>
+                <div class="song-title">${title}</div>
+                <div class="song-artist">${artist}</div>
+                <div class="song-meta">
+                    ${category}<br>
+                    ${style}<br>
+                    ${duration ? "Durée : " + duration : ""}
+                </div>
+            `;
 
-// Premier affichage
-updateGrid();
+            grid.appendChild(div);
+        });
+
+        counter.textContent =
+            filtered.length + " chanson(s) affichée(s) sur " + (songs ? songs.length : 0);
+    }
+
+    // Événements
+    document.getElementById("search").addEventListener("input", updateGrid);
+    document.querySelectorAll(".decade-filter").forEach(cb =>
+        cb.addEventListener("change", updateGrid)
+    );
+    document.querySelectorAll(".category-filter").forEach(cb =>
+        cb.addEventListener("change", updateGrid)
+    );
+
+    // Premier affichage
+    updateGrid();
 </script>
 
 </body>
 </html>
-
-
-
-
