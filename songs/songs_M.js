@@ -3,19 +3,16 @@ const songsM = [
     "artist": "Macklemore & Ryan Lewis",
     "title": "Thrift Shop",
     "duration": "3 min 49",
-    "style": [
-      "Hip Hop"
-    ],
+    "style": ["Hip Hop"],
     "category": "2010s Music",
     "cover": "img/Macklemore & Ryan Lewis - Thrift Shop.jpg"
   },
+
   {
     "artist": "Madonna",
     "title": "La Isla Bonita",
     "duration": "3 min 48",
-    "style": [
-      "Pop"
-    ],
+    "style": ["Pop"],
     "category": "80s Music",
     "cover": "img/Madonna - La Isla Bonita.jpg"
   },
@@ -23,39 +20,42 @@ const songsM = [
     "artist": "Madonna",
     "title": "Like A Prayer",
     "duration": "7 min 04",
-    "style": [
-      "Pop"
-    ],
+    "style": ["Pop"],
     "category": "80s Music",
     "cover": "img/Madonna - Like A Prayer.jpg"
   },
+
   {
     "artist": "Major Lazer",
     "title": "Lean on",
     "duration": "2 min 56",
-    "style": [
-      "Electronic"
-    ],
+    "style": ["Electronic"],
     "category": "2010s Music",
     "cover": "img/Major Lazer - Lean on.jpg"
+  },
+
+  {
+    "artist": "Marvin Gaye",
+    "title": "I heard it trough the grapevine",
+    "duration": "",
+    "style": [],
+    "category": "",
+    "cover": "img/Marvin Gaye - I heard it trough the grapevine.jpg"
   },
   {
     "artist": "Marvin Gaye",
     "title": "Sexual Healing",
     "duration": "4 min 08",
-    "style": [
-      "Soul"
-    ],
+    "style": ["Soul"],
     "category": "80s Music",
     "cover": "img/Marvin Gaye - Sexual Healing.jpg"
   },
+
   {
     "artist": "Massive Attack",
     "title": "Angel",
     "duration": "6 min 13",
-    "style": [
-      "Trip-Hop"
-    ],
+    "style": ["Trip-Hop"],
     "category": "90s Music",
     "cover": "img/Massive Attack - Angel.jpg"
   },
@@ -63,49 +63,61 @@ const songsM = [
     "artist": "Massive Attack",
     "title": "Teardrop",
     "duration": "5 min 24",
-    "style": [
-      "Trip-Hop"
-    ],
+    "style": ["Trip-Hop"],
     "category": "90s Music",
     "cover": "img/Massive Attack - Teardrop.jpg"
   },
+
+  {
+    "artist": "Mattafix",
+    "title": "Big City Life",
+    "duration": "",
+    "style": [],
+    "category": "",
+    "cover": "img/Mattafix - Big City Life.jpg"
+  },
+
   {
     "artist": "Medley - Sweet Dreams vs Seven Nation Army",
     "title": "Sweet Dreams vs Seven Nation Army",
     "duration": "3 min 33",
-    "style": [
-      "Mashup"
-    ],
+    "style": ["Mashup"],
     "category": "Mixed Years",
     "cover": "img/Medley - Sweet Dreams vs Seven Nation Army - Sweet Dreams vs Seven Nation Army.jpg"
   },
+
   {
     "artist": "Meute",
     "title": "You and Me (Flume Remix)",
     "duration": "5 min 33",
-    "style": [
-      "Electronic"
-    ],
+    "style": ["Electronic"],
     "category": "2010s Music",
     "cover": "img/Meute - You and Me (Flume Remix).jpg"
   },
+
   {
     "artist": "MGMT",
     "title": "Kids",
     "duration": "4 min 52",
-    "style": [
-      "Indie Pop"
-    ],
+    "style": ["Indie Pop"],
     "category": "2000s Music",
     "cover": "img/MGMT - Kids.jpg"
   },
+
+  {
+    "artist": "Mia",
+    "title": "Paper Planes",
+    "duration": "",
+    "style": [],
+    "category": "",
+    "cover": "img/Mia - Paper Planes.jpg"
+  },
+
   {
     "artist": "Michael Jackson",
     "title": "Beat it",
     "duration": "4 min 12",
-    "style": [
-      "Pop"
-    ],
+    "style": ["Pop"],
     "category": "80s Music",
     "cover": "img/Michael Jackson - Beat it.jpg"
   },
@@ -113,79 +125,113 @@ const songsM = [
     "artist": "Michael Jackson",
     "title": "Billie Jean",
     "duration": "4 min 53",
-    "style": [
-      "Pop"
-    ],
+    "style": ["Pop"],
     "category": "80s Music",
     "cover": "img/Michael Jackson - Billie Jean.jpg"
   },
   {
+    "artist": "Michael Jackson",
+    "title": "Smooth Criminal",
+    "duration": "",
+    "style": [],
+    "category": "",
+    "cover": "img/Michael Jackson - Smooth Criminal.jpg"
+  },
+  {
+    "artist": "Michael Jackson",
+    "title": "They Don't Care About Us",
+    "duration": "",
+    "style": [],
+    "category": "",
+    "cover": "img/Michael Jackson - They Don't Care About Us.jpg"
+  },
+
+  {
     "artist": "Michel Polnareff",
     "title": "Lettre a France",
     "duration": "3 min 42",
-    "style": [
-      "French Pop"
-    ],
+    "style": ["French Pop"],
     "category": "70s Music",
     "cover": "img/Michel Polnareff - Lettre a France.jpg"
   },
+
   {
     "artist": "Michel Sardou",
     "title": "Les lacs du connemara",
     "duration": "6 min 02",
-    "style": [
-      "French Pop"
-    ],
+    "style": ["French Pop"],
     "category": "80s Music",
     "cover": "img/Michel Sardou - Les lacs du connemara.jpg"
   },
+
+  {
+    "artist": "Midnight Oil",
+    "title": "Beds are burning",
+    "duration": "",
+    "style": [],
+    "category": "",
+    "cover": "img/Midnight Oil - Beds are burning.jpg"
+  },
+
   {
     "artist": "Mike Oldfield",
     "title": "Moonlight Shadow",
     "duration": "5 min 01",
-    "style": [
-      "Pop Rock"
-    ],
+    "style": ["Pop Rock"],
     "category": "80s Music",
     "cover": "img/Mike Oldfield - Moonlight Shadow.jpg"
   },
+
   {
     "artist": "Miki Matsubara",
     "title": "Stay With Me",
     "duration": "5 min 01",
-    "style": [
-      "City Pop"
-    ],
+    "style": ["City Pop"],
     "category": "80s Music",
     "cover": "img/Miki Matsubara - Stay With Me.jpg"
   },
+
+  {
+    "artist": "Moby",
+    "title": "Porcelain",
+    "duration": "",
+    "style": [],
+    "category": "",
+    "cover": "img/Moby - Porcelain.jpg"
+  },
+
   {
     "artist": "Modjo",
     "title": "Lady Hear Me Tonight",
     "duration": "3 min 40",
-    "style": [
-      "House"
-    ],
+    "style": ["House"],
     "category": "2000s Music",
     "cover": "img/Modjo - Lady Hear Me Tonight.jpg"
   },
+
   {
     "artist": "Monty Python",
     "title": "Always look on the bright side of life",
     "duration": "3 min 32",
-    "style": [
-      "Comedy"
-    ],
+    "style": ["Comedy"],
     "category": "70s Music",
     "cover": "img/Monty Python - Always look on the bright side of life.jpg"
   },
+
+  {
+    "artist": "Muse",
+    "title": "Verona",
+    "duration": "",
+    "style": [],
+    "category": "",
+    "cover": "img/Muse - Verona.jpg"
+  },
+
   {
     "artist": "Myrskyluodon Maija",
     "title": "Myrskyluodon Maija",
     "duration": "3 min 11",
-    "style": [
-      "Classical"
-    ],
+    "style": ["Classical"],
     "category": "Modern Classical",
     "cover": "img/Myrskyluodon Maija - Myrskyluodon Maija.jpg"
   }
