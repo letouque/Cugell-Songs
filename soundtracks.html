@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cugell – Soundtracks</title>
 
-    <!-- Same styles as index.html (you can factor them later into a shared CSS if you want) -->
     <style>
         body {
             margin: 0;
@@ -25,6 +24,7 @@
             border: 2px solid #c79b53;
         }
 
+        /* Top navigation */
         .top-nav {
             display: flex;
             justify-content: center;
@@ -48,6 +48,7 @@
             font-weight: bold;
         }
 
+        /* Header section (image + text) */
         .page-header {
             display: grid;
             grid-template-columns: 220px 1fr;
@@ -244,36 +245,42 @@
 <body>
 <div class="container">
 
+    <!-- Top navigation -->
     <nav class="top-nav">
         <a href="index.html">Songs</a>
         <a href="soundtracks.html" class="active">Soundtracks</a>
     </nav>
 
+    <!-- Header -->
     <div class="page-header">
         <div class="header-image">
-            <!-- You can use another image here, e.g. img/soundtracks-header.jpg -->
+            <!-- You can change this image if you want a different header for soundtracks -->
             <img src="img/header.jpg" alt="Soundtracks header image">
         </div>
         <div class="header-text">
             <h1>Cugell’s Soundtracks</h1>
-            <h2>Game, anime and movie music</h2>
+            <h2>Game, anime, movies & TV music</h2>
             <p>
                 This page lists soundtracks I love and arrange: music from games, anime, movies and TV shows.
-                It is separated from the main “Songs” page so that you can browse OST material independently.
-                Use the filters below to explore by decade and genre.
+                It is separated from the main “Songs” page so you can explore OST material independently.
+                Use the filters below to focus on anime, films, series, or game-related music such as
+                Final Fantasy, Nintendo and more.
             </p>
         </div>
     </div>
 
+    <!-- Filters and search -->
     <div class="controls">
+        <!-- Search -->
         <div class="search-row">
             <input
                 type="text"
                 id="search"
-                placeholder="Search by title, game, anime or style…"
+                placeholder="Search by title, series, game, movie or style…"
             />
         </div>
 
+        <!-- Decades -->
         <div class="filter-row">
             <span class="filter-label">Decades:</span>
             <div class="filter-group">
@@ -287,15 +294,25 @@
             </div>
         </div>
 
+        <!-- Media type: Anime, Movies, TV Show, Games -->
         <div class="filter-row">
-            <span class="filter-label">Genres:</span>
+            <span class="filter-label">Media type:</span>
             <div class="filter-group">
-                <label><input type="checkbox" class="category-filter" value="Game OST">Game OST</label>
-                <label><input type="checkbox" class="category-filter" value="Anime OST">Anime OST</label>
-                <label><input type="checkbox" class="category-filter" value="Movie Score">Movie Score</label>
-                <label><input type="checkbox" class="category-filter" value="Orchestral">Orchestral</label>
-                <label><input type="checkbox" class="category-filter" value="Piano">Piano</label>
-                <!-- add more tags as needed -->
+                <label><input type="checkbox" class="media-filter" value="Anime">Anime</label>
+                <label><input type="checkbox" class="media-filter" value="Movie">Movies</label>
+                <label><input type="checkbox" class="media-filter" value="TV Show">TV Shows</label>
+                <label><input type="checkbox" class="media-filter" value="Game">Games</label>
+            </div>
+        </div>
+
+        <!-- Game-specific filters -->
+        <div class="filter-row">
+            <span class="filter-label">Game filters:</span>
+            <div class="filter-group">
+                <label><input type="checkbox" class="game-filter" value="Final Fantasy">Final Fantasy</label>
+                <label><input type="checkbox" class="game-filter" value="Nintendo">Nintendo</label>
+                <label><input type="checkbox" class="game-filter" value="PlayStation">PlayStation</label>
+                <label><input type="checkbox" class="game-filter" value="Old games">Old games</label>
             </div>
         </div>
     </div>
@@ -305,7 +322,7 @@
     <div id="grid" class="grid"></div>
 </div>
 
-<!-- this page uses a different data file -->
+<!-- This page uses soundtracks.js -->
 <script src="soundtracks.js"></script>
 
 <script>
@@ -314,8 +331,13 @@
             .map(cb => cb.value);
     }
 
-    function getSelectedCategories() {
-        return Array.from(document.querySelectorAll(".category-filter:checked"))
+    function getSelectedMediaTypes() {
+        return Array.from(document.querySelectorAll(".media-filter:checked"))
+            .map(cb => cb.value);
+    }
+
+    function getSelectedGameFilters() {
+        return Array.from(document.querySelectorAll(".game-filter:checked"))
             .map(cb => cb.value);
     }
 
@@ -331,30 +353,42 @@
     function updateGrid() {
         const search = document.getElementById("search").value.toLowerCase();
         const selectedDecades = getSelectedDecades();
-        const selectedCategories = getSelectedCategories();
+        const selectedMedia = getSelectedMediaTypes();
+        const selectedGames = getSelectedGameFilters();
         const grid = document.getElementById("grid");
         const counter = document.getElementById("counter");
 
         grid.innerHTML = "";
 
         const filtered = (soundtracks || []).filter(track => {
-            const category = (track.category || "");
+            const category = track.category || "";      // Decade (e.g. "2000s Music")
+            const mediaType = track.mediaType || "";    // "Anime", "Movie", "TV Show", "Game"
+            const gameGroup = track.gameGroup || "";    // "Final Fantasy", "Nintendo", "PlayStation", "Old games", or ""
             const stylesArray = normalizeStyles(track.style);
-            const title = (track.title || "");
-            const artist = (track.artist || "");
+            const title = track.title || "";
+            const artist = track.artist || "";
 
+            // Decade filter
             const matchesDecade =
                 selectedDecades.length === 0 ||
                 selectedDecades.includes(category);
 
-            const matchesCategory =
-                selectedCategories.length === 0 ||
-                stylesArray.some(s => selectedCategories.includes(s));
+            // MediaType filter
+            const matchesMedia =
+                selectedMedia.length === 0 ||
+                selectedMedia.includes(mediaType);
 
-            const text = (title + " " + artist + " " + stylesArray.join(" ") + " " + category).toLowerCase();
+            // Game filters (only if user selected some)
+            const matchesGameFilters =
+                selectedGames.length === 0 ||
+                selectedGames.includes(gameGroup);
+
+            // Text search
+            const text = (title + " " + artist + " " + mediaType + " " + gameGroup + " " + stylesArray.join(" ") + " " + category)
+                .toLowerCase();
             const matchesSearch = text.includes(search);
 
-            return matchesDecade && matchesCategory && matchesSearch;
+            return matchesDecade && matchesMedia && matchesGameFilters && matchesSearch;
         });
 
         filtered.forEach(track => {
@@ -365,9 +399,13 @@
             const title = track.title || "";
             const artist = track.artist || "";
             const category = track.category || "";
+            const mediaType = track.mediaType || "";
+            const gameGroup = track.gameGroup || "";
             const stylesArray = normalizeStyles(track.style);
             const duration = track.duration || "";
             const stylesText = stylesArray.join(", ");
+
+            const extraLine = [mediaType, gameGroup, stylesText].filter(Boolean).join(" • ");
 
             div.innerHTML = `
                 <div class="song-cover">
@@ -377,7 +415,7 @@
                 <div class="song-artist">${artist}</div>
                 <div class="song-meta">
                     ${category}<br>
-                    ${stylesText}<br>
+                    ${extraLine}<br>
                     ${duration ? "Duration: " + duration : ""}
                 </div>
             `;
@@ -393,7 +431,10 @@
     document.querySelectorAll(".decade-filter").forEach(cb =>
         cb.addEventListener("change", updateGrid)
     );
-    document.querySelectorAll(".category-filter").forEach(cb =>
+    document.querySelectorAll(".media-filter").forEach(cb =>
+        cb.addEventListener("change", updateGrid)
+    );
+    document.querySelectorAll(".game-filter").forEach(cb =>
         cb.addEventListener("change", updateGrid)
     );
 
