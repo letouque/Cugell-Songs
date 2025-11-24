@@ -47,7 +47,7 @@ const songsB = [
       "Soul"
     ],
     "category": "70s Music",
-    "cover": "img/Barry White - You're the first the last my everything.jpg"
+    "cover": "img/Barry White - Youre the first the last my everything.jpg"
   },
   {
     "artist": "Billie Eilish",
@@ -169,7 +169,7 @@ const songsB = [
   },
   {
     "artist": "Bon Jovi",
-    "title": "It's my life",
+    "title": "Its my life",
     "duration": "",
     "style": [],
     "category": "",
