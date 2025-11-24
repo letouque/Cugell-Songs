@@ -501,7 +501,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/daft-punk-discovery.jpg"
   },
   {
     artist: "Daft Punk",
@@ -510,7 +510,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/daft-punk-discovery.jpg"
   },
   {
     artist: "Daft Punk",
@@ -528,7 +528,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/daft-punk-discovery.jpg"
   },
   {
     artist: "Daft Punk",
@@ -555,7 +555,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/daft-punk-discovery.jpg"
   },
   {
     artist: "Daft Punk",
@@ -582,7 +582,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/daft-punk-discovery.jpg"
   },
   {
     artist: "Daft Punk",
