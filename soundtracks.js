@@ -4,11 +4,13 @@ const soundtracks = [
     title: "To Zanarkand",
     duration: "3:12",
     year: "2001",
-    style: ["Game OST", "Piano"],
     category: "2000s Music",
     mediaType: "Game",
-    gameGroup: "Final Fantasy",
+    gameUniverse: "JRPG Classics",
+    finalFantasy: "X",
+    style: ["Piano", "Game OST"],
     cover: "img/Nobuo Uematsu - To Zanarkand.jpg"
   },
-  // ...
+
+  // Add more tracks...
 ];
