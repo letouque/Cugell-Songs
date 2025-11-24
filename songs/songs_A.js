@@ -87,10 +87,7 @@ const songsA = [
     "artist": "Alicia Keys",
     "title": "No one",
     "duration": "4 min 08",
-    "style": [
-      "R",
-      "B"
-    ],
+    "style": ["R","B"],
     "category": "2000s Music",
     "cover": "img/Alicia Keys - No one.jpg"
   },
@@ -98,9 +95,7 @@ const songsA = [
     "artist": "Alizee",
     "title": "Moi Lolita",
     "duration": "4 min 26",
-    "style": [
-      "French Pop"
-    ],
+    "style": ["French Pop"],
     "category": "2000s Music",
     "cover": "img/Alizee - Moi Lolita.jpg"
   },
