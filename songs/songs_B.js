@@ -20,6 +20,22 @@ const songsB = [
     "cover": "img/Bag Raiders - Shooting Star.jpg"
   },
   {
+  "artist": "B-52s",
+  "title": "Love Shack",
+  "duration": "5 min 21",
+  "style": ["Pop Rock"],
+  "category": "80s Music",
+  "cover": "img/B-52s - Love Shack.jpg"
+},
+ {
+ "artist": "Babymetal",
+ "title": "Gimme Chocolate",
+ "duration": "3 min 51",
+  "style": ["Metal", "J-Pop"],
+  "category": "2010s Music",
+  "cover": "img/Babymetal - Gimme Chocolate.jpg"
+},
+  {
     "artist": "Bangles",
     "title": "Eternal Flame",
     "duration": "3 min 47",
