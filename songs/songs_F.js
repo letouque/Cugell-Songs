@@ -40,6 +40,14 @@ const songsF = [
     "cover": "img/Fools Garden - Lemon Tree.jpg"
   },
   {
+    "artist": "Frank Sinatra",
+    "title": "My Way",
+    "duration": "",
+    "style": [],
+    "category": "",
+    "cover": "img/Frank Sinatra - My Way.jpg"
+  },
+  {
     "artist": "FR David",
     "title": "Words",
     "duration": "4 min 19",
