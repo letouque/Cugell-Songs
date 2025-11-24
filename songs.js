@@ -6,7 +6,7 @@ const songs = [
     year: "",
     style: ["Soft Rock"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/10cc-not-in-love.jpg"
   },
   {
     artist: "ABBA",
@@ -15,7 +15,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "abba-gimme.jpg"
   },
   {
     artist: "ABBA",
@@ -24,7 +24,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "70s Music",
-    cover: "img/default-cover.jpg"
+    cover: "abba-mammamia.jpg"
   },
   {
     artist: "Ace Of Base",
@@ -33,7 +33,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/ace-of-base-all-that-she-wants.jpg"
   },
   {
     artist: "Ace Of Base",
@@ -60,7 +60,7 @@ const songs = [
     year: "",
     style: ["Pop"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/take-on-me.jpg"
   },
   {
     artist: "Air",
