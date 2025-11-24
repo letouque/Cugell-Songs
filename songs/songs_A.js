@@ -59,13 +59,11 @@ const songsA = [
     "artist": "Alannah Myles",
     "title": "Black Velvet",
     "duration": "4 min 39",
-    "style": [
-      "Rock"
-    ],
+    "style": ["Rock"],
     "category": "80s Music",
     "cover": "img/Alannah Myles - Black Velvet.jpg"
   },
-   {
+  {
     "artist": "Alan Parson's Project",
     "title": "Eye in the sky",
     "duration": "4 min 25",
@@ -77,9 +75,7 @@ const songsA = [
     "artist": "Alice Deejay",
     "title": "Better off alone",
     "duration": "3 min 32",
-    "style": [
-      "Dance"
-    ],
+    "style": ["Dance"],
     "category": "90s Music",
     "cover": "img/Alice Deejay - Better off alone.jpg"
   },
@@ -99,29 +95,27 @@ const songsA = [
     "category": "2000s Music",
     "cover": "img/Alizee - Moi Lolita.jpg"
   },
- {
-  "artist": "All Saints",
-  "title": "Lady Marmalade",
-  "duration": "",
-  "style": ["Pop"],
-  "category": "2000s Music",
-  "cover": "img/All Saints - Lady Marmalade.jpg"
-},
-{
-  "artist": "All Saints",
-  "title": "Pure Shores",
-  "duration": "4 min 27",
-  "style": ["Pop"],
-  "category": "2000s Music",
-  "cover": "img/All Saints - Pure Shores.jpg"
-}
+  {
+    "artist": "All Saints",
+    "title": "Lady Marmalade",
+    "duration": "",
+    "style": ["Pop"],
+    "category": "2000s Music",
+    "cover": "img/All Saints - Lady Marmalade.jpg"
+  },
+  {
+    "artist": "All Saints",
+    "title": "Pure Shores",
+    "duration": "4 min 27",
+    "style": ["Pop"],
+    "category": "2000s Music",
+    "cover": "img/All Saints - Pure Shores.jpg"
+  },
   {
     "artist": "Alphaville",
     "title": "Big in Japan",
     "duration": "4 min 46",
-    "style": [
-      "New Wave"
-    ],
+    "style": ["New Wave"],
     "category": "80s Music",
     "cover": "img/Alphaville - Big in Japan.jpg"
   },
@@ -129,9 +123,7 @@ const songsA = [
     "artist": "Alphaville",
     "title": "Forever Young",
     "duration": "3 min 49",
-    "style": [
-      "New Wave"
-    ],
+    "style": ["New Wave"],
     "category": "80s Music",
     "cover": "img/Alphaville - Forever Young.jpg"
   },
@@ -139,9 +131,7 @@ const songsA = [
     "artist": "Amy Winehouse",
     "title": "Back to Black",
     "duration": "3 min 56",
-    "style": [
-      "Soul"
-    ],
+    "style": ["Soul"],
     "category": "2000s Music",
     "cover": "img/Amy Winehouse - Back to Black.jpg"
   },
@@ -149,9 +139,7 @@ const songsA = [
     "artist": "Amy Winehouse",
     "title": "You know I'm no good",
     "duration": "3 min 34",
-    "style": [
-      "Soul"
-    ],
+    "style": ["Soul"],
     "category": "2000s Music",
     "cover": "img/Amy Winehouse - You know Im no good.jpg"
   },
@@ -167,9 +155,7 @@ const songsA = [
     "artist": "Animals",
     "title": "House of the rising sun",
     "duration": "4 min 39",
-    "style": [
-      "Rock"
-    ],
+    "style": ["Rock"],
     "category": "60s Music",
     "cover": "img/Animals - House of the rising sun.jpg"
   },
@@ -177,9 +163,7 @@ const songsA = [
     "artist": "Anita Ward",
     "title": "Ring My Bell",
     "duration": "3 min 26",
-    "style": [
-      "Disco"
-    ],
+    "style": ["Disco"],
     "category": "70s Music",
     "cover": "img/Anita Ward - Ring My Bell.jpg"
   },
@@ -187,9 +171,7 @@ const songsA = [
     "artist": "Ann Lee",
     "title": "2 Times",
     "duration": "3 min 48",
-    "style": [
-      "Dance-Pop"
-    ],
+    "style": ["Dance-Pop"],
     "category": "90s Music",
     "cover": "img/Ann Lee - 2 Times.jpg"
   },
@@ -197,9 +179,7 @@ const songsA = [
     "artist": "Arctic Monkeys",
     "title": "505",
     "duration": "4 min 10",
-    "style": [
-      "Indie Rock"
-    ],
+    "style": ["Indie Rock"],
     "category": "2000s Music",
     "cover": "img/Arctic Monkeys - 505.jpg"
   },
@@ -207,9 +187,7 @@ const songsA = [
     "artist": "Artemas",
     "title": "I like the way you kiss me",
     "duration": "2 min 18",
-    "style": [
-      "Pop"
-    ],
+    "style": ["Pop"],
     "category": "2020s Music",
     "cover": "img/Artemas - I like the way you kiss me.jpg"
   },
@@ -217,9 +195,7 @@ const songsA = [
     "artist": "Avicii",
     "title": "Levels",
     "duration": "2 min 57",
-    "style": [
-      "Electronic"
-    ],
+    "style": ["Electronic"],
     "category": "2010s Music",
     "cover": "img/Avicii - Levels.jpg"
   },
@@ -227,9 +203,7 @@ const songsA = [
     "artist": "Awolnation",
     "title": "Sail",
     "duration": "4 min 00",
-    "style": [
-      "Alternative Rock"
-    ],
+    "style": ["Alternative Rock"],
     "category": "2010s Music",
     "cover": "img/Awolnation - Sail.jpg"
   }
