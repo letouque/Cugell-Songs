@@ -5,7 +5,7 @@ const songsA = [
     "duration": "3 min 07",
     "style": ["Pop","Disco"],
     "category": "70s Music",
-    "cover": "img/ABBA - Gimme ! Gimme ! Gimmie !.jpg"
+    "cover": "img/ABBA - Gimme Gimme Gimmie.jpg"
   },
   {
     "artist": "ABBA",
@@ -142,7 +142,7 @@ const songsA = [
       "Soul"
     ],
     "category": "2000s Music",
-    "cover": "img/Amy Winehouse - You know I'm no good.jpg"
+    "cover": "img/Amy Winehouse - You know Im no good.jpg"
   },
   {
     "artist": "Andrea Bocelli",
@@ -150,7 +150,7 @@ const songsA = [
     "duration": "",
     "style": [],
     "category": "",
-    "cover": "img/Andrea Bocelli - Vivo por Ella.jpg"
+    "cover": "img/Andrea Bocelli - Vivo por Lei.jpg"
   },
   {
     "artist": "Animals",
