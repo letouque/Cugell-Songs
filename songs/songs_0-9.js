@@ -5,6 +5,6 @@ const songs09 = [
     "duration": "5 min 06",
     "style": ["Soft Rock"],
     "category": "70s Music",
-    "cover": "img/10cc - I'm not in love.jpg"
+    "cover": "img/10cc - Im not in love.jpg"
   }
 ];
