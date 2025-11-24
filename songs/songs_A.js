@@ -3,9 +3,7 @@ const songsA = [
     "artist": "ABBA",
     "title": "Gimme ! Gimme ! Gimmie !",
     "duration": "3 min 07",
-    "style": [
-      "Pop"
-    ],
+    "style": ["Pop","Disco"],
     "category": "70s Music",
     "cover": "img/ABBA - Gimme ! Gimme ! Gimmie !.jpg"
   },
@@ -13,9 +11,7 @@ const songsA = [
     "artist": "ABBA",
     "title": "Mammamia",
     "duration": "3 min 28",
-    "style": [
-      "Pop"
-    ],
+    "style": ["Pop","Disco"],
     "category": "70s Music",
     "cover": "img/ABBA - Mammamia.jpg"
   },
@@ -23,9 +19,7 @@ const songsA = [
     "artist": "Ace Of Base",
     "title": "All that she wants",
     "duration": "3 min 22",
-    "style": [
-      "Pop"
-    ],
+    "style": ["Pop","Dance"],
     "category": "90s Music",
     "cover": "img/Ace Of Base - All that she wants.jpg"
   },
@@ -33,9 +27,7 @@ const songsA = [
     "artist": "Ace Of Base",
     "title": "Happy Nation",
     "duration": "3 min 36",
-    "style": [
-      "Pop"
-    ],
+    "style": ["Pop"],
     "category": "90s Music",
     "cover": "img/Ace Of Base - Happy Nation.jpg"
   },
@@ -43,9 +35,7 @@ const songsA = [
     "artist": "Ace Of Base",
     "title": "The Sign",
     "duration": "3 min 06",
-    "style": [
-      "Pop"
-    ],
+    "style": ["Pop"],
     "category": "90s Music",
     "cover": "img/Ace Of Base - The Sign.jpg"
   },
@@ -53,9 +43,7 @@ const songsA = [
     "artist": "Aha",
     "title": "Take on me",
     "duration": "3 min 42",
-    "style": [
-      "Pop"
-    ],
+    "style": ["Pop"],
     "category": "80s Music",
     "cover": "img/Aha - Take on me.jpg"
   },
@@ -63,9 +51,7 @@ const songsA = [
     "artist": "Air",
     "title": "Kelly watch the stars",
     "duration": "3 min 42",
-    "style": [
-      "Electronic"
-    ],
+    "style": ["Electronic"],
     "category": "90s Music",
     "cover": "img/Air - Kelly watch the stars.jpg"
   },
@@ -78,6 +64,14 @@ const songsA = [
     ],
     "category": "80s Music",
     "cover": "img/Alannah Myles - Black Velvet.jpg"
+  },
+   {
+    "artist": "Alan Parson's Project",
+    "title": "Eye in the sky",
+    "duration": "4 min 25",
+    "style": ["Rock"],
+    "category": "80s Music",
+    "cover": "img/Alan Parson - Eye in the sky.jpg"
   },
   {
     "artist": "Alice Deejay",
