@@ -3,9 +3,7 @@ const songsS = [
     "artist": "Sabrina",
     "title": "Boys (Summertime Love)",
     "duration": "4 min 06",
-    "style": [
-      "Pop"
-    ],
+    "style": ["Pop"],
     "category": "80s Music",
     "cover": "img/Sabrina - Boys (Summertime Love).jpg"
   },
@@ -13,9 +11,7 @@ const songsS = [
     "artist": "Santa Esmeralda",
     "title": "Don't let me be misunderstood",
     "duration": "5 min 44",
-    "style": [
-      "Disco"
-    ],
+    "style": ["Disco"],
     "category": "70s Music",
     "cover": "img/Santa Esmeralda - Don't let me be misunderstood.jpg"
   },
@@ -23,9 +19,7 @@ const songsS = [
     "artist": "Sash",
     "title": "Equador",
     "duration": "3 min 33",
-    "style": [
-      "Dance"
-    ],
+    "style": ["Dance"],
     "category": "90s Music",
     "cover": "img/Sash - Equador.jpg"
   },
@@ -33,9 +27,7 @@ const songsS = [
     "artist": "Scorpions",
     "title": "Wind of change",
     "duration": "5 min 08",
-    "style": [
-      "Rock"
-    ],
+    "style": ["Rock"],
     "category": "90s Music",
     "cover": "img/Scorpions - Wind of change.jpg"
   },
@@ -48,12 +40,26 @@ const songsS = [
     "cover": "img/Seal - Kiss for a Rose.jpg"
   },
   {
+    "artist": "Ska-P",
+    "title": "Cannabis",
+    "duration": "",
+    "style": [],
+    "category": "",
+    "cover": "img/Ska-P - Cannabis.jpg"
+  },
+  {
+    "artist": "Skrillex & Damian Jr. Marley",
+    "title": "Make it bun dem",
+    "duration": "",
+    "style": [],
+    "category": "",
+    "cover": "img/Skrillex & Damian Jr. Marley - Make it bun dem.jpg"
+  },
+  {
     "artist": "Shaggy",
     "title": "Boombastic",
     "duration": "3 min 56",
-    "style": [
-      "Reggae Fusion"
-    ],
+    "style": ["Reggae Fusion"],
     "category": "90s Music",
     "cover": "img/Shaggy - Boombastic.jpg"
   },
@@ -61,9 +67,7 @@ const songsS = [
     "artist": "Shakira",
     "title": "Hips don't lie",
     "duration": "3 min 13",
-    "style": [
-      "Pop"
-    ],
+    "style": ["Pop"],
     "category": "2000s Music",
     "cover": "img/Shakira - Hips don't lie.jpg"
   },
@@ -71,9 +75,7 @@ const songsS = [
     "artist": "Shivaree",
     "title": "Goodnight moon",
     "duration": "4 min 00",
-    "style": [
-      "Alternative Rock"
-    ],
+    "style": ["Alternative Rock"],
     "category": "90s Music",
     "cover": "img/Shivaree - Goodnight moon.jpg"
   },
@@ -81,19 +83,23 @@ const songsS = [
     "artist": "Shostakovich",
     "title": "Waltz N?2",
     "duration": "2 min 09",
-    "style": [
-      "Classical"
-    ],
+    "style": ["Classical"],
     "category": "Early 20th Century",
     "cover": "img/Shostakovich - Waltz N?2.jpg"
   },
   {
     "artist": "Stevie Wonder",
+    "title": "Happy Birthday",
+    "duration": "",
+    "style": [],
+    "category": "",
+    "cover": "img/Stevie Wonder - Happy Birthday.jpg"
+  },
+  {
+    "artist": "Stevie Wonder",
     "title": "Isn't She Lovely",
     "duration": "3 min 21",
-    "style": [
-      "Soul"
-    ],
+    "style": ["Soul"],
     "category": "70s Music",
     "cover": "img/Stevie Wonder - Isn't She Lovely.jpg"
   },
@@ -101,9 +107,7 @@ const songsS = [
     "artist": "Stromae",
     "title": "Alors on Danse",
     "duration": "3 min 22",
-    "style": [
-      "Electronic"
-    ],
+    "style": ["Electronic"],
     "category": "2010s Music",
     "cover": "img/Stromae - Alors on Danse.jpg"
   },
@@ -111,9 +115,7 @@ const songsS = [
     "artist": "Stromae & Pomme",
     "title": "Ma Meilleure Ennemie (Arcane soundtrack)",
     "duration": "2 min 22",
-    "style": [
-      "Pop"
-    ],
+    "style": ["Pop"],
     "category": "2020s Music",
     "cover": "img/Stromae & Pomme - Ma Meilleure Ennemie (Arcane soundtrack).jpg"
   },
@@ -121,9 +123,7 @@ const songsS = [
     "artist": "Survivors",
     "title": "Eye of the Tiger",
     "duration": "4 min 04",
-    "style": [
-      "Rock"
-    ],
+    "style": ["Rock"],
     "category": "80s Music",
     "cover": "img/Survivors - Eye of the Tiger.jpg"
   },
@@ -131,9 +131,7 @@ const songsS = [
     "artist": "Suzanne Vega",
     "title": "Luka",
     "duration": "3 min 51",
-    "style": [
-      "Folk Rock"
-    ],
+    "style": ["Folk Rock"],
     "category": "80s Music",
     "cover": "img/Suzanne Vega - Luka.jpg"
   }
