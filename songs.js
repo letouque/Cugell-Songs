@@ -15,7 +15,7 @@ const songs = [
     year: "",
     style: ["Pop","Disco"],
     category: "70s Music",
-    cover: "img/ABBA - Gimme  Gimme  Gimmie .jpg"
+    cover: "img/ABBA - Gimme  Gimme  Gimmie.jpg"
   },
   {
     artist: "ABBA",
