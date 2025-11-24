@@ -13,7 +13,7 @@ const songs = [
     title: "Gimme ! Gimme ! Gimmie !",
     duration: "3 min 07",
     year: "",
-    style: ["Pop"],
+    style: ["Pop","Disco"],
     category: "70s Music",
     cover: "img/abba-gimme.jpg"
   },
