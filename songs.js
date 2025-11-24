@@ -132,7 +132,7 @@ const songs = [
     year: "",
     style: ["Soul"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Amy-Winehouse-Back-To-Black.jpg"
   },
   {
     artist: "Amy Winehouse",
@@ -147,9 +147,9 @@ const songs = [
     artist: "Andrea Bocelli",
     title: "Vivo por Ella",
     duration: "",
-    year: "",
-    style: [],
-    category: "",
+    year: "1995",
+    style: ["Pop","Classic"],
+    category: "90s Music",
     cover: "img/default-cover.jpg"
   },
   {
