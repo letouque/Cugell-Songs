@@ -104,6 +104,22 @@ const songsA = [
     "category": "2000s Music",
     "cover": "img/Alizee - Moi Lolita.jpg"
   },
+ {
+  "artist": "All Saints",
+  "title": "Lady Marmalade",
+  "duration": "",
+  "style": ["Pop"],
+  "category": "2000s Music",
+  "cover": "img/All Saints - Lady Marmalade.jpg"
+},
+{
+  "artist": "All Saints",
+  "title": "Pure Shores",
+  "duration": "4 min 27",
+  "style": ["Pop"],
+  "category": "2000s Music",
+  "cover": "img/All Saints - Pure Shores.jpg"
+}
   {
     "artist": "Alphaville",
     "title": "Big in Japan",
