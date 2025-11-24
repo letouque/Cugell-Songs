@@ -5,7 +5,7 @@ const songsA = [
     "duration": "3 min 07",
     "style": ["Pop","Disco"],
     "category": "70s Music",
-    "cover": "img/ABBA - Gimme Gimme Gimmie.jpg"
+    "cover": "img/ABBA - Gimme Gimme Gimme.jpg"
   },
   {
     "artist": "ABBA",
