@@ -87,7 +87,7 @@ const songs = [
     year: "",
     style: ["Dance"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/alice-deejay-better-off-alone.jpg"
   },
   {
     artist: "Alicia Keys",
