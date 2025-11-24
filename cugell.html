@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Répertoire de chansons</title>
+    <title>Cugell Song Repertoire</title>
 
     <style>
         body {
@@ -24,19 +24,60 @@
             border: 2px solid #c79b53;
         }
 
-        h1 {
-            text-align: center;
-            margin-top: 0;
+        /* Header section (image + text) */
+        .page-header {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header-image {
+            width: 100%;
+            max-width: 220px;
+            aspect-ratio: 1 / 1;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid #c79b53;
+            background: #2b1d16;
+        }
+
+        .header-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .header-text h1 {
+            margin: 0 0 6px 0;
             font-size: 28px;
             letter-spacing: 1px;
         }
 
-        h1 span {
-            display: block;
-            font-size: 14px;
+        .header-text h2 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
             font-weight: normal;
-            margin-top: 4px;
             color: #d3c2a5;
+        }
+
+        .header-text p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #f7f1e3;
+        }
+
+        @media (max-width: 700px) {
+            .page-header {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .header-image {
+                margin: 0 auto;
+            }
         }
 
         .controls {
@@ -66,7 +107,7 @@
             color: #bda88a;
         }
 
-        .categories-row {
+        .filter-row {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
@@ -74,19 +115,19 @@
             font-size: 13px;
         }
 
-        .categories-label {
+        .filter-label {
             font-weight: bold;
             color: #e5d3b0;
             margin-right: 4px;
         }
 
-        .category-group {
+        .filter-group {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
         }
 
-        .category-group label {
+        .filter-group label {
             display: inline-flex;
             align-items: center;
             gap: 4px;
@@ -97,7 +138,7 @@
             cursor: pointer;
         }
 
-        .category-group input[type="checkbox"] {
+        .filter-group input[type="checkbox"] {
             cursor: pointer;
         }
 
@@ -107,7 +148,7 @@
             margin-bottom: 10px;
         }
 
-        /* Grille de cartes */
+        /* Song grid */
         .grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -181,25 +222,38 @@
 <body>
 <div class="container">
 
-    <h1>
-        Répertoire de chansons
-        <span>Recherche • Décennies • Catégories • Grille d’aperçus</span>
-    </h1>
+    <!-- Header with your image + text -->
+    <div class="page-header">
+        <div class="header-image">
+            <!-- Put your own image in img/header.jpg, or change the path below -->
+            <img src="img/header.jpg" alt="Song list header image">
+        </div>
+        <div class="header-text">
+            <h1>Cugell’s Song Repertoire</h1>
+            <h2>Browse, filter and search my setlist</h2>
+            <p>
+                Use the search bar and filters below to explore the songs I can play live.
+                You can filter by decade, by genre, or simply type part of a title or artist name.
+                This page is designed for the audience to quickly find and suggest songs during performances.
+            </p>
+        </div>
+    </div>
 
+    <!-- Filters and search -->
     <div class="controls">
-        <!-- Recherche -->
+        <!-- Search -->
         <div class="search-row">
             <input
                 type="text"
                 id="search"
-                placeholder="Rechercher un titre, un artiste, un style…"
+                placeholder="Search by title, artist or style…"
             />
         </div>
 
-        <!-- Filtres par décennie (basés sur song.category, ex: '70s Music') -->
-        <div class="categories-row">
-            <span class="categories-label">Décennies :</span>
-            <div class="category-group">
+        <!-- Filter by decade (based on song.category, e.g. '70s Music') -->
+        <div class="filter-row">
+            <span class="filter-label">Decades:</span>
+            <div class="filter-group">
                 <label><input type="checkbox" class="decade-filter" value="60s Music">60s</label>
                 <label><input type="checkbox" class="decade-filter" value="70s Music">70s</label>
                 <label><input type="checkbox" class="decade-filter" value="80s Music">80s</label>
@@ -210,11 +264,11 @@
             </div>
         </div>
 
-        <!-- Filtres par catégorie / style musical (basés sur song.style) -->
-        <div class="categories-row">
-            <span class="categories-label">Catégories :</span>
-            <div class="category-group">
-                <!-- Adapte cette liste aux valeurs que tu utilises dans songs.js -->
+        <!-- Filter by genre / category (based on song.style) -->
+        <div class="filter-row">
+            <span class="filter-label">Genres:</span>
+            <div class="filter-group">
+                <!-- Adapt this list to match your styles in songs.js -->
                 <label><input type="checkbox" class="category-filter" value="Pop">Pop</label>
                 <label><input type="checkbox" class="category-filter" value="Rock">Rock</label>
                 <label><input type="checkbox" class="category-filter" value="Electronic">Electronic</label>
@@ -223,7 +277,7 @@
                 <label><input type="checkbox" class="category-filter" value="New Wave">New Wave</label>
                 <label><input type="checkbox" class="category-filter" value="Soul">Soul</label>
                 <label><input type="checkbox" class="category-filter" value="Dance">Dance</label>
-                <!-- Tu peux en ajouter autant que tu veux -->
+                <!-- You can add more genres here -->
             </div>
         </div>
     </div>
@@ -233,17 +287,17 @@
     <div id="grid" class="grid"></div>
 </div>
 
-<!-- Chargement de la liste de chansons générée : songs.js doit définir "const songs = [...]" -->
+<!-- Load the external songs.js file which defines "const songs = [...]" -->
 <script src="songs.js"></script>
 
 <script>
-    // Récupère les décennies sélectionnées
+    // Get selected decades
     function getSelectedDecades() {
         return Array.from(document.querySelectorAll(".decade-filter:checked"))
             .map(cb => cb.value);
     }
 
-    // Récupère les catégories (styles) sélectionnées
+    // Get selected genres/categories (based on song.style)
     function getSelectedCategories() {
         return Array.from(document.querySelectorAll(".category-filter:checked"))
             .map(cb => cb.value);
@@ -261,73 +315,14 @@
         const filtered = (songs || []).filter(song => {
             const category = (song.category || "");
             const style = (song.style || "");
+            const title = (song.title || "");
+            const artist = (song.artist || "");
 
-            // Filtrage par décennie (category)
+            // Decade filter (song.category, e.g. "80s Music")
             const matchesDecade =
                 selectedDecades.length === 0 ||
                 selectedDecades.includes(category);
 
-            // Filtrage par style (style)
+            // Genre filter (song.style, e.g. "Pop", "Rock")
             const matchesCategory =
                 selectedCategories.length === 0 ||
-                selectedCategories.includes(style);
-
-            // Recherche texte
-            const text = (
-                (song.title || "") + " " +
-                (song.artist || "") + " " +
-                style + " " +
-                category
-            ).toLowerCase();
-
-            const matchesSearch = text.includes(search);
-
-            return matchesDecade && matchesCategory && matchesSearch;
-        });
-
-        filtered.forEach(song => {
-            const div = document.createElement("div");
-            div.className = "song";
-
-            const cover = song.cover || "img/default-cover.jpg";
-            const title = song.title || "";
-            const artist = song.artist || "";
-            const category = song.category || "";
-            const style = song.style || "";
-            const duration = song.duration || "";
-
-            div.innerHTML = `
-                <div class="song-cover">
-                    <img src="${cover}" alt="${title}">
-                </div>
-                <div class="song-title">${title}</div>
-                <div class="song-artist">${artist}</div>
-                <div class="song-meta">
-                    ${category}<br>
-                    ${style}<br>
-                    ${duration ? "Durée : " + duration : ""}
-                </div>
-            `;
-
-            grid.appendChild(div);
-        });
-
-        counter.textContent =
-            filtered.length + " chanson(s) affichée(s) sur " + (songs ? songs.length : 0);
-    }
-
-    // Événements
-    document.getElementById("search").addEventListener("input", updateGrid);
-    document.querySelectorAll(".decade-filter").forEach(cb =>
-        cb.addEventListener("change", updateGrid)
-    );
-    document.querySelectorAll(".category-filter").forEach(cb =>
-        cb.addEventListener("change", updateGrid)
-    );
-
-    // Premier affichage
-    updateGrid();
-</script>
-
-</body>
-</html>
