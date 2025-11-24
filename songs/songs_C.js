@@ -35,7 +35,7 @@ const songsC = [
       "Funk"
     ],
     "category": "80s Music",
-    "cover": "img/Chaka Khan - Ain't Nobody.jpg"
+    "cover": "img/Chaka Khan - Aint Nobody.jpg"
   },
   {
     "artist": "Cock Robin",
