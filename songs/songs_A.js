@@ -1,7 +1,7 @@
 const songsA = [
   {
     "artist": "ABBA",
-    "title": "Gimme ! Gimme ! Gimmie !",
+    "title": "Gimme ! Gimme ! Gimme !",
     "duration": "3 min 07",
     "style": ["Pop","Disco"],
     "category": "70s Music",
