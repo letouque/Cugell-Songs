@@ -96,7 +96,7 @@ const songs = [
     year: "",
     style: ["R&B"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/alicia-keys-no-one.jpg"
   },
   {
     artist: "Alizee",
@@ -105,7 +105,7 @@ const songs = [
     year: "",
     style: ["French Pop"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/alizee-moi-lolita.jpg"
   },
   {
     artist: "Alphaville",
@@ -114,7 +114,7 @@ const songs = [
     year: "",
     style: ["New Wave"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/alphaville-big-in-japan.jpg"
   },
   {
     artist: "Alphaville",
@@ -123,7 +123,7 @@ const songs = [
     year: "",
     style: ["New Wave"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/alphaville-forever-young.jpg"
   },
   {
     artist: "Amy Winehouse",
@@ -141,7 +141,7 @@ const songs = [
     year: "",
     style: ["Soul"],
     category: "2000s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/Amy-Winehouse-Back-To-Black.jpg"
   },
   {
     artist: "Andrea Bocelli",
