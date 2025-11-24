@@ -69,7 +69,7 @@ const songs = [
     year: "",
     style: ["Electronic"],
     category: "90s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/air-kelly-watch-the-stars.jpg"
   },
   {
     artist: "Alannah Myles",
@@ -78,7 +78,7 @@ const songs = [
     year: "",
     style: ["Rock"],
     category: "80s Music",
-    cover: "img/default-cover.jpg"
+    cover: "img/black-velvet.jpg"
   },
   {
     artist: "Alice Deejay",
