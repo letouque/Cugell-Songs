@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cugell – Soundtracks</title>
+
+    <!-- Same styles as index.html (you can factor them later into a shared CSS if you want) -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Trebuchet MS", Arial, sans-serif;
+            background: radial-gradient(circle at top, #55415f 0, #1c1024 40%, #050308 100%);
+            color: #f7f1e3;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 30px auto 50px;
+            padding: 20px;
+            background: #3b2b22;
+            border-radius: 16px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.7);
+            border: 2px solid #c79b53;
+        }
+
+        .top-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .top-nav a {
+            text-decoration: none;
+            color: #f7f1e3;
+            font-size: 14px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1px solid #c79b53;
+            background: #2b1d16;
+        }
+
+        .top-nav a.active {
+            background: #c79b53;
+            color: #2b1d16;
+            font-weight: bold;
+        }
+
+        .page-header {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header-image {
+            width: 100%;
+            max-width: 220px;
+            aspect-ratio: 1 / 1;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid #c79b53;
+            background: #2b1d16;
+        }
+
+        .header-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .header-text h1 {
+            margin: 0 0 6px 0;
+            font-size: 28px;
+            letter-spacing: 1px;
+        }
+
+        .header-text h2 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            font-weight: normal;
+            color: #d3c2a5;
+        }
+
+        .header-text p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #f7f1e3;
+        }
+
+        @media (max-width: 700px) {
+            .page-header {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .header-image {
+                margin: 0 auto;
+            }
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .search-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .search-row input {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #c79b53;
+            background: #2b1d16;
+            color: #f7f1e3;
+            font-size: 14px;
+            flex: 1 1 260px;
+        }
+
+        .search-row input::placeholder {
+            color: #bda88a;
+        }
+
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .filter-label {
+            font-weight: bold;
+            color: #e5d3b0;
+            margin-right: 4px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .filter-group label {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #2b1d16;
+            border-radius: 999px;
+            padding: 3px 8px;
+            border: 1px solid #c79b53;
+            cursor: pointer;
+        }
+
+        .filter-group input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        .counter {
+            font-size: 13px;
+            color: #d3c2a5;
+            margin-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+
+        @media (max-width: 1100px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 450px) {
+            .grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+        .song {
+            background: #4a3427;
+            border-radius: 10px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+            border: 1px solid #c79b53;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .song-cover {
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #c79b53;
+            background: #2b1d16;
+            margin-bottom: 8px;
+        }
+
+        .song-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .song-title {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .song-artist {
+            font-size: 13px;
+            color: #e5d3b0;
+            margin: 4px 0;
+        }
+
+        .song-meta {
+            font-size: 12px;
+            color: #d3c2a5;
+            margin-top: 4px;
+            line-height: 14px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <nav class="top-nav">
+        <a href="index.html">Songs</a>
+        <a href="soundtracks.html" class="active">Soundtracks</a>
+    </nav>
+
+    <div class="page-header">
+        <div class="header-image">
+            <!-- You can use another image here, e.g. img/soundtracks-header.jpg -->
+            <img src="img/header.jpg" alt="Soundtracks header image">
+        </div>
+        <div class="header-text">
+            <h1>Cugell’s Soundtracks</h1>
+            <h2>Game, anime and movie music</h2>
+            <p>
+                This page lists soundtracks I love and arrange: music from games, anime, movies and TV shows.
+                It is separated from the main “Songs” page so that you can browse OST material independently.
+                Use the filters below to explore by decade and genre.
+            </p>
+        </div>
+    </div>
+
+    <div class="controls">
+        <div class="search-row">
+            <input
+                type="text"
+                id="search"
+                placeholder="Search by title, game, anime or style…"
+            />
+        </div>
+
+        <div class="filter-row">
+            <span class="filter-label">Decades:</span>
+            <div class="filter-group">
+                <label><input type="checkbox" class="decade-filter" value="60s Music">60s</label>
+                <label><input type="checkbox" class="decade-filter" value="70s Music">70s</label>
+                <label><input type="checkbox" class="decade-filter" value="80s Music">80s</label>
+                <label><input type="checkbox" class="decade-filter" value="90s Music">90s</label>
+                <label><input type="checkbox" class="decade-filter" value="2000s Music">2000s</label>
+                <label><input type="checkbox" class="decade-filter" value="2010s Music">2010s</label>
+                <label><input type="checkbox" class="decade-filter" value="2020s Music">2020s</label>
+            </div>
+        </div>
+
+        <div class="filter-row">
+            <span class="filter-label">Genres:</span>
+            <div class="filter-group">
+                <label><input type="checkbox" class="category-filter" value="Game OST">Game OST</label>
+                <label><input type="checkbox" class="category-filter" value="Anime OST">Anime OST</label>
+                <label><input type="checkbox" class="category-filter" value="Movie Score">Movie Score</label>
+                <label><input type="checkbox" class="category-filter" value="Orchestral">Orchestral</label>
+                <label><input type="checkbox" class="category-filter" value="Piano">Piano</label>
+                <!-- add more tags as needed -->
+            </div>
+        </div>
+    </div>
+
+    <div class="counter" id="counter"></div>
+
+    <div id="grid" class="grid"></div>
+</div>
+
+<!-- this page uses a different data file -->
+<script src="soundtracks.js"></script>
+
+<script>
+    function getSelectedDecades() {
+        return Array.from(document.querySelectorAll(".decade-filter:checked"))
+            .map(cb => cb.value);
+    }
+
+    function getSelectedCategories() {
+        return Array.from(document.querySelectorAll(".category-filter:checked"))
+            .map(cb => cb.value);
+    }
+
+    function normalizeStyles(styleField) {
+        if (!styleField) return [];
+        if (Array.isArray(styleField)) return styleField.filter(Boolean);
+        return styleField
+            .split(",")
+            .map(s => s.trim())
+            .filter(Boolean);
+    }
+
+    function updateGrid() {
+        const search = document.getElementById("search").value.toLowerCase();
+        const selectedDecades = getSelectedDecades();
+        const selectedCategories = getSelectedCategories();
+        const grid = document.getElementById("grid");
+        const counter = document.getElementById("counter");
+
+        grid.innerHTML = "";
+
+        const filtered = (soundtracks || []).filter(track => {
+            const category = (track.category || "");
+            const stylesArray = normalizeStyles(track.style);
+            const title = (track.title || "");
+            const artist = (track.artist || "");
+
+            const matchesDecade =
+                selectedDecades.length === 0 ||
+                selectedDecades.includes(category);
+
+            const matchesCategory =
+                selectedCategories.length === 0 ||
+                stylesArray.some(s => selectedCategories.includes(s));
+
+            const text = (title + " " + artist + " " + stylesArray.join(" ") + " " + category).toLowerCase();
+            const matchesSearch = text.includes(search);
+
+            return matchesDecade && matchesCategory && matchesSearch;
+        });
+
+        filtered.forEach(track => {
+            const div = document.createElement("div");
+            div.className = "song";
+
+            const cover = track.cover || "img/default-cover.jpg";
+            const title = track.title || "";
+            const artist = track.artist || "";
+            const category = track.category || "";
+            const stylesArray = normalizeStyles(track.style);
+            const duration = track.duration || "";
+            const stylesText = stylesArray.join(", ");
+
+            div.innerHTML = `
+                <div class="song-cover">
+                    <img src="${cover}" alt="${title}">
+                </div>
+                <div class="song-title">${title}</div>
+                <div class="song-artist">${artist}</div>
+                <div class="song-meta">
+                    ${category}<br>
+                    ${stylesText}<br>
+                    ${duration ? "Duration: " + duration : ""}
+                </div>
+            `;
+
+            grid.appendChild(div);
+        });
+
+        counter.textContent =
+            filtered.length + " track(s) shown out of " + (soundtracks ? soundtracks.length : 0);
+    }
+
+    document.getElementById("search").addEventListener("input", updateGrid);
+    document.querySelectorAll(".decade-filter").forEach(cb =>
+        cb.addEventListener("change", updateGrid)
+    );
+    document.querySelectorAll(".category-filter").forEach(cb =>
+        cb.addEventListener("change", updateGrid)
+    );
+
+    updateGrid();
+</script>
+
+</body>
+</html>
