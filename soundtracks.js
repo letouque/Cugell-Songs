@@ -4,18 +4,11 @@ const soundtracks = [
     title: "To Zanarkand",
     duration: "3:12",
     year: "2001",
-    style: ["Game OST","Piano"],
+    style: ["Game OST", "Piano"],
     category: "2000s Music",
+    mediaType: "Game",
+    gameGroup: "Final Fantasy",
     cover: "img/Nobuo Uematsu - To Zanarkand.jpg"
   },
-  {
-    artist: "Yoko Shimomura",
-    title: "Dearly Beloved",
-    duration: "2:43",
-    year: "2002",
-    style: ["Game OST","Piano"],
-    category: "2000s Music",
-    cover: "img/Yoko Shimomura - Dearly Beloved.jpg"
-  },
-  // etc.
+  // ...
 ];
