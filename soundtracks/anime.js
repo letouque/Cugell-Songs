@@ -10,7 +10,7 @@ const anime = [
     finalFantasy: "",
     license: "AOT",
     style: ["Anime OST"],
-    cover: "img/AOT - Warrior.jpg"
+    cover: "img/AOT.jpg"
   },
   {
     artist: "",
@@ -23,7 +23,7 @@ const anime = [
     finalFantasy: "",
     license: "DBZ",
     style: ["Anime OST"],
-    cover: "img/DBZ - Prologue.jpg"
+    cover: "img/DBZ.jpg"
   },
   {
     artist: "",
@@ -36,7 +36,7 @@ const anime = [
     finalFantasy: "",
     license: "FMA",
     style: ["Anime OST"],
-    cover: "img/FMA - Brothers.jpg"
+    cover: "img/FMA.jpg"
   },
   {
     artist: "",
@@ -49,7 +49,7 @@ const anime = [
     finalFantasy: "",
     license: "KNY",
     style: ["Anime OST"],
-    cover: "img/KNY - Kamado Tanjiro no Uta.jpg"
+    cover: "img/Demon Slayer.jpg"
   },
   {
     artist: "",
@@ -62,7 +62,7 @@ const anime = [
     finalFantasy: "",
     license: "Naruto",
     style: ["Anime OST"],
-    cover: "img/Naruto - Main Theme.jpg"
+    cover: "img/Naruto.jpg"
   },
   {
     artist: "",
@@ -75,7 +75,7 @@ const anime = [
     finalFantasy: "",
     license: "One Piece",
     style: ["Anime OST"],
-    cover: "img/One Piece - Bink's Sake.jpg"
+    cover: "img/One Piece.jpg"
   },
   {
     artist: "",
@@ -88,6 +88,6 @@ const anime = [
     finalFantasy: "",
     license: "Mononoke",
     style: ["Anime OST"],
-    cover: "img/Mononoke - Journey To The West.jpg"
+    cover: "img/Mononoke.jpg"
   }
 ];
