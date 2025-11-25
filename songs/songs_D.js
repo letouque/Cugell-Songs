@@ -215,7 +215,7 @@ const songsD = [
     "duration": "4 min 17",
     "style": ["Soundtrack"],
     "category": "80s Music",
-    "cover": "img/Dune (1984) - Take My Hand (Credits music).jpg"
+    "cover": "img/Dune 1984 - Take My Hand Credits music.jpg"
   },
 
   {
