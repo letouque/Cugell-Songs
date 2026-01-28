@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cugell – Admin</title>
+
+  <style>
+    body{
+      margin:0; padding:0;
+      font-family: Trebuchet MS, Arial, sans-serif;
+      background: radial-gradient(circle at top, #55415f 0, #1c1024 40%, #050308 100%);
+      color:#f7f1e3;
+    }
+    .wrap{
+      max-width:1300px; margin:24px auto; padding:18px;
+      background:#3b2b22; border:2px solid #c79b53; border-radius:16px;
+      box-shadow:0 0 25px rgba(0,0,0,.7);
+    }
+    .top{
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      margin-bottom:14px;
+    }
+    .btn{
+      background:#2b1d16; color:#f7f1e3;
+      border:1px solid #c79b53; border-radius:10px;
+      padding:10px 12px; cursor:pointer; font-size:14px;
+    }
+    .btn.primary{ background:#c79b53; color:#2b1d16; font-weight:bold; }
+    .row{ display:flex; gap:14px; flex-wrap:wrap; }
+    .card{
+      background:#4a3427; border:1px solid #c79b53; border-radius:12px;
+      padding:12px;
+    }
+    .left{ flex: 1 1 380px; min-width:320px; }
+    .right{ flex: 2 1 700px; min-width:320px; }
+    h1{ margin:0 0 8px 0; font-size:22px; }
+    h2{ margin:0 0 10px 0; font-size:14px; font-weight:normal; color:#d3c2a5; }
+    label{ font-size:12px; color:#e5d3b0; display:block; margin:10px 0 6px; }
+    input, textarea{
+      width:100%;
+      background:#2b1d16; color:#f7f1e3;
+      border:1px solid #c79b53; border-radius:10px;
+      padding:10px; font-size:14px; box-sizing:border-box;
+    }
+    textarea{ min-height:84px; resize:vertical; }
+    .list{
+      margin-top:10px;
+      max-height:520px; overflow:auto;
+      border:1px solid #c79b53; border-radius:10px;
+      background:#2b1d16;
+    }
+    .item{
+      padding:10px; border-bottom:1px solid rgba(199,155,83,.35);
+      cursor:pointer;
+    }
+    .item:hover{ background: rgba(199,155,83,.12); }
+    .item.active{ background: rgba(199,155,83,.22); }
+    .meta{ font-size:12px; color:#d3c2a5; margin-top:4px; }
+    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    @media(max-width:900px){ .grid2{ grid-template-columns:1fr; } }
+    .coverBox{
+      display:flex; gap:12px; align-items:center; flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .coverPreview{
+      width:110px; height:110px; border-radius:12px;
+      border:1px solid #c79b53; background:#2b1d16;
+      overflow:hidden;
+    }
+    .coverPreview img{ width:100%; height:100%; object-fit:cover; }
+    .hint{ font-size:12px; color:#d3c2a5; margin-top:8px; line-height:1.4; }
+    .pillRow{ display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+    .pill{ border:1px solid #c79b53; background:#2b1d16; border-radius:999px; padding:6px 10px; font-size:12px; color:#f7f1e3;}
+    .small{ font-size:12px; color:#d3c2a5; }
+    .divider{ height:1px; background:rgba(199,155,83,.35); margin:14px 0; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1>Cugell – Admin (Songs)</h1>
+        <h2>Edit individually (Option 1) + bulk import CSV (Option 2) → Export ZIP</h2>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <label class="btn">
+          Import songsX.js
+          <input id="jsFile" type="file" accept=".js" style="display:none;">
+        </label>
+        <button class="btn" id="addNew">+ Add new song</button>
+        <button class="btn primary" id="exportZip">Export ZIP</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- LEFT: list -->
+      <div class="card left">
+        <label>Search</label>
+        <input id="search" placeholder="Search artist / title..." />
+
+        <div class="divider"></div>
+
+        <div class="small">
+          Loaded variable: <span id="varName">—</span><br/>
+          Songs: <span id="count">0</span>
+        </div>
+
+        <div class="list" id="list"></div>
+
+        <div class="divider"></div>
+
+        <label>Bulk import (CSV from Google Sheets)</label>
+        <textarea id="csv" placeholder="Paste CSV here. Columns: artist,title,duration,category,style,cover (style can be 'Pop|Disco' or 'Pop, Disco')"></textarea>
+        <div class="pillRow">
+          <button class="btn" id="replaceFromCsv">Replace list from CSV</button>
+          <button class="btn" id="mergeFromCsv">Merge CSV into list</button>
+        </div>
+        <div class="hint">
+          Tip: In Google Sheets → File → Download → CSV. Then paste here.<br/>
+          For styles, you can write: <span class="pill">Pop|Disco</span> or <span class="pill">Pop, Disco</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: editor -->
+      <div class="card right">
+        <div class="grid2">
+          <div>
+            <label>Artist</label>
+            <input id="artist" />
+          </div>
+          <div>
+            <label>Title</label>
+            <input id="title" />
+          </div>
+          <div>
+            <label>Duration</label>
+            <input id="duration" placeholder="e.g. 3 min 45" />
+          </div>
+          <div>
+            <label>Category (decade)</label>
+            <input id="category" placeholder="e.g. 80s Music" />
+          </div>
+        </div>
+
+        <label>Styles (comma separated)</label>
+        <input id="style" placeholder="e.g. Pop, Disco" />
+
+        <div class="coverBox">
+          <div class="coverPreview"><img id="coverImg" src="img/default-cover.jpg" alt=""></div>
+          <div style="flex:1 1 300px; min-width:260px;">
+            <label>Cover filename (auto)</label>
+            <input id="cover" placeholder='img/Artist - Title.jpg' />
+            <div class="pillRow">
+              <label class="btn">
+                Upload cover
+                <input id="coverFile" type="file" accept="image/*" style="display:none;">
+              </label>
+              <button class="btn" id="autoCover">Auto filename</button>
+              <button class="btn" id="deleteSong">Delete song</button>
+              <button class="btn primary" id="saveSong">Save changes</button>
+            </div>
+            <div class="hint">
+              Upload is stored in the exported ZIP under <span class="pill">img/</span>.<br/>
+              If you don’t upload, it will keep the current filename (or default).
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="small">
+          Output format: <span class="pill">const songsX = [ { "artist": "...", ... } ];</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JSZip for exporting ZIP -->
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+
+  <script>
+    let varName = null;          // e.g. songsM
+    let data = [];               // array of song objects
+    let currentIndex = -1;       // selected song index
+    let coverBlobs = new Map();  // coverPath -> Blob (only for uploaded covers)
+
+    const $ = (id) => document.getElementById(id);
+
+    function normalizeStyles(input){
+      if(!input) return [];
+      if(Array.isArray(input)) return input.filter(Boolean);
+      // accept "Pop|Disco" or "Pop, Disco"
+      return String(input)
+        .split(/[\|,]/g)
+        .map(s => s.trim())
+        .filter(Boolean);
+    }
+
+    function sanitizeFilePart(s){
+      return String(s || "")
+        .replace(/[\/\\:*?"<>|]/g, "")     // windows illegal
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function buildCoverPath(artist, title){
+      const a = sanitizeFilePart(artist);
+      const t = sanitizeFilePart(title);
+      if(!a || !t) return "img/default-cover.jpg";
+      return `img/${a} - ${t}.jpg`;
+    }
+
+    function sortData(){
+      data.sort((x,y)=>{
+        const ax = (x.artist||"").toLowerCase();
+        const ay = (y.artist||"").toLowerCase();
+        if(ax !== ay) return ax.localeCompare(ay);
+        const tx = (x.title||"").toLowerCase();
+        const ty = (y.title||"").toLowerCase();
+        return tx.localeCompare(ty);
+      });
+    }
+
+    function renderList(){
+      const q = ($("search").value || "").toLowerCase();
+      const list = $("list");
+      list.innerHTML = "";
+
+      const filtered = data
+        .map((s, idx)=>({s, idx}))
+        .filter(({s})=>{
+          const hay = ((s.artist||"") + " " + (s.title||"")).toLowerCase();
+          return hay.includes(q);
+        });
+
+      filtered.forEach(({s, idx})=>{
+        const div = document.createElement("div");
+        div.className = "item" + (idx === currentIndex ? " active" : "");
+        div.innerHTML = `
+          <div><b>${escapeHtml(s.title || "(no title)")}</b></div>
+          <div class="meta">${escapeHtml(s.artist || "(no artist)")}</div>
+        `;
+        div.onclick = ()=> selectSong(idx);
+        list.appendChild(div);
+      });
+
+      $("count").textContent = data.length;
+      $("varName").textContent = varName || "—";
+    }
+
+    function selectSong(idx){
+      currentIndex = idx;
+      const s = data[idx] || {};
+
+      $("artist").value = s.artist || "";
+      $("title").value = s.title || "";
+      $("duration").value = s.duration || "";
+      $("category").value = s.category || "";
+      $("style").value = normalizeStyles(s.style).join(", ");
+      $("cover").value = s.cover || "img/default-cover.jpg";
+
+      const coverSrc = s.cover || "img/default-cover.jpg";
+      $("coverImg").src = coverSrc;
+
+      renderList();
+    }
+
+    function saveCurrent(){
+      if(currentIndex < 0) return;
+
+      const artist = $("artist").value.trim();
+      const title = $("title").value.trim();
+
+      data[currentIndex] = {
+        artist,
+        title,
+        duration: $("duration").value.trim(),
+        style: normalizeStyles($("style").value),
+        category: $("category").value.trim(),
+        cover: $("cover").value.trim() || "img/default-cover.jpg"
+      };
+
+      sortData();
+      // keep selection on same song (best effort)
+      const newIdx = data.findIndex(s => s.artist === artist && s.title === title);
+      currentIndex = newIdx >= 0 ? newIdx : 0;
+
+      selectSong(currentIndex);
+    }
+
+    function addNewSong(){
+      data.push({
+        artist: "",
+        title: "",
+        duration: "",
+        style: [],
+        category: "",
+        cover: "img/default-cover.jpg"
+      });
+      sortData();
+      currentIndex = data.findIndex(s => !s.artist && !s.title);
+      if(currentIndex < 0) currentIndex = data.length - 1;
+      selectSong(currentIndex);
+    }
+
+    function deleteCurrent(){
+      if(currentIndex < 0) return;
+      data.splice(currentIndex, 1);
+      currentIndex = Math.min(currentIndex, data.length - 1);
+      if(currentIndex >= 0) selectSong(currentIndex);
+      else renderList();
+    }
+
+    function escapeHtml(str){
+      return String(str||"")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    // ---- Import JS file (songsX.js) ----
+    $("jsFile").addEventListener("change", async (e)=>{
+      const file = e.target.files?.[0];
+      if(!file) return;
+
+      const text = await file.text();
+      const m = text.match(/const\s+([A-Za-z0-9_]+)\s*=\s*\[/);
+      if(!m){
+        alert("Could not find 'const something = [' in this file.");
+        return;
+      }
+      varName = m[1];
+
+      // Evaluate safely-ish: create function returning the array
+      try{
+        const fn = new Function(text + `\nreturn ${varName};`);
+        const arr = fn();
+        if(!Array.isArray(arr)) throw new Error("Not an array");
+        data = arr.map(s => ({
+          artist: s.artist || "",
+          title: s.title || "",
+          duration: s.duration || "",
+          style: Array.isArray(s.style) ? s.style : normalizeStyles(s.style),
+          category: s.category || "",
+          cover: s.cover || "img/default-cover.jpg"
+        }));
+        sortData();
+        currentIndex = data.length ? 0 : -1;
+        if(currentIndex >= 0) selectSong(currentIndex);
+        else renderList();
+      }catch(err){
+        console.error(err);
+        alert("Failed to load JS file. Check console for details.");
+      }
+    });
+
+    // ---- Cover upload ----
+    $("coverFile").addEventListener("change", async (e)=>{
+      const file = e.target.files?.[0];
+      if(!file) return;
+
+      // preview immediately
+      const url = URL.createObjectURL(file);
+      $("coverImg").src = url;
+
+      // decide filename
+      const artist = $("artist").value.trim();
+      const title = $("title").value.trim();
+      const path = buildCoverPath(artist, title);
+
+      $("cover").value = path;
+      // store blob for export
+      coverBlobs.set(path, file);
+    });
+
+    $("autoCover").addEventListener("click", ()=>{
+      const artist = $("artist").value.trim();
+      const title = $("title").value.trim();
+      const path = buildCoverPath(artist, title);
+      $("cover").value = path;
+      // also update preview if current cover not uploaded
+      if(!$("coverImg").src) $("coverImg").src = path;
+    });
+
+    // ---- CSV import (Option 2) ----
+    function parseCsv(text){
+      // Simple CSV parser (handles quoted fields)
+      const rows = [];
+      let i = 0, field = "", row = [], inQuotes = false;
+
+      const pushField = ()=>{
+        row.push(field);
+        field = "";
+      };
+      const pushRow = ()=>{
+        // skip empty trailing row
+        if(row.length === 1 && row[0].trim() === "") { row = []; return; }
+        rows.push(row);
+        row = [];
+      };
+
+      while(i < text.length){
+        const c = text[i];
+
+        if(c === '"'){
+          if(inQuotes && text[i+1] === '"'){ field += '"'; i += 2; continue; }
+          inQuotes = !inQuotes; i++; continue;
+        }
+
+        if(!inQuotes && (c === ',')){
+          pushField(); i++; continue;
+        }
+
+        if(!inQuotes && (c === '\n')){
+          pushField(); pushRow(); i++; continue;
+        }
+
+        if(!inQuotes && c === '\r'){ i++; continue; }
+
+        field += c; i++;
+      }
+      pushField(); pushRow();
+      return rows;
+    }
+
+    function csvToSongs(csvText){
+      const rows = parseCsv(csvText.trim());
+      if(rows.length === 0) return [];
+
+      // if first row looks like headers, handle it
+      const header = rows[0].map(x => (x||"").toLowerCase().trim());
+      const hasHeader = header.includes("artist") && header.includes("title");
+
+      const idx = (name)=>{
+        const i = header.indexOf(name);
+        return i >= 0 ? i : -1;
+      };
+
+      if(hasHeader){
+        const aI = idx("artist");
+        const tI = idx("title");
+        const dI = idx("duration");
+        const cI = idx("category");
+        const sI = idx("style");
+        const covI = idx("cover");
+
+        return rows.slice(1).map(r=>{
+          const artist = (r[aI]||"").trim();
+          const title  = (r[tI]||"").trim();
+          const cover = (covI >= 0 ? (r[covI]||"").trim() : "") || buildCoverPath(artist, title);
+
+          return {
+            artist,
+            title,
+            duration: dI >= 0 ? (r[dI]||"").trim() : "",
+            category: cI >= 0 ? (r[cI]||"").trim() : "",
+            style: sI >= 0 ? normalizeStyles(r[sI]) : [],
+            cover: cover || "img/default-cover.jpg"
+          };
+        }).filter(s=>s.artist || s.title);
+      }else{
+        // No header: assume artist,title,duration,category,style,cover
+        return rows.map(r=>{
+          const artist = (r[0]||"").trim();
+          const title  = (r[1]||"").trim();
+          const duration = (r[2]||"").trim();
+          const category = (r[3]||"").trim();
+          const style = normalizeStyles(r[4]||"");
+          const cover = (r[5]||"").trim() || buildCoverPath(artist, title);
+
+          return { artist, title, duration, category, style, cover };
+        }).filter(s=>s.artist || s.title);
+      }
+    }
+
+    $("replaceFromCsv").addEventListener("click", ()=>{
+      const csv = $("csv").value;
+      if(!csv.trim()) return alert("Paste CSV first.");
+      const songs = csvToSongs(csv);
+      data = songs;
+      sortData();
+      currentIndex = data.length ? 0 : -1;
+      if(currentIndex >= 0) selectSong(currentIndex);
+      else renderList();
+    });
+
+    $("mergeFromCsv").addEventListener("click", ()=>{
+      const csv = $("csv").value;
+      if(!csv.trim()) return alert("Paste CSV first.");
+      const songs = csvToSongs(csv);
+
+      // merge by (artist,title)
+      const key = (s)=> (s.artist||"") + "||" + (s.title||"");
+      const map = new Map(data.map(s => [key(s), s]));
+      songs.forEach(s=>{
+        const k = key(s);
+        if(map.has(k)){
+          // overwrite blanks only
+          const existing = map.get(k);
+          existing.duration = existing.duration || s.duration || "";
+          existing.category = existing.category || s.category || "";
+          existing.style = (existing.style && existing.style.length) ? existing.style : s.style;
+          existing.cover = (existing.cover && existing.cover !== "img/default-cover.jpg") ? existing.cover : s.cover;
+        }else{
+          map.set(k, s);
+        }
+      });
+      data = Array.from(map.values());
+      sortData();
+      currentIndex = data.length ? 0 : -1;
+      if(currentIndex >= 0) selectSong(currentIndex);
+      else renderList();
+    });
+
+    // ---- Export ZIP ----
+    function jsStringifySongs(){
+      // matches your preferred JSON-like formatting
+      const items = data.map(s => ({
+        "artist": s.artist || "",
+        "title": s.title || "",
+        "duration": s.duration || "",
+        "style": Array.isArray(s.style) ? s.style : [],
+        "category": s.category || "",
+        "cover": s.cover || "img/default-cover.jpg"
+      }));
+
+      return `const ${varName || "songsX"} = ${JSON.stringify(items, null, 2)};\n`;
+    }
+
+    $("exportZip").addEventListener("click", async ()=>{
+      if(!varName){
+        alert("Import a songsX.js file first.");
+        return;
+      }
+
+      const zip = new JSZip();
+      zip.file(`${varName}.js`, jsStringifySongs());
+
+      // add any uploaded covers
+      for(const [path, blob] of coverBlobs.entries()){
+        // only keep in img/ folder paths
+        const p = path.startsWith("img/") ? path : `img/${path}`;
+        zip.file(p, blob);
+      }
+
+      const out = await zip.generateAsync({type:"blob"});
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(out);
+      a.download = `${varName}_export.zip`;
+      a.click();
+    });
+
+    // ---- Wire buttons ----
+    $("addNew").addEventListener("click", addNewSong);
+    $("saveSong").addEventListener("click", saveCurrent);
+    $("deleteSong").addEventListener("click", deleteCurrent);
+    $("search").addEventListener("input", renderList);
+
+    // Start empty
+    renderList();
+  </script>
+</body>
+</html>
