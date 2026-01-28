@@ -1,426 +1,439 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cugell – Song Repertoire</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cugell – Songs</title>
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Trebuchet MS", Arial, sans-serif;
-            background: radial-gradient(circle at top, #55415f 0, #1c1024 40%, #050308 100%);
-            color: #f7f1e3;
-        }
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      background: radial-gradient(circle at top, #55415f 0, #1c1024 40%, #050308 100%);
+      color: #f7f1e3;
+    }
 
-        .container {
-            max-width: 1300px;
-            margin: 30px auto 50px;
-            padding: 20px;
-            background: #3b2b22;
-            border-radius: 16px;
-            box-shadow: 0 0 25px rgba(0,0,0,0.7);
-            border: 2px solid #c79b53;
-        }
+    .container {
+      max-width: 1300px;
+      margin: 30px auto 50px;
+      padding: 20px;
+      background: #3b2b22;
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.7);
+      border: 2px solid #c79b53;
+    }
 
-        .top-nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 15px;
-        }
+    .top-nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
 
-        .top-nav a {
-            text-decoration: none;
-            color: #f7f1e3;
-            font-size: 14px;
-            padding: 6px 14px;
-            border-radius: 999px;
-            border: 1px solid #c79b53;
-            background: #2b1d16;
-        }
+    .top-nav a {
+      text-decoration: none;
+      color: #f7f1e3;
+      font-size: 14px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid #c79b53;
+      background: #2b1d16;
+    }
 
-        .top-nav a.active {
-            background: #c79b53;
-            color: #2b1d16;
-            font-weight: bold;
-        }
+    .top-nav a.active {
+      background: #c79b53;
+      color: #2b1d16;
+      font-weight: bold;
+    }
 
-        .page-header {
-            display: grid;
-            grid-template-columns: 220px 1fr;
-            gap: 20px;
-            align-items: center;
-            margin-bottom: 20px;
-        }
+    .page-header {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
 
-        .header-image {
-            width: 100%;
-            max-width: 220px;
-            aspect-ratio: 1 / 1;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 2px solid #c79b53;
-            background: #2b1d16;
-        }
+    .header-image {
+      width: 100%;
+      max-width: 220px;
+      aspect-ratio: 1 / 1;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid #c79b53;
+      background: #2b1d16;
+    }
 
-        .header-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+    .header-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-        .header-text h1 {
-            margin: 0 0 6px 0;
-            font-size: 28px;
-            letter-spacing: 1px;
-        }
+    .header-text h1 {
+      margin: 0 0 6px 0;
+      font-size: 28px;
+      letter-spacing: 1px;
+    }
 
-        .header-text h2 {
-            margin: 0 0 10px 0;
-            font-size: 16px;
-            font-weight: normal;
-            color: #d3c2a5;
-        }
+    .header-text h2 {
+      margin: 0 0 10px 0;
+      font-size: 16px;
+      font-weight: normal;
+      color: #d3c2a5;
+    }
 
-        .header-text p {
-            margin: 0;
-            font-size: 14px;
-            line-height: 1.4;
-            color: #f7f1e3;
-        }
+    .header-text p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.4;
+    }
 
-        @media (max-width: 700px) {
-            .page-header {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .header-image {
-                margin: 0 auto;
-            }
-        }
+    @media (max-width: 700px) {
+      .page-header {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .header-image {
+        margin: 0 auto;
+      }
+    }
 
-        .controls {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 20px 0;
-        }
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0;
+    }
 
-        .search-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
+    .search-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
 
-        .search-row input {
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #c79b53;
-            background: #2b1d16;
-            color: #f7f1e3;
-            font-size: 14px;
-            flex: 1 1 260px;
-        }
+    .search-row input {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #c79b53;
+      background: #2b1d16;
+      color: #f7f1e3;
+      font-size: 14px;
+      flex: 1 1 260px;
+    }
 
-        .search-row input::placeholder {
-            color: #bda88a;
-        }
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      font-size: 13px;
+    }
 
-        .filter-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: center;
-            font-size: 13px;
-        }
+    .filter-label {
+      font-weight: bold;
+      color: #e5d3b0;
+      margin-right: 4px;
+      min-width: 90px;
+    }
 
-        .filter-label {
-            font-weight: bold;
-            color: #e5d3b0;
-            margin-right: 4px;
-        }
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
 
-        .filter-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
+    .filter-group label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #2b1d16;
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid #c79b53;
+      cursor: pointer;
+      user-select: none;
+    }
 
-        .filter-group label {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: #2b1d16;
-            border-radius: 999px;
-            padding: 3px 8px;
-            border: 1px solid #c79b53;
-            cursor: pointer;
-        }
+    .filter-group input[type="checkbox"] {
+      margin: 0;
+    }
 
-        .filter-group input[type="checkbox"] {
-            cursor: pointer;
-        }
+    .counter {
+      font-size: 13px;
+      color: #d3c2a5;
+      margin-bottom: 10px;
+    }
 
-        .counter {
-            font-size: 13px;
-            color: #d3c2a5;
-            margin-bottom: 10px;
-        }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+    }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
-        }
+    @media (max-width: 1200px) {
+      .grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 1000px) {
+      .grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 700px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 450px) {
+      .grid { grid-template-columns: repeat(1, 1fr); }
+    }
 
-        @media (max-width: 1100px) {
-            .grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
+    .song {
+      background: #4a3427;
+      border-radius: 10px;
+      border: 1px solid #c79b53;
+      padding: 10px;
+      text-align: center;
+    }
 
-        @media (max-width: 700px) {
-            .grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+    .song-cover {
+      width: 100%;
+      aspect-ratio: 1/1;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #c79b53;
+      background: #2b1d16;
+      margin-bottom: 8px;
+    }
 
-        @media (max-width: 450px) {
-            .grid {
-                grid-template-columns: repeat(1, 1fr);
-            }
-        }
+    .song-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-        .song {
-            background: #4a3427;
-            border-radius: 10px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.5);
-            border: 1px solid #c79b53;
-            padding: 10px;
-            text-align: center;
-        }
+    .song-title {
+      font-weight: bold;
+      font-size: 15px;
+    }
 
-        .song-cover {
-            width: 100%;
-            aspect-ratio: 1/1;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #c79b53;
-            background: #2b1d16;
-            margin-bottom: 8px;
-        }
+    .song-artist {
+      font-size: 13px;
+      color: #e5d3b0;
+      margin: 4px 0;
+    }
 
-        .song-cover img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+    .song-meta {
+      font-size: 12px;
+      color: #d3c2a5;
+      margin-top: 4px;
+      line-height: 16px;
+    }
 
-        .song-title {
-            font-weight: bold;
-            font-size: 15px;
-        }
-
-        .song-artist {
-            font-size: 13px;
-            color: #e5d3b0;
-            margin: 4px 0;
-        }
-
-        .song-meta {
-            font-size: 12px;
-            color: #d3c2a5;
-            margin-top: 4px;
-            line-height: 14px;
-        }
-    </style>
+    .small-muted { color: #bda98a; }
+  </style>
 </head>
 
 <body>
-<div class="container">
+  <div class="container">
 
-    <!-- Top navigation -->
+    <!-- Navigation -->
     <nav class="top-nav">
-        <a href="index.html" class="active">Songs</a>
-        <a href="soundtracks.html">Soundtracks</a>
+      <a href="index.html" class="active">Songs</a>
+      <a href="soundtracks.html">Soundtracks</a>
+      <a href="admin.html">Admin</a>
     </nav>
 
-    <!-- Header with your image + text -->
+    <!-- Header -->
     <div class="page-header">
-        <div class="header-image">
-            <img src="img/header.png" alt="Song list header image">
-        </div>
-        <div class="header-text">
-            <h1>Cugell’s Song Repertoire</h1>
-            <h2>Browse, filter and search the songs I can play live</h2>
-            <p>
-                This page lists the songs I can currently perform live. Use the search bar and filters below
-                to explore the repertoire, by decade and by genre. If you’re in the audience, you can use this
-                to find ideas and suggest your favorite tracks during the show. Don't be afraid to ask!
-            </p>
-        </div>
+      <div class="header-image">
+        <img src="img/header.png" alt="Songs">
+      </div>
+      <div class="header-text">
+        <h1>Cugell’s Songs</h1>
+        <h2>Browse & filter the songs I can play</h2>
+        <p>
+          Use search + filters (decades, genres) to quickly find a track.
+          Covers are local images in the <span class="small-muted">img/</span> folder.
+        </p>
+      </div>
     </div>
 
-    <!-- Filters and search -->
+    <!-- Controls -->
     <div class="controls">
-        <!-- Search -->
-        <div class="search-row">
-            <input
-                type="text"
-                id="search"
-                placeholder="Search by title, artist or style…"
-            />
-        </div>
 
-        <!-- Filter by decade (based on song.category, e.g. '70s Music') -->
-        <div class="filter-row">
-            <span class="filter-label">Decades:</span>
-            <div class="filter-group">
-                <label><input type="checkbox" class="decade-filter" value="60s Music">60s</label>
-                <label><input type="checkbox" class="decade-filter" value="70s Music">70s</label>
-                <label><input type="checkbox" class="decade-filter" value="80s Music">80s</label>
-                <label><input type="checkbox" class="decade-filter" value="90s Music">90s</label>
-                <label><input type="checkbox" class="decade-filter" value="2000s Music">2000s</label>
-                <label><input type="checkbox" class="decade-filter" value="2010s Music">2010s</label>
-                <label><input type="checkbox" class="decade-filter" value="2020s Music">2020s</label>
-            </div>
-        </div>
+      <!-- Search -->
+      <div class="search-row">
+        <input type="text" id="search" placeholder="Search by title, artist, year, genre…" />
+      </div>
 
-        <!-- Filter by genre / styles -->
-        <div class="filter-row">
-            <span class="filter-label">Genres:</span>
-            <div class="filter-group">
-                <label><input type="checkbox" class="category-filter" value="Pop">Pop</label>
-                <label><input type="checkbox" class="category-filter" value="Rock">Rock</label>
-                <label><input type="checkbox" class="category-filter" value="Electronic">Electronic</label>
-                <label><input type="checkbox" class="category-filter" value="R&B">R&B</label>
-                <label><input type="checkbox" class="category-filter" value="Disco">Disco</label>
-                <label><input type="checkbox" class="category-filter" value="New Wave">New Wave</label>
-                <label><input type="checkbox" class="category-filter" value="Soul">Soul</label>
-                <label><input type="checkbox" class="category-filter" value="Dance">Dance</label>
-            </div>
+      <!-- Decades (category) -->
+      <div class="filter-row">
+        <span class="filter-label">Decades:</span>
+        <div class="filter-group">
+          <label><input type="checkbox" class="decade-filter" value="60s Music">60s</label>
+          <label><input type="checkbox" class="decade-filter" value="70s Music">70s</label>
+          <label><input type="checkbox" class="decade-filter" value="80s Music">80s</label>
+          <label><input type="checkbox" class="decade-filter" value="90s Music">90s</label>
+          <label><input type="checkbox" class="decade-filter" value="2000s Music">2000s</label>
+          <label><input type="checkbox" class="decade-filter" value="2010s Music">2010s</label>
+          <label><input type="checkbox" class="decade-filter" value="2020s Music">2020s</label>
+          <label><input type="checkbox" class="decade-filter" value="Mixed Years">Mixed</label>
         </div>
+      </div>
+
+      <!-- Styles (auto-generated to match Admin) -->
+      <div class="filter-row">
+        <span class="filter-label">Genres:</span>
+        <div class="filter-group" id="styleFilters"></div>
+      </div>
+
     </div>
 
     <div class="counter" id="counter"></div>
-
     <div id="grid" class="grid"></div>
-</div>
 
-<!-- Load all song JS files -->
-<script src="songs/songs_0.js"></script>
-<script src="songs/songs_A.js"></script>
-<script src="songs/songs_B.js"></script>
-<script src="songs/songs_C.js"></script>
-<script src="songs/songs_D.js"></script>
-<script src="songs/songs_E.js"></script>
-<script src="songs/songs_F.js"></script>
-<script src="songs/songs_G.js"></script>
-<script src="songs/songs_H.js"></script>
-<script src="songs/songs_I.js"></script>
-<script src="songs/songs_J.js"></script>
-<script src="songs/songs_K.js"></script>
-<script src="songs/songs_L.js"></script>
-<script src="songs/songs_M.js"></script>
-<script src="songs/songs_N.js"></script>
-<script src="songs/songs_O.js"></script>
-<script src="songs/songs_P.js"></script>
-<script src="songs/songs_Q.js"></script>
-<script src="songs/songs_R.js"></script>
-<script src="songs/songs_S.js"></script>
-<script src="songs/songs_T.js"></script>
-<script src="songs/songs_U.js"></script>
-<script src="songs/songs_V.js"></script>
-<script src="songs/songs_W.js"></script>
-<script src="songs/songs_X.js"></script>
-<script src="songs/songs_Y.js"></script>
-<script src="songs/songs_Z.js"></script>
+  </div>
 
-<!-- Merge them into a single array -->
-<script>
-const songs = [
-  ...(typeof songs09 !== "undefined" ? songs09 : []),
-  ...(typeof songsA !== "undefined" ? songsA : []),
-  ...(typeof songsB !== "undefined" ? songsB : []),
-  ...(typeof songsC !== "undefined" ? songsC : []),
-  ...(typeof songsD !== "undefined" ? songsD : []),
-  ...(typeof songsE !== "undefined" ? songsE : []),
-  ...(typeof songsF !== "undefined" ? songsF : []),
-  ...(typeof songsG !== "undefined" ? songsG : []),
-  ...(typeof songsH !== "undefined" ? songsH : []),
-  ...(typeof songsI !== "undefined" ? songsI : []),
-  ...(typeof songsJ !== "undefined" ? songsJ : []),
-  ...(typeof songsK !== "undefined" ? songsK : []),
-  ...(typeof songsL !== "undefined" ? songsL : []),
-  ...(typeof songsM !== "undefined" ? songsM : []),
-  ...(typeof songsN !== "undefined" ? songsN : []),
-  ...(typeof songsO !== "undefined" ? songsO : []),
-  ...(typeof songsP !== "undefined" ? songsP : []),
-  ...(typeof songsQ !== "undefined" ? songsQ : []),
-  ...(typeof songsR !== "undefined" ? songsR : []),
-  ...(typeof songsS !== "undefined" ? songsS : []),
-  ...(typeof songsT !== "undefined" ? songsT : []),
-  ...(typeof songsU !== "undefined" ? songsU : []),
-  ...(typeof songsV !== "undefined" ? songsV : []),
-  ...(typeof songsW !== "undefined" ? songsW : []),
-  ...(typeof songsX !== "undefined" ? songsX : []),
-  ...(typeof songsY !== "undefined" ? songsY : []),
-  ...(typeof songsZ !== "undefined" ? songsZ : []),
-];
+  <!-- ===== MULTI-FILE SONG SYSTEM ===== -->
+  <!-- IMPORTANT:
+       - songs_0.js must define: const songs0 = [...]
+       - songs_A.js must define: const songsA = [...]
+       etc. -->
+  <script src="songs/songs_0.js"></script>
+  <script src="songs/songs_A.js"></script>
+  <script src="songs/songs_B.js"></script>
+  <script src="songs/songs_C.js"></script>
+  <script src="songs/songs_D.js"></script>
+  <script src="songs/songs_E.js"></script>
+  <script src="songs/songs_F.js"></script>
+  <script src="songs/songs_G.js"></script>
+  <script src="songs/songs_H.js"></script>
+  <script src="songs/songs_I.js"></script>
+  <script src="songs/songs_J.js"></script>
+  <script src="songs/songs_K.js"></script>
+  <script src="songs/songs_L.js"></script>
+  <script src="songs/songs_M.js"></script>
+  <script src="songs/songs_N.js"></script>
+  <script src="songs/songs_O.js"></script>
+  <script src="songs/songs_P.js"></script>
+  <script src="songs/songs_Q.js"></script>
+  <script src="songs/songs_R.js"></script>
+  <script src="songs/songs_S.js"></script>
+  <script src="songs/songs_T.js"></script>
+  <script src="songs/songs_U.js"></script>
+  <script src="songs/songs_V.js"></script>
+  <script src="songs/songs_W.js"></script>
+  <script src="songs/songs_X.js"></script>
+  <script src="songs/songs_Y.js"></script>
+  <script src="songs/songs_Z.js"></script>
 
-function getSelectedDecades() {
-    return Array.from(document.querySelectorAll(".decade-filter:checked"))
-        .map(cb => cb.value);
-}
+  <script>
+    function getChecked(cls) {
+      return Array.from(document.querySelectorAll("." + cls + ":checked")).map(x => x.value);
+    }
 
-function getSelectedCategories() {
-    return Array.from(document.querySelectorAll(".category-filter:checked"))
-        .map(cb => cb.value);
-}
+    function normArray(val) {
+      if (!val) return [];
+      if (Array.isArray(val)) return val;
+      return String(val).split(/[\|,]/g).map(v => v.trim()).filter(v => v);
+    }
 
-function normalizeStyles(styleField) {
-    if (!styleField) return [];
-    if (Array.isArray(styleField)) return styleField.filter(Boolean);
-    return String(styleField)
-        .split(",")
+    function escapeHtml(s) {
+      return String(s || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function getAllSongs() {
+      return [
+        ...(typeof songs0 !== "undefined" ? songs0 : []),
+        ...(typeof songsA !== "undefined" ? songsA : []),
+        ...(typeof songsB !== "undefined" ? songsB : []),
+        ...(typeof songsC !== "undefined" ? songsC : []),
+        ...(typeof songsD !== "undefined" ? songsD : []),
+        ...(typeof songsE !== "undefined" ? songsE : []),
+        ...(typeof songsF !== "undefined" ? songsF : []),
+        ...(typeof songsG !== "undefined" ? songsG : []),
+        ...(typeof songsH !== "undefined" ? songsH : []),
+        ...(typeof songsI !== "undefined" ? songsI : []),
+        ...(typeof songsJ !== "undefined" ? songsJ : []),
+        ...(typeof songsK !== "undefined" ? songsK : []),
+        ...(typeof songsL !== "undefined" ? songsL : []),
+        ...(typeof songsM !== "undefined" ? songsM : []),
+        ...(typeof songsN !== "undefined" ? songsN : []),
+        ...(typeof songsO !== "undefined" ? songsO : []),
+        ...(typeof songsP !== "undefined" ? songsP : []),
+        ...(typeof songsQ !== "undefined" ? songsQ : []),
+        ...(typeof songsR !== "undefined" ? songsR : []),
+        ...(typeof songsS !== "undefined" ? songsS : []),
+        ...(typeof songsT !== "undefined" ? songsT : []),
+        ...(typeof songsU !== "undefined" ? songsU : []),
+        ...(typeof songsV !== "undefined" ? songsV : []),
+        ...(typeof songsW !== "undefined" ? songsW : []),
+        ...(typeof songsX !== "undefined" ? songsX : []),
+        ...(typeof songsY !== "undefined" ? songsY : []),
+        ...(typeof songsZ !== "undefined" ? songsZ : []),
+      ];
+    }
+
+    function buildStyleFilters(allSongs) {
+      const box = document.getElementById("styleFilters");
+      if (!box) return;
+
+      const set = new Set();
+      allSongs.forEach(s => normArray(s.style).forEach(st => set.add(st)));
+
+      const styles = Array.from(set)
         .map(s => s.trim())
-        .filter(Boolean);
-}
+        .filter(Boolean)
+        .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
-function updateGrid() {
-    const search = document.getElementById("search").value.toLowerCase();
-    const selectedDecades = getSelectedDecades();
-    const selectedCategories = getSelectedCategories();
-    const grid = document.getElementById("grid");
-    const counter = document.getElementById("counter");
+      box.innerHTML = styles.map(st => `
+        <label>
+          <input type="checkbox" class="style-filter" value="${escapeHtml(st)}">
+          ${escapeHtml(st)}
+        </label>
+      `).join("");
 
-    grid.innerHTML = "";
+      box.querySelectorAll("input").forEach(cb => cb.addEventListener("change", updateGrid));
+    }
 
-    const filtered = (songs || []).filter(song => {
-        const category = (song.category || "");
-        const stylesArray = normalizeStyles(song.style);
-        const title = (song.title || "");
-        const artist = (song.artist || "");
+    function updateGrid() {
+      const allSongs = window.__ALL_SONGS__ || [];
+      const search = document.getElementById("search").value.toLowerCase();
 
-        const matchesDecade =
-            selectedDecades.length === 0 ||
-            selectedDecades.includes(category);
+      const decades = getChecked("decade-filter");
+      const stylesSelected = getChecked("style-filter");
 
-        const matchesCategory =
-            selectedCategories.length === 0 ||
-            stylesArray.some(s => selectedCategories.includes(s));
+      const grid = document.getElementById("grid");
+      const counter = document.getElementById("counter");
+      grid.innerHTML = "";
 
-        const text = (title + " " + artist + " " + stylesArray.join(" ") + " " + category).toLowerCase();
-        const matchesSearch = text.includes(search);
+      const filtered = allSongs.filter(song => {
+        const styles = normArray(song.style);
 
-        return matchesDecade && matchesCategory && matchesSearch;
-    });
+        const searchTarget = (
+          (song.title || "") + " " +
+          (song.artist || "") + " " +
+          (song.year || "") + " " +
+          (song.category || "") + " " +
+          styles.join(" ")
+        ).toLowerCase();
 
-    filtered.forEach(song => {
+        const matchesSearch = searchTarget.includes(search);
+        const matchesDecade = decades.length === 0 || decades.includes(song.category);
+
+        // AND logic (must include all selected styles)
+        const matchesStyles =
+          stylesSelected.length === 0 ||
+          stylesSelected.every(st => styles.includes(st));
+
+        return matchesSearch && matchesDecade && matchesStyles;
+      });
+
+      filtered.forEach(song => {
         const div = document.createElement("div");
         div.className = "song";
 
@@ -428,43 +441,38 @@ function updateGrid() {
         const title = song.title || "";
         const artist = song.artist || "";
         const category = song.category || "";
-        const stylesArray = normalizeStyles(song.style);
         const duration = song.duration || "";
-        const stylesText = stylesArray.join(", ");
+        const year = song.year || "";
+
+        const styles = normArray(song.style).join(", ");
 
         div.innerHTML = `
-            <div class="song-cover">
-                <img src="${cover}" alt="${title}">
-            </div>
-            <div class="song-title">${title}</div>
-            <div class="song-artist">${artist}</div>
-            <div class="song-meta">
-                ${category}<br>
-                ${stylesText}<br>
-                ${duration ? "Duration: " + duration : ""}
-            </div>
+          <div class="song-cover"><img src="${escapeHtml(cover)}" alt="${escapeHtml(title)}"></div>
+          <div class="song-title">${escapeHtml(title)}</div>
+          <div class="song-artist">${escapeHtml(artist)}</div>
+          <div class="song-meta">
+            ${year ? escapeHtml(year) + " • " : ""}${escapeHtml(category)}<br>
+            ${styles ? escapeHtml(styles) + "<br>" : ""}
+            ${duration ? "Duration: " + escapeHtml(duration) : ""}
+          </div>
         `;
 
         grid.appendChild(div);
-    });
+      });
 
-    counter.textContent =
-        filtered.length + " song(s) shown out of " + (songs ? songs.length : 0);
-}
+      counter.textContent = `${filtered.length} song(s) shown`;
+    }
 
-document.getElementById("search").addEventListener("input", updateGrid);
-document.querySelectorAll(".decade-filter").forEach(cb =>
-    cb.addEventListener("change", updateGrid)
-);
-document.querySelectorAll(".category-filter").forEach(cb =>
-    cb.addEventListener("change", updateGrid)
-);
+    // Bind
+    document.querySelectorAll(".decade-filter").forEach(cb =>
+      cb.addEventListener("change", updateGrid)
+    );
+    document.getElementById("search").addEventListener("input", updateGrid);
 
-updateGrid();
-</script>
-
+    // Init
+    window.__ALL_SONGS__ = getAllSongs();
+    buildStyleFilters(window.__ALL_SONGS__);
+    updateGrid();
+  </script>
 </body>
 </html>
-
-
-
