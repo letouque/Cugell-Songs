@@ -71,9 +71,25 @@
     .coverPreview img{ width:100%; height:100%; object-fit:cover; }
     .hint{ font-size:12px; color:#d3c2a5; margin-top:8px; line-height:1.4; }
     .pillRow{ display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
-    .pill{ border:1px solid #c79b53; background:#2b1d16; border-radius:999px; padding:6px 10px; font-size:12px; color:#f7f1e3;}
+    .pill{
+      border:1px solid #c79b53; background:#2b1d16; border-radius:999px;
+      padding:6px 10px; font-size:12px; color:#f7f1e3;
+    }
     .small{ font-size:12px; color:#d3c2a5; }
     .divider{ height:1px; background:rgba(199,155,83,.35); margin:14px 0; }
+
+    /* checkbox pills */
+    .pillRow label{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .pillRow input[type="checkbox"]{
+      width:auto;
+      margin:0;
+    }
   </style>
 </head>
 
@@ -82,7 +98,7 @@
     <div class="top">
       <div>
         <h1>Cugell – Admin (Songs)</h1>
-        <h2>Edit individually (Option 1) + bulk import CSV (Option 2) → Export ZIP</h2>
+        <h2>Edit individually + bulk import CSV → Export ZIP</h2>
       </div>
       <div style="display:flex; gap:10px; flex-wrap:wrap;">
         <label class="btn">
@@ -95,7 +111,7 @@
     </div>
 
     <div class="row">
-      <!-- LEFT: list -->
+      <!-- LEFT -->
       <div class="card left">
         <label>Search</label>
         <input id="search" placeholder="Search artist / title..." />
@@ -112,18 +128,18 @@
         <div class="divider"></div>
 
         <label>Bulk import (CSV from Google Sheets)</label>
-        <textarea id="csv" placeholder="Paste CSV here. Columns: artist,title,duration,category,style,cover (style can be 'Pop|Disco' or 'Pop, Disco')"></textarea>
+        <textarea id="csv" placeholder="Paste CSV here. Columns: artist,title,year,duration,category,style,cover (style can be 'Pop|Disco' or 'Pop, Disco')"></textarea>
         <div class="pillRow">
           <button class="btn" id="replaceFromCsv">Replace list from CSV</button>
           <button class="btn" id="mergeFromCsv">Merge CSV into list</button>
         </div>
         <div class="hint">
-          Tip: In Google Sheets → File → Download → CSV. Then paste here.<br/>
-          For styles, you can write: <span class="pill">Pop|Disco</span> or <span class="pill">Pop, Disco</span>
+          Tip: Google Sheets → File → Download → CSV, then paste here.<br/>
+          Duration format recommended: <span class="pill">HH:MM:SS</span> (e.g. 00:03:45)
         </div>
       </div>
 
-      <!-- RIGHT: editor -->
+      <!-- RIGHT -->
       <div class="card right">
         <div class="grid2">
           <div>
@@ -134,18 +150,36 @@
             <label>Title</label>
             <input id="title" />
           </div>
+
           <div>
-            <label>Duration</label>
-            <input id="duration" placeholder="e.g. 3 min 45" />
+            <label>Exact year</label>
+            <input id="year" placeholder="e.g. 1987" inputmode="numeric" />
+            <div class="hint" style="margin-top:6px;">
+              Auto decade: when you type a year, the decade checkbox is set automatically.
+            </div>
           </div>
+
           <div>
-            <label>Category (decade)</label>
-            <input id="category" placeholder="e.g. 80s Music" />
+            <label>Duration (HH:MM:SS)</label>
+            <input id="durationTime" type="time" step="1" value="00:00:00" />
           </div>
         </div>
 
-        <label>Styles (comma separated)</label>
+        <label style="margin-top:14px;">Decade (Category)</label>
+        <div class="pillRow" id="decadeBox"></div>
+        <input id="category" placeholder="e.g. 80s Music" style="margin-top:8px;" />
+
+        <label style="margin-top:14px;">Styles (multi-select)</label>
+        <div class="pillRow" id="styleBox"></div>
+
+        <div class="pillRow" style="margin-top:10px;">
+          <input id="styleAdd" placeholder="Add a new style (e.g. Synthpop)" style="flex:1 1 260px; min-width:220px;" />
+          <button class="btn" id="addStyleBtn">+ Add style</button>
+        </div>
+
+        <label style="margin-top:12px;">Styles (manual input - optional)</label>
         <input id="style" placeholder="e.g. Pop, Disco" />
+        <div class="hint">Tip: use the checkboxes above. Manual input is optional.</div>
 
         <div class="coverBox">
           <div class="coverPreview"><img id="coverImg" src="img/default-cover.jpg" alt=""></div>
@@ -162,16 +196,29 @@
               <button class="btn primary" id="saveSong">Save changes</button>
             </div>
             <div class="hint">
-              Upload is stored in the exported ZIP under <span class="pill">img/</span>.<br/>
-              If you don’t upload, it will keep the current filename (or default).
+              Uploaded covers are added to the exported ZIP under <span class="pill">img/</span>.<br/>
+              (GitHub Pages cannot save uploads directly.)
             </div>
           </div>
         </div>
 
         <div class="divider"></div>
 
+        <h2 style="margin-top:0;">Style Manager</h2>
+        <div class="hint">Add / rename / delete styles used by the checkboxes (updates all songs).</div>
+
+        <div class="pillRow" style="margin-top:10px;">
+          <input id="styleNewName" placeholder="New style name (e.g. Synthpop)" style="flex:1 1 260px; min-width:220px;" />
+          <button class="btn" id="styleAddBtn2">+ Add</button>
+        </div>
+
+        <div class="list" id="styleManager" style="max-height:240px; margin-top:10px;"></div>
+
+        <div class="divider"></div>
+
         <div class="small">
-          Output format: <span class="pill">const songsX = [ { "artist": "...", ... } ];</span>
+          Output format: <span class="pill">const songsX = [ { "artist": "...", ... } ];</span><br/>
+          Hidden field per song: <span class="pill">addedAt</span> (auto, exported, not shown in list)
         </div>
       </div>
     </div>
@@ -188,10 +235,22 @@
 
     const $ = (id) => document.getElementById(id);
 
+    const DECADES = ["60s Music","70s Music","80s Music","90s Music","2000s Music","2010s Music","2020s Music","Mixed Years"];
+
+    let styleMaster = new Set([
+      "Pop","Rock","Alternative Rock","Indie Rock","Indie Pop","Electronic","Synthpop","New Wave","Disco","Hip Hop",
+      "R&B","Soul","Funk","House","Dance","Dance Pop","Trip-Hop","Soundtrack","Video Game Music","Classical","Country",
+      "Punk Rock","Hard Rock","Soft Rock","Glam Rock","Industrial Metal","Latin Pop","Latin Rock","French Pop","French Rock",
+      "City Pop","Comedy","Instrumental","Mashup"
+    ]);
+
+    function nowISO() {
+      return new Date().toISOString();
+    }
+
     function normalizeStyles(input){
       if(!input) return [];
       if(Array.isArray(input)) return input.filter(Boolean);
-      // accept "Pop|Disco" or "Pop, Disco"
       return String(input)
         .split(/[\|,]/g)
         .map(s => s.trim())
@@ -200,7 +259,7 @@
 
     function sanitizeFilePart(s){
       return String(s || "")
-        .replace(/[\/\\:*?"<>|]/g, "")     // windows illegal
+        .replace(/[\/\\:*?"<>|]/g, "")
         .replace(/\s+/g, " ")
         .trim();
     }
@@ -210,6 +269,45 @@
       const t = sanitizeFilePart(title);
       if(!a || !t) return "img/default-cover.jpg";
       return `img/${a} - ${t}.jpg`;
+    }
+
+    function escapeHtml(str){
+      return String(str||"")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    // duration stored as "HH:MM:SS"
+    function timeToDurationStr(t) {
+      if (!t) return "";
+      const parts = t.split(":").map(x => x.trim());
+      if (parts.length === 2) return `${parts[0].padStart(2,"0")}:${parts[1].padStart(2,"0")}:00`;
+      if (parts.length === 3) return `${parts[0].padStart(2,"0")}:${parts[1].padStart(2,"0")}:${parts[2].padStart(2,"0")}`;
+      return "";
+    }
+
+    function durationStrToTime(d) {
+      if (!d) return "00:00:00";
+      const parts = String(d).split(":");
+      if (parts.length === 3) return `${parts[0].padStart(2,"0")}:${parts[1].padStart(2,"0")}:${parts[2].padStart(2,"0")}`;
+      return "00:00:00";
+    }
+
+    // Auto decade from year
+    function decadeFromYear(yearStr){
+      const y = parseInt(String(yearStr || "").trim(), 10);
+      if (!Number.isFinite(y)) return "";
+      if (y >= 1960 && y <= 1969) return "60s Music";
+      if (y >= 1970 && y <= 1979) return "70s Music";
+      if (y >= 1980 && y <= 1989) return "80s Music";
+      if (y >= 1990 && y <= 1999) return "90s Music";
+      if (y >= 2000 && y <= 2009) return "2000s Music";
+      if (y >= 2010 && y <= 2019) return "2010s Music";
+      if (y >= 2020 && y <= 2029) return "2020s Music";
+      return "";
     }
 
     function sortData(){
@@ -231,7 +329,7 @@
       const filtered = data
         .map((s, idx)=>({s, idx}))
         .filter(({s})=>{
-          const hay = ((s.artist||"") + " " + (s.title||"")).toLowerCase();
+          const hay = ((s.artist||"") + " " + (s.title||"") + " " + (s.year||"")).toLowerCase();
           return hay.includes(q);
         });
 
@@ -240,7 +338,10 @@
         div.className = "item" + (idx === currentIndex ? " active" : "");
         div.innerHTML = `
           <div><b>${escapeHtml(s.title || "(no title)")}</b></div>
-          <div class="meta">${escapeHtml(s.artist || "(no artist)")}</div>
+          <div class="meta">
+            ${escapeHtml(s.artist || "(no artist)")}
+            ${s.year ? " • " + escapeHtml(s.year) : ""}
+          </div>
         `;
         div.onclick = ()=> selectSong(idx);
         list.appendChild(div);
@@ -250,19 +351,174 @@
       $("varName").textContent = varName || "—";
     }
 
+    // ---- Decade checkbox UI ----
+    function rebuildDecadeBox() {
+      const box = $("decadeBox");
+      box.innerHTML = "";
+
+      DECADES.forEach(dec => {
+        const id = `dec_${dec.replace(/\s+/g,"_")}`;
+        const lbl = document.createElement("label");
+        lbl.className = "pill";
+        lbl.innerHTML = `<input type="checkbox" class="decadeCB" value="${dec}" id="${id}"> ${dec.replace(" Music","")}`;
+        box.appendChild(lbl);
+      });
+
+      // single-choice behavior
+      box.querySelectorAll(".decadeCB").forEach(cb => {
+        cb.addEventListener("change", () => {
+          if (cb.checked) {
+            box.querySelectorAll(".decadeCB").forEach(other => {
+              if (other !== cb) other.checked = false;
+            });
+            $("category").value = cb.value;
+          } else {
+            if ($("category").value === cb.value) $("category").value = "";
+          }
+        });
+      });
+    }
+
+    function setSelectedDecade(category) {
+      document.querySelectorAll(".decadeCB").forEach(cb => {
+        cb.checked = (cb.value === category);
+      });
+    }
+
+    // ---- Styles checkbox UI ----
+    function rebuildStyleBox() {
+      const box = $("styleBox");
+      box.innerHTML = "";
+
+      // expand master with what exists in data
+      data.forEach(s => normalizeStyles(s.style).forEach(st => styleMaster.add(st)));
+
+      Array.from(styleMaster)
+        .map(s => s.trim())
+        .filter(Boolean)
+        .sort((a,b) => a.toLowerCase().localeCompare(b.toLowerCase()))
+        .forEach(styleName => {
+          const safe = styleName.replace(/\s+/g,"_").replace(/[^\w\-]/g,"");
+          const id = `st_${safe}`;
+          const lbl = document.createElement("label");
+          lbl.className = "pill";
+          lbl.innerHTML = `<input type="checkbox" class="styleCB" value="${escapeHtml(styleName)}" id="${id}"> ${escapeHtml(styleName)}`;
+          box.appendChild(lbl);
+        });
+
+      box.querySelectorAll(".styleCB").forEach(cb => {
+        cb.addEventListener("change", () => {
+          $("style").value = getSelectedStyles().join(", ");
+        });
+      });
+    }
+
+    function getSelectedStyles() {
+      return Array.from(document.querySelectorAll(".styleCB:checked"))
+        .map(x => x.value)
+        .map(s => s.trim())
+        .filter(Boolean);
+    }
+
+    function setSelectedStyles(stylesArr) {
+      const set = new Set((stylesArr || []).map(s => String(s).trim()).filter(Boolean));
+      document.querySelectorAll(".styleCB").forEach(cb => {
+        cb.checked = set.has(cb.value);
+      });
+      $("style").value = Array.from(set).join(", ");
+    }
+
+    function refreshCheckboxes() {
+      rebuildDecadeBox();
+      rebuildStyleBox();
+      renderStyleManager();
+    }
+
+    // ---- Style Manager ----
+    function renderStyleManager() {
+      const box = $("styleManager");
+      if (!box) return;
+      box.innerHTML = "";
+
+      const styles = Array.from(styleMaster)
+        .map(s => s.trim())
+        .filter(Boolean)
+        .sort((a,b)=>a.toLowerCase().localeCompare(b.toLowerCase()));
+
+      styles.forEach(st => {
+        const row = document.createElement("div");
+        row.className = "item";
+        row.style.display = "flex";
+        row.style.gap = "8px";
+        row.style.alignItems = "center";
+
+        row.innerHTML = `
+          <input data-old="${escapeHtml(st)}" value="${escapeHtml(st)}" style="flex:1 1 auto; min-width:180px;" />
+          <button class="btn" data-action="rename">Rename</button>
+          <button class="btn" data-action="delete">Delete</button>
+        `;
+
+        const input = row.querySelector("input");
+        const btnRename = row.querySelector('[data-action="rename"]');
+        const btnDelete = row.querySelector('[data-action="delete"]');
+
+        btnRename.onclick = () => {
+          const oldName = input.getAttribute("data-old");
+          const newName = input.value.trim();
+          if (!newName) return;
+
+          if (oldName === newName) return;
+
+          styleMaster.delete(oldName);
+          styleMaster.add(newName);
+
+          // update in songs
+          data.forEach(song => {
+            const arr = normalizeStyles(song.style);
+            const updated = arr.map(x => x === oldName ? newName : x);
+            song.style = Array.from(new Set(updated)).filter(Boolean);
+          });
+
+          rebuildStyleBox();
+          renderStyleManager();
+          if (currentIndex >= 0) setSelectedStyles(normalizeStyles(data[currentIndex].style));
+        };
+
+        btnDelete.onclick = () => {
+          const name = input.getAttribute("data-old");
+          styleMaster.delete(name);
+
+          data.forEach(song => {
+            song.style = normalizeStyles(song.style).filter(x => x !== name);
+          });
+
+          rebuildStyleBox();
+          renderStyleManager();
+          if (currentIndex >= 0) setSelectedStyles(normalizeStyles(data[currentIndex].style));
+        };
+
+        box.appendChild(row);
+      });
+    }
+
+    // ---- Select / Save ----
     function selectSong(idx){
       currentIndex = idx;
       const s = data[idx] || {};
 
       $("artist").value = s.artist || "";
       $("title").value = s.title || "";
-      $("duration").value = s.duration || "";
+      $("year").value = s.year || "";
       $("category").value = s.category || "";
-      $("style").value = normalizeStyles(s.style).join(", ");
-      $("cover").value = s.cover || "img/default-cover.jpg";
 
-      const coverSrc = s.cover || "img/default-cover.jpg";
-      $("coverImg").src = coverSrc;
+      $("durationTime").value = durationStrToTime(s.duration || "");
+      $("style").value = normalizeStyles(s.style).join(", ");
+
+      setSelectedDecade(s.category || "");
+      setSelectedStyles(normalizeStyles(s.style));
+
+      $("cover").value = s.cover || "img/default-cover.jpg";
+      $("coverImg").src = s.cover || "img/default-cover.jpg";
 
       renderList();
     }
@@ -273,17 +529,26 @@
       const artist = $("artist").value.trim();
       const title = $("title").value.trim();
 
+      const pickedStyles = getSelectedStyles();
+      const finalStyles = pickedStyles.length ? pickedStyles : normalizeStyles($("style").value);
+
+      const duration = timeToDurationStr($("durationTime").value);
+      const year = $("year").value.trim();
+
+      const existingAddedAt = (data[currentIndex] && data[currentIndex].addedAt) ? data[currentIndex].addedAt : "";
+
       data[currentIndex] = {
         artist,
         title,
-        duration: $("duration").value.trim(),
-        style: normalizeStyles($("style").value),
+        duration: duration || "",
+        year: year,
+        style: finalStyles,
         category: $("category").value.trim(),
-        cover: $("cover").value.trim() || "img/default-cover.jpg"
+        cover: $("cover").value.trim() || "img/default-cover.jpg",
+        addedAt: existingAddedAt || nowISO()
       };
 
       sortData();
-      // keep selection on same song (best effort)
       const newIdx = data.findIndex(s => s.artist === artist && s.title === title);
       currentIndex = newIdx >= 0 ? newIdx : 0;
 
@@ -294,10 +559,12 @@
       data.push({
         artist: "",
         title: "",
-        duration: "",
+        duration: "00:00:00",
+        year: "",
         style: [],
         category: "",
-        cover: "img/default-cover.jpg"
+        cover: "img/default-cover.jpg",
+        addedAt: nowISO()
       });
       sortData();
       currentIndex = data.findIndex(s => !s.artist && !s.title);
@@ -313,15 +580,6 @@
       else renderList();
     }
 
-    function escapeHtml(str){
-      return String(str||"")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
-
     // ---- Import JS file (songsX.js) ----
     $("jsFile").addEventListener("change", async (e)=>{
       const file = e.target.files?.[0];
@@ -335,20 +593,24 @@
       }
       varName = m[1];
 
-      // Evaluate safely-ish: create function returning the array
       try{
         const fn = new Function(text + `\nreturn ${varName};`);
         const arr = fn();
         if(!Array.isArray(arr)) throw new Error("Not an array");
+
         data = arr.map(s => ({
           artist: s.artist || "",
           title: s.title || "",
           duration: s.duration || "",
+          year: s.year || "",
           style: Array.isArray(s.style) ? s.style : normalizeStyles(s.style),
           category: s.category || "",
-          cover: s.cover || "img/default-cover.jpg"
+          cover: s.cover || "img/default-cover.jpg",
+          addedAt: s.addedAt || ""
         }));
+
         sortData();
+        refreshCheckboxes();
         currentIndex = data.length ? 0 : -1;
         if(currentIndex >= 0) selectSong(currentIndex);
         else renderList();
@@ -363,17 +625,14 @@
       const file = e.target.files?.[0];
       if(!file) return;
 
-      // preview immediately
       const url = URL.createObjectURL(file);
       $("coverImg").src = url;
 
-      // decide filename
       const artist = $("artist").value.trim();
       const title = $("title").value.trim();
       const path = buildCoverPath(artist, title);
 
       $("cover").value = path;
-      // store blob for export
       coverBlobs.set(path, file);
     });
 
@@ -382,22 +641,43 @@
       const title = $("title").value.trim();
       const path = buildCoverPath(artist, title);
       $("cover").value = path;
-      // also update preview if current cover not uploaded
-      if(!$("coverImg").src) $("coverImg").src = path;
+    });
+
+    // ---- Auto decade from year ----
+    $("year").addEventListener("input", ()=>{
+      const dec = decadeFromYear($("year").value);
+      if (dec) {
+        $("category").value = dec;
+        setSelectedDecade(dec);
+      }
+    });
+
+    // ---- Styles add ----
+    $("addStyleBtn").addEventListener("click", () => {
+      const s = ($("styleAdd").value || "").trim();
+      if (!s) return;
+      styleMaster.add(s);
+      $("styleAdd").value = "";
+      rebuildStyleBox();
+      renderStyleManager();
+    });
+
+    $("styleAddBtn2").addEventListener("click", () => {
+      const s = ($("styleNewName").value || "").trim();
+      if (!s) return;
+      styleMaster.add(s);
+      $("styleNewName").value = "";
+      rebuildStyleBox();
+      renderStyleManager();
     });
 
     // ---- CSV import (Option 2) ----
     function parseCsv(text){
-      // Simple CSV parser (handles quoted fields)
       const rows = [];
       let i = 0, field = "", row = [], inQuotes = false;
 
-      const pushField = ()=>{
-        row.push(field);
-        field = "";
-      };
+      const pushField = ()=>{ row.push(field); field = ""; };
       const pushRow = ()=>{
-        // skip empty trailing row
         if(row.length === 1 && row[0].trim() === "") { row = []; return; }
         rows.push(row);
         row = [];
@@ -410,15 +690,8 @@
           if(inQuotes && text[i+1] === '"'){ field += '"'; i += 2; continue; }
           inQuotes = !inQuotes; i++; continue;
         }
-
-        if(!inQuotes && (c === ',')){
-          pushField(); i++; continue;
-        }
-
-        if(!inQuotes && (c === '\n')){
-          pushField(); pushRow(); i++; continue;
-        }
-
+        if(!inQuotes && c === ','){ pushField(); i++; continue; }
+        if(!inQuotes && c === '\n'){ pushField(); pushRow(); i++; continue; }
         if(!inQuotes && c === '\r'){ i++; continue; }
 
         field += c; i++;
@@ -431,7 +704,6 @@
       const rows = parseCsv(csvText.trim());
       if(rows.length === 0) return [];
 
-      // if first row looks like headers, handle it
       const header = rows[0].map(x => (x||"").toLowerCase().trim());
       const hasHeader = header.includes("artist") && header.includes("title");
 
@@ -443,36 +715,48 @@
       if(hasHeader){
         const aI = idx("artist");
         const tI = idx("title");
+        const yI = idx("year");
         const dI = idx("duration");
         const cI = idx("category");
         const sI = idx("style");
         const covI = idx("cover");
+        const addI = idx("addedat");
 
         return rows.slice(1).map(r=>{
           const artist = (r[aI]||"").trim();
           const title  = (r[tI]||"").trim();
           const cover = (covI >= 0 ? (r[covI]||"").trim() : "") || buildCoverPath(artist, title);
+          const year = (yI >= 0 ? (r[yI]||"").trim() : "");
+
+          // if category missing but year exists, auto
+          const catRaw = (cI >= 0 ? (r[cI]||"").trim() : "");
+          const category = catRaw || decadeFromYear(year) || "";
+
+          const duration = (dI >= 0 ? (r[dI]||"").trim() : "");
 
           return {
             artist,
             title,
-            duration: dI >= 0 ? (r[dI]||"").trim() : "",
-            category: cI >= 0 ? (r[cI]||"").trim() : "",
+            year,
+            duration,
+            category,
             style: sI >= 0 ? normalizeStyles(r[sI]) : [],
-            cover: cover || "img/default-cover.jpg"
+            cover: cover || "img/default-cover.jpg",
+            addedAt: addI >= 0 ? (r[addI]||"").trim() : ""
           };
         }).filter(s=>s.artist || s.title);
-      }else{
-        // No header: assume artist,title,duration,category,style,cover
+      } else {
+        // No header: artist,title,year,duration,category,style,cover
         return rows.map(r=>{
           const artist = (r[0]||"").trim();
           const title  = (r[1]||"").trim();
-          const duration = (r[2]||"").trim();
-          const category = (r[3]||"").trim();
-          const style = normalizeStyles(r[4]||"");
-          const cover = (r[5]||"").trim() || buildCoverPath(artist, title);
+          const year = (r[2]||"").trim();
+          const duration = (r[3]||"").trim();
+          const category = (r[4]||"").trim() || decadeFromYear(year) || "";
+          const style = normalizeStyles(r[5]||"");
+          const cover = (r[6]||"").trim() || buildCoverPath(artist, title);
 
-          return { artist, title, duration, category, style, cover };
+          return { artist, title, year, duration, category, style, cover, addedAt: "" };
         }).filter(s=>s.artist || s.title);
       }
     }
@@ -481,8 +765,13 @@
       const csv = $("csv").value;
       if(!csv.trim()) return alert("Paste CSV first.");
       const songs = csvToSongs(csv);
+
+      // ensure addedAt if missing
+      songs.forEach(s => { if(!s.addedAt) s.addedAt = nowISO(); });
+
       data = songs;
       sortData();
+      refreshCheckboxes();
       currentIndex = data.length ? 0 : -1;
       if(currentIndex >= 0) selectSong(currentIndex);
       else renderList();
@@ -493,24 +782,29 @@
       if(!csv.trim()) return alert("Paste CSV first.");
       const songs = csvToSongs(csv);
 
-      // merge by (artist,title)
       const key = (s)=> (s.artist||"") + "||" + (s.title||"");
       const map = new Map(data.map(s => [key(s), s]));
+
       songs.forEach(s=>{
         const k = key(s);
         if(map.has(k)){
-          // overwrite blanks only
           const existing = map.get(k);
+
+          existing.year = existing.year || s.year || "";
           existing.duration = existing.duration || s.duration || "";
           existing.category = existing.category || s.category || "";
           existing.style = (existing.style && existing.style.length) ? existing.style : s.style;
           existing.cover = (existing.cover && existing.cover !== "img/default-cover.jpg") ? existing.cover : s.cover;
-        }else{
+          existing.addedAt = existing.addedAt || s.addedAt || "";
+        } else {
+          s.addedAt = s.addedAt || nowISO();
           map.set(k, s);
         }
       });
+
       data = Array.from(map.values());
       sortData();
+      refreshCheckboxes();
       currentIndex = data.length ? 0 : -1;
       if(currentIndex >= 0) selectSong(currentIndex);
       else renderList();
@@ -518,14 +812,15 @@
 
     // ---- Export ZIP ----
     function jsStringifySongs(){
-      // matches your preferred JSON-like formatting
       const items = data.map(s => ({
         "artist": s.artist || "",
         "title": s.title || "",
         "duration": s.duration || "",
+        "year": s.year || "",
         "style": Array.isArray(s.style) ? s.style : [],
         "category": s.category || "",
-        "cover": s.cover || "img/default-cover.jpg"
+        "cover": s.cover || "img/default-cover.jpg",
+        "addedAt": s.addedAt || ""
       }));
 
       return `const ${varName || "songsX"} = ${JSON.stringify(items, null, 2)};\n`;
@@ -540,9 +835,7 @@
       const zip = new JSZip();
       zip.file(`${varName}.js`, jsStringifySongs());
 
-      // add any uploaded covers
       for(const [path, blob] of coverBlobs.entries()){
-        // only keep in img/ folder paths
         const p = path.startsWith("img/") ? path : `img/${path}`;
         zip.file(p, blob);
       }
@@ -560,7 +853,8 @@
     $("deleteSong").addEventListener("click", deleteCurrent);
     $("search").addEventListener("input", renderList);
 
-    // Start empty
+    // Init
+    refreshCheckboxes();
     renderList();
   </script>
 </body>
