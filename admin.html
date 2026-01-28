@@ -37,7 +37,7 @@
     h1{ margin:0 0 8px 0; font-size:22px; }
     h2{ margin:0 0 10px 0; font-size:14px; font-weight:normal; color:#d3c2a5; }
     label{ font-size:12px; color:#e5d3b0; display:block; margin:10px 0 6px; }
-    input, textarea{
+    input, textarea, select{
       width:100%;
       background:#2b1d16; color:#f7f1e3;
       border:1px solid #c79b53; border-radius:10px;
@@ -74,6 +74,7 @@
     .pill{
       border:1px solid #c79b53; background:#2b1d16; border-radius:999px;
       padding:6px 10px; font-size:12px; color:#f7f1e3;
+      display:inline-flex; align-items:center; gap:6px;
     }
     .small{ font-size:12px; color:#d3c2a5; }
     .divider{ height:1px; background:rgba(199,155,83,.35); margin:14px 0; }
@@ -90,6 +91,12 @@
       width:auto;
       margin:0;
     }
+
+    /* compact selects in a row */
+    .durRow select{
+      width:auto;
+      min-width:90px;
+    }
   </style>
 </head>
 
@@ -98,15 +105,31 @@
     <div class="top">
       <div>
         <h1>Cugell – Admin (Songs)</h1>
-        <h2>Edit individually + bulk import CSV → Export ZIP</h2>
+        <h2>Load A/B/C… from your website → edit → download → upload to GitHub</h2>
       </div>
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <label class="btn">
-          Import songsX.js
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+        <select id="remoteKey" class="btn" style="width:auto; padding:10px 12px;">
+          <option value="0">0-9</option>
+          <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option>
+          <option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option>
+          <option value="I">I</option><option value="J">J</option><option value="K">K</option><option value="L">L</option>
+          <option value="M">M</option><option value="N">N</option><option value="O">O</option><option value="P">P</option>
+          <option value="Q">Q</option><option value="R">R</option><option value="S">S</option><option value="T">T</option>
+          <option value="U">U</option><option value="V">V</option><option value="W">W</option><option value="X">X</option>
+          <option value="Y">Y</option><option value="Z">Z</option>
+        </select>
+
+        <button class="btn" id="loadRemote">Load from website</button>
+
+        <label class="btn" style="display:inline-flex; align-items:center; gap:8px;">
+          Import local JS
           <input id="jsFile" type="file" accept=".js" style="display:none;">
         </label>
+
         <button class="btn" id="addNew">+ Add new song</button>
-        <button class="btn primary" id="exportZip">Export ZIP</button>
+        <button class="btn primary" id="downloadJs">Download JS</button>
+        <button class="btn" id="exportZip">Export ZIP (JS + uploaded covers)</button>
       </div>
     </div>
 
@@ -114,11 +137,12 @@
       <!-- LEFT -->
       <div class="card left">
         <label>Search</label>
-        <input id="search" placeholder="Search artist / title..." />
+        <input id="search" placeholder="Search artist / title / year..." />
 
         <div class="divider"></div>
 
         <div class="small">
+          Current filename: <span id="fileName">—</span><br/>
           Loaded variable: <span id="varName">—</span><br/>
           Songs: <span id="count">0</span>
         </div>
@@ -128,14 +152,14 @@
         <div class="divider"></div>
 
         <label>Bulk import (CSV from Google Sheets)</label>
-        <textarea id="csv" placeholder="Paste CSV here. Columns: artist,title,year,duration,category,style,cover (style can be 'Pop|Disco' or 'Pop, Disco')"></textarea>
+        <textarea id="csv" placeholder="Paste CSV here. Columns: artist,title,year,duration,category,style,cover"></textarea>
         <div class="pillRow">
           <button class="btn" id="replaceFromCsv">Replace list from CSV</button>
           <button class="btn" id="mergeFromCsv">Merge CSV into list</button>
         </div>
         <div class="hint">
-          Tip: Google Sheets → File → Download → CSV, then paste here.<br/>
-          Duration format recommended: <span class="pill">HH:MM:SS</span> (e.g. 00:03:45)
+          Duration recommended: <span class="pill">MM:SS</span> (e.g. 03:45).<br/>
+          Style accepted separators: <span class="pill">Pop|Disco</span> or <span class="pill">Pop, Disco</span>
         </div>
       </div>
 
@@ -160,8 +184,12 @@
           </div>
 
           <div>
-            <label>Duration (HH:MM:SS)</label>
-            <input id="durationTime" type="time" step="1" value="00:00:00" />
+            <label>Duration (MM:SS)</label>
+            <div class="pillRow durRow" style="margin-top:0;">
+              <select id="durMin" class="btn" style="padding:10px 12px;"></select>
+              <select id="durSec" class="btn" style="padding:10px 12px;"></select>
+              <span class="small" style="align-self:center;">min / sec</span>
+            </div>
           </div>
         </div>
 
@@ -184,7 +212,7 @@
         <div class="coverBox">
           <div class="coverPreview"><img id="coverImg" src="img/default-cover.jpg" alt=""></div>
           <div style="flex:1 1 300px; min-width:260px;">
-            <label>Cover filename (auto)</label>
+            <label>Cover filename</label>
             <input id="cover" placeholder='img/Artist - Title.jpg' />
             <div class="pillRow">
               <label class="btn">
@@ -196,8 +224,7 @@
               <button class="btn primary" id="saveSong">Save changes</button>
             </div>
             <div class="hint">
-              Uploaded covers are added to the exported ZIP under <span class="pill">img/</span>.<br/>
-              (GitHub Pages cannot save uploads directly.)
+              Uploaded covers are included only in <b>Export ZIP</b>.
             </div>
           </div>
         </div>
@@ -208,7 +235,7 @@
         <div class="hint">Add / rename / delete styles used by the checkboxes (updates all songs).</div>
 
         <div class="pillRow" style="margin-top:10px;">
-          <input id="styleNewName" placeholder="New style name (e.g. Synthpop)" style="flex:1 1 260px; min-width:220px;" />
+          <input id="styleNewName" placeholder="New style name" style="flex:1 1 260px; min-width:220px;" />
           <button class="btn" id="styleAddBtn2">+ Add</button>
         </div>
 
@@ -217,7 +244,6 @@
         <div class="divider"></div>
 
         <div class="small">
-          Output format: <span class="pill">const songsX = [ { "artist": "...", ... } ];</span><br/>
           Hidden field per song: <span class="pill">addedAt</span> (auto, exported, not shown in list)
         </div>
       </div>
@@ -228,10 +254,17 @@
   <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 
   <script>
-    let varName = null;          // e.g. songsM
-    let data = [];               // array of song objects
-    let currentIndex = -1;       // selected song index
-    let coverBlobs = new Map();  // coverPath -> Blob (only for uploaded covers)
+    // ====== CONFIG: adjust to your repo structure ======
+    const REMOTE_BASE_PATH = "./songs/";              // folder where songs_A.js etc live
+    const REMOTE_FILE_PATTERN = "songs_{KEY}.js";     // {KEY} = A..Z or 0
+    // Example: ./songs/songs_A.js, ./songs/songs_0.js
+
+    // ====== STATE ======
+    let currentFilename = null;     // e.g. songs_A.js
+    let varName = null;             // e.g. songsA / songs_A / songsX...
+    let data = [];
+    let currentIndex = -1;
+    let coverBlobs = new Map();     // coverPath -> Blob (only for uploaded covers)
 
     const $ = (id) => document.getElementById(id);
 
@@ -244,24 +277,16 @@
       "City Pop","Comedy","Instrumental","Mashup"
     ]);
 
-    function nowISO() {
-      return new Date().toISOString();
-    }
+    function nowISO() { return new Date().toISOString(); }
 
     function normalizeStyles(input){
       if(!input) return [];
       if(Array.isArray(input)) return input.filter(Boolean);
-      return String(input)
-        .split(/[\|,]/g)
-        .map(s => s.trim())
-        .filter(Boolean);
+      return String(input).split(/[\|,]/g).map(s=>s.trim()).filter(Boolean);
     }
 
     function sanitizeFilePart(s){
-      return String(s || "")
-        .replace(/[\/\\:*?"<>|]/g, "")
-        .replace(/\s+/g, " ")
-        .trim();
+      return String(s||"").replace(/[\/\\:*?"<>|]/g, "").replace(/\s+/g," ").trim();
     }
 
     function buildCoverPath(artist, title){
@@ -280,178 +305,158 @@
         .replaceAll("'","&#039;");
     }
 
-    // duration stored as "HH:MM:SS"
-    function timeToDurationStr(t) {
-      if (!t) return "";
-      const parts = t.split(":").map(x => x.trim());
-      if (parts.length === 2) return `${parts[0].padStart(2,"0")}:${parts[1].padStart(2,"0")}:00`;
-      if (parts.length === 3) return `${parts[0].padStart(2,"0")}:${parts[1].padStart(2,"0")}:${parts[2].padStart(2,"0")}`;
-      return "";
+    // ---- duration MM:SS via selects ----
+    function buildDurationSelects(){
+      const min = $("durMin");
+      const sec = $("durSec");
+      min.innerHTML = "";
+      sec.innerHTML = "";
+      for(let i=0;i<=59;i++){
+        const v = String(i).padStart(2,"0");
+        const o1 = document.createElement("option");
+        o1.value = v; o1.textContent = v;
+        min.appendChild(o1);
+
+        const o2 = document.createElement("option");
+        o2.value = v; o2.textContent = v;
+        sec.appendChild(o2);
+      }
+      min.value = "00";
+      sec.value = "00";
     }
 
-    function durationStrToTime(d) {
-      if (!d) return "00:00:00";
+    function durToStr(){
+      const mm = $("durMin")?.value || "00";
+      const ss = $("durSec")?.value || "00";
+      return `${mm}:${ss}`;
+    }
+
+    function strToDur(d){
+      // accepts "MM:SS" or "HH:MM:SS" or empty
+      if(!d) return {mm:"00", ss:"00"};
       const parts = String(d).split(":");
-      if (parts.length === 3) return `${parts[0].padStart(2,"0")}:${parts[1].padStart(2,"0")}:${parts[2].padStart(2,"0")}`;
-      return "00:00:00";
+      if(parts.length === 2) return {mm: parts[0].padStart(2,"0"), ss: parts[1].padStart(2,"0")};
+      if(parts.length === 3) return {mm: parts[1].padStart(2,"0"), ss: parts[2].padStart(2,"0")};
+      return {mm:"00", ss:"00"};
     }
 
-    // Auto decade from year
+    // ---- year -> decade ----
     function decadeFromYear(yearStr){
-      const y = parseInt(String(yearStr || "").trim(), 10);
-      if (!Number.isFinite(y)) return "";
-      if (y >= 1960 && y <= 1969) return "60s Music";
-      if (y >= 1970 && y <= 1979) return "70s Music";
-      if (y >= 1980 && y <= 1989) return "80s Music";
-      if (y >= 1990 && y <= 1999) return "90s Music";
-      if (y >= 2000 && y <= 2009) return "2000s Music";
-      if (y >= 2010 && y <= 2019) return "2010s Music";
-      if (y >= 2020 && y <= 2029) return "2020s Music";
+      const y = parseInt(String(yearStr||"").trim(),10);
+      if(!Number.isFinite(y)) return "";
+      if(y>=1960 && y<=1969) return "60s Music";
+      if(y>=1970 && y<=1979) return "70s Music";
+      if(y>=1980 && y<=1989) return "80s Music";
+      if(y>=1990 && y<=1999) return "90s Music";
+      if(y>=2000 && y<=2009) return "2000s Music";
+      if(y>=2010 && y<=2019) return "2010s Music";
+      if(y>=2020 && y<=2029) return "2020s Music";
       return "";
     }
 
     function sortData(){
       data.sort((x,y)=>{
-        const ax = (x.artist||"").toLowerCase();
-        const ay = (y.artist||"").toLowerCase();
-        if(ax !== ay) return ax.localeCompare(ay);
-        const tx = (x.title||"").toLowerCase();
-        const ty = (y.title||"").toLowerCase();
-        return tx.localeCompare(ty);
+        const ax=(x.artist||"").toLowerCase(), ay=(y.artist||"").toLowerCase();
+        if(ax!==ay) return ax.localeCompare(ay);
+        return (x.title||"").toLowerCase().localeCompare((y.title||"").toLowerCase());
       });
     }
 
     function renderList(){
-      const q = ($("search").value || "").toLowerCase();
+      const q = ($("search").value||"").toLowerCase();
       const list = $("list");
       list.innerHTML = "";
 
-      const filtered = data
-        .map((s, idx)=>({s, idx}))
-        .filter(({s})=>{
-          const hay = ((s.artist||"") + " " + (s.title||"") + " " + (s.year||"")).toLowerCase();
-          return hay.includes(q);
-        });
+      const filtered = data.map((s,idx)=>({s,idx}))
+        .filter(({s}) => ((s.artist||"")+" "+(s.title||"")+" "+(s.year||"")).toLowerCase().includes(q));
 
-      filtered.forEach(({s, idx})=>{
+      filtered.forEach(({s,idx})=>{
         const div = document.createElement("div");
-        div.className = "item" + (idx === currentIndex ? " active" : "");
+        div.className = "item" + (idx===currentIndex ? " active" : "");
         div.innerHTML = `
           <div><b>${escapeHtml(s.title || "(no title)")}</b></div>
-          <div class="meta">
-            ${escapeHtml(s.artist || "(no artist)")}
-            ${s.year ? " • " + escapeHtml(s.year) : ""}
-          </div>
+          <div class="meta">${escapeHtml(s.artist || "(no artist)")} ${s.year ? " • " + escapeHtml(s.year) : ""}</div>
         `;
-        div.onclick = ()=> selectSong(idx);
+        div.onclick = ()=>selectSong(idx);
         list.appendChild(div);
       });
 
       $("count").textContent = data.length;
       $("varName").textContent = varName || "—";
+      $("fileName").textContent = currentFilename || "—";
     }
 
-    // ---- Decade checkbox UI ----
-    function rebuildDecadeBox() {
+    // ---- decades checkbox ----
+    function rebuildDecadeBox(){
       const box = $("decadeBox");
       box.innerHTML = "";
-
-      DECADES.forEach(dec => {
-        const id = `dec_${dec.replace(/\s+/g,"_")}`;
+      DECADES.forEach(dec=>{
         const lbl = document.createElement("label");
         lbl.className = "pill";
-        lbl.innerHTML = `<input type="checkbox" class="decadeCB" value="${dec}" id="${id}"> ${dec.replace(" Music","")}`;
+        lbl.innerHTML = `<input type="checkbox" class="decadeCB" value="${dec}"> ${dec.replace(" Music","")}`;
         box.appendChild(lbl);
       });
-
-      // single-choice behavior
-      box.querySelectorAll(".decadeCB").forEach(cb => {
-        cb.addEventListener("change", () => {
-          if (cb.checked) {
-            box.querySelectorAll(".decadeCB").forEach(other => {
-              if (other !== cb) other.checked = false;
-            });
+      box.querySelectorAll(".decadeCB").forEach(cb=>{
+        cb.addEventListener("change", ()=>{
+          if(cb.checked){
+            box.querySelectorAll(".decadeCB").forEach(o=>{ if(o!==cb) o.checked=false; });
             $("category").value = cb.value;
           } else {
-            if ($("category").value === cb.value) $("category").value = "";
+            if($("category").value === cb.value) $("category").value = "";
           }
         });
       });
     }
-
-    function setSelectedDecade(category) {
-      document.querySelectorAll(".decadeCB").forEach(cb => {
-        cb.checked = (cb.value === category);
-      });
+    function setSelectedDecade(category){
+      document.querySelectorAll(".decadeCB").forEach(cb=>cb.checked = (cb.value===category));
     }
 
-    // ---- Styles checkbox UI ----
-    function rebuildStyleBox() {
+    // ---- styles checkbox ----
+    function rebuildStyleBox(){
       const box = $("styleBox");
       box.innerHTML = "";
 
-      // expand master with what exists in data
       data.forEach(s => normalizeStyles(s.style).forEach(st => styleMaster.add(st)));
 
-      Array.from(styleMaster)
-        .map(s => s.trim())
-        .filter(Boolean)
-        .sort((a,b) => a.toLowerCase().localeCompare(b.toLowerCase()))
-        .forEach(styleName => {
-          const safe = styleName.replace(/\s+/g,"_").replace(/[^\w\-]/g,"");
-          const id = `st_${safe}`;
+      Array.from(styleMaster).map(s=>s.trim()).filter(Boolean)
+        .sort((a,b)=>a.toLowerCase().localeCompare(b.toLowerCase()))
+        .forEach(styleName=>{
           const lbl = document.createElement("label");
           lbl.className = "pill";
-          lbl.innerHTML = `<input type="checkbox" class="styleCB" value="${escapeHtml(styleName)}" id="${id}"> ${escapeHtml(styleName)}`;
+          lbl.innerHTML = `<input type="checkbox" class="styleCB" value="${escapeHtml(styleName)}"> ${escapeHtml(styleName)}`;
           box.appendChild(lbl);
         });
 
-      box.querySelectorAll(".styleCB").forEach(cb => {
-        cb.addEventListener("change", () => {
+      box.querySelectorAll(".styleCB").forEach(cb=>{
+        cb.addEventListener("change", ()=>{
           $("style").value = getSelectedStyles().join(", ");
         });
       });
     }
-
-    function getSelectedStyles() {
+    function getSelectedStyles(){
       return Array.from(document.querySelectorAll(".styleCB:checked"))
-        .map(x => x.value)
-        .map(s => s.trim())
-        .filter(Boolean);
+        .map(x=>x.value).map(s=>s.trim()).filter(Boolean);
     }
-
-    function setSelectedStyles(stylesArr) {
-      const set = new Set((stylesArr || []).map(s => String(s).trim()).filter(Boolean));
-      document.querySelectorAll(".styleCB").forEach(cb => {
-        cb.checked = set.has(cb.value);
-      });
+    function setSelectedStyles(arr){
+      const set = new Set((arr||[]).map(s=>String(s).trim()).filter(Boolean));
+      document.querySelectorAll(".styleCB").forEach(cb=>cb.checked = set.has(cb.value));
       $("style").value = Array.from(set).join(", ");
     }
 
-    function refreshCheckboxes() {
-      rebuildDecadeBox();
-      rebuildStyleBox();
-      renderStyleManager();
-    }
-
-    // ---- Style Manager ----
-    function renderStyleManager() {
+    // ---- style manager ----
+    function renderStyleManager(){
       const box = $("styleManager");
-      if (!box) return;
       box.innerHTML = "";
 
-      const styles = Array.from(styleMaster)
-        .map(s => s.trim())
-        .filter(Boolean)
+      const styles = Array.from(styleMaster).map(s=>s.trim()).filter(Boolean)
         .sort((a,b)=>a.toLowerCase().localeCompare(b.toLowerCase()));
 
-      styles.forEach(st => {
+      styles.forEach(st=>{
         const row = document.createElement("div");
         row.className = "item";
-        row.style.display = "flex";
-        row.style.gap = "8px";
-        row.style.alignItems = "center";
-
+        row.style.display="flex";
+        row.style.gap="8px";
+        row.style.alignItems="center";
         row.innerHTML = `
           <input data-old="${escapeHtml(st)}" value="${escapeHtml(st)}" style="flex:1 1 auto; min-width:180px;" />
           <button class="btn" data-action="rename">Rename</button>
@@ -462,46 +467,48 @@
         const btnRename = row.querySelector('[data-action="rename"]');
         const btnDelete = row.querySelector('[data-action="delete"]');
 
-        btnRename.onclick = () => {
+        btnRename.onclick = ()=>{
           const oldName = input.getAttribute("data-old");
           const newName = input.value.trim();
-          if (!newName) return;
-
-          if (oldName === newName) return;
+          if(!newName || oldName===newName) return;
 
           styleMaster.delete(oldName);
           styleMaster.add(newName);
 
-          // update in songs
-          data.forEach(song => {
-            const arr = normalizeStyles(song.style);
-            const updated = arr.map(x => x === oldName ? newName : x);
-            song.style = Array.from(new Set(updated)).filter(Boolean);
+          data.forEach(song=>{
+            const s = normalizeStyles(song.style).map(x => x===oldName ? newName : x);
+            song.style = Array.from(new Set(s)).filter(Boolean);
           });
 
           rebuildStyleBox();
           renderStyleManager();
-          if (currentIndex >= 0) setSelectedStyles(normalizeStyles(data[currentIndex].style));
+          if(currentIndex>=0) setSelectedStyles(normalizeStyles(data[currentIndex].style));
         };
 
-        btnDelete.onclick = () => {
+        btnDelete.onclick = ()=>{
           const name = input.getAttribute("data-old");
           styleMaster.delete(name);
 
-          data.forEach(song => {
-            song.style = normalizeStyles(song.style).filter(x => x !== name);
+          data.forEach(song=>{
+            song.style = normalizeStyles(song.style).filter(x=>x!==name);
           });
 
           rebuildStyleBox();
           renderStyleManager();
-          if (currentIndex >= 0) setSelectedStyles(normalizeStyles(data[currentIndex].style));
+          if(currentIndex>=0) setSelectedStyles(normalizeStyles(data[currentIndex].style));
         };
 
         box.appendChild(row);
       });
     }
 
-    // ---- Select / Save ----
+    function refreshUI(){
+      rebuildDecadeBox();
+      rebuildStyleBox();
+      renderStyleManager();
+    }
+
+    // ---- select/save ----
     function selectSong(idx){
       currentIndex = idx;
       const s = data[idx] || {};
@@ -511,8 +518,9 @@
       $("year").value = s.year || "";
       $("category").value = s.category || "";
 
-      $("durationTime").value = durationStrToTime(s.duration || "");
-      $("style").value = normalizeStyles(s.style).join(", ");
+      const dd = strToDur(s.duration || "");
+      $("durMin").value = dd.mm;
+      $("durSec").value = dd.ss;
 
       setSelectedDecade(s.category || "");
       setSelectedStyles(normalizeStyles(s.style));
@@ -524,24 +532,23 @@
     }
 
     function saveCurrent(){
-      if(currentIndex < 0) return;
+      if(currentIndex<0) return;
 
       const artist = $("artist").value.trim();
-      const title = $("title").value.trim();
+      const title  = $("title").value.trim();
+      const year   = $("year").value.trim();
 
       const pickedStyles = getSelectedStyles();
       const finalStyles = pickedStyles.length ? pickedStyles : normalizeStyles($("style").value);
 
-      const duration = timeToDurationStr($("durationTime").value);
-      const year = $("year").value.trim();
-
-      const existingAddedAt = (data[currentIndex] && data[currentIndex].addedAt) ? data[currentIndex].addedAt : "";
+      const duration = durToStr(); // "MM:SS"
+      const existingAddedAt = data[currentIndex]?.addedAt || "";
 
       data[currentIndex] = {
         artist,
         title,
+        year,
         duration: duration || "",
-        year: year,
         style: finalStyles,
         category: $("category").value.trim(),
         cover: $("cover").value.trim() || "img/default-cover.jpg",
@@ -549,152 +556,169 @@
       };
 
       sortData();
-      const newIdx = data.findIndex(s => s.artist === artist && s.title === title);
+      const newIdx = data.findIndex(s => s.artist===artist && s.title===title);
       currentIndex = newIdx >= 0 ? newIdx : 0;
-
+      refreshUI();
       selectSong(currentIndex);
     }
 
     function addNewSong(){
       data.push({
-        artist: "",
-        title: "",
-        duration: "00:00:00",
-        year: "",
-        style: [],
-        category: "",
-        cover: "img/default-cover.jpg",
+        artist:"",
+        title:"",
+        year:"",
+        duration:"00:00",
+        style:[],
+        category:"",
+        cover:"img/default-cover.jpg",
         addedAt: nowISO()
       });
       sortData();
-      currentIndex = data.findIndex(s => !s.artist && !s.title);
-      if(currentIndex < 0) currentIndex = data.length - 1;
+      currentIndex = data.findIndex(s=>!s.artist && !s.title);
+      if(currentIndex<0) currentIndex = data.length-1;
+      refreshUI();
       selectSong(currentIndex);
     }
 
     function deleteCurrent(){
-      if(currentIndex < 0) return;
-      data.splice(currentIndex, 1);
-      currentIndex = Math.min(currentIndex, data.length - 1);
-      if(currentIndex >= 0) selectSong(currentIndex);
+      if(currentIndex<0) return;
+      data.splice(currentIndex,1);
+      currentIndex = Math.min(currentIndex, data.length-1);
+      refreshUI();
+      if(currentIndex>=0) selectSong(currentIndex);
       else renderList();
     }
 
-    // ---- Import JS file (songsX.js) ----
-    $("jsFile").addEventListener("change", async (e)=>{
-      const file = e.target.files?.[0];
-      if(!file) return;
-
-      const text = await file.text();
-      const m = text.match(/const\s+([A-Za-z0-9_]+)\s*=\s*\[/);
-      if(!m){
-        alert("Could not find 'const something = [' in this file.");
-        return;
-      }
-      varName = m[1];
-
-      try{
-        const fn = new Function(text + `\nreturn ${varName};`);
-        const arr = fn();
-        if(!Array.isArray(arr)) throw new Error("Not an array");
-
-        data = arr.map(s => ({
-          artist: s.artist || "",
-          title: s.title || "",
-          duration: s.duration || "",
-          year: s.year || "",
-          style: Array.isArray(s.style) ? s.style : normalizeStyles(s.style),
-          category: s.category || "",
-          cover: s.cover || "img/default-cover.jpg",
-          addedAt: s.addedAt || ""
-        }));
-
-        sortData();
-        refreshCheckboxes();
-        currentIndex = data.length ? 0 : -1;
-        if(currentIndex >= 0) selectSong(currentIndex);
-        else renderList();
-      }catch(err){
-        console.error(err);
-        alert("Failed to load JS file. Check console for details.");
-      }
-    });
-
-    // ---- Cover upload ----
-    $("coverFile").addEventListener("change", async (e)=>{
+    // ---- cover upload ----
+    $("coverFile").addEventListener("change", (e)=>{
       const file = e.target.files?.[0];
       if(!file) return;
 
       const url = URL.createObjectURL(file);
       $("coverImg").src = url;
 
-      const artist = $("artist").value.trim();
-      const title = $("title").value.trim();
-      const path = buildCoverPath(artist, title);
-
+      const path = buildCoverPath($("artist").value.trim(), $("title").value.trim());
       $("cover").value = path;
       coverBlobs.set(path, file);
     });
 
     $("autoCover").addEventListener("click", ()=>{
-      const artist = $("artist").value.trim();
-      const title = $("title").value.trim();
-      const path = buildCoverPath(artist, title);
-      $("cover").value = path;
+      $("cover").value = buildCoverPath($("artist").value.trim(), $("title").value.trim());
     });
 
-    // ---- Auto decade from year ----
+    // ---- auto decade from year ----
     $("year").addEventListener("input", ()=>{
       const dec = decadeFromYear($("year").value);
-      if (dec) {
+      if(dec){
         $("category").value = dec;
         setSelectedDecade(dec);
       }
     });
 
-    // ---- Styles add ----
-    $("addStyleBtn").addEventListener("click", () => {
-      const s = ($("styleAdd").value || "").trim();
-      if (!s) return;
+    // ---- styles add ----
+    $("addStyleBtn").addEventListener("click", ()=>{
+      const s = ($("styleAdd").value||"").trim();
+      if(!s) return;
       styleMaster.add(s);
       $("styleAdd").value = "";
-      rebuildStyleBox();
-      renderStyleManager();
+      rebuildStyleBox(); renderStyleManager();
     });
-
-    $("styleAddBtn2").addEventListener("click", () => {
-      const s = ($("styleNewName").value || "").trim();
-      if (!s) return;
+    $("styleAddBtn2").addEventListener("click", ()=>{
+      const s = ($("styleNewName").value||"").trim();
+      if(!s) return;
       styleMaster.add(s);
       $("styleNewName").value = "";
-      rebuildStyleBox();
-      renderStyleManager();
+      rebuildStyleBox(); renderStyleManager();
     });
 
-    // ---- CSV import (Option 2) ----
+    // ---- load JS text (common) ----
+    function loadFromText(text, filename){
+      const m = text.match(/const\s+([A-Za-z0-9_]+)\s*=\s*\[/);
+      if(!m) throw new Error("Could not find 'const X = [' in the file.");
+      varName = m[1];
+      currentFilename = filename || null;
+
+      const fn = new Function(text + `\nreturn ${varName};`);
+      const arr = fn();
+      if(!Array.isArray(arr)) throw new Error("Loaded value is not an array.");
+
+      data = arr.map(s => ({
+        artist: s.artist || "",
+        title: s.title || "",
+        year: s.year || "",
+        duration: s.duration || "",
+        style: Array.isArray(s.style) ? s.style : normalizeStyles(s.style),
+        category: s.category || "",
+        cover: s.cover || "img/default-cover.jpg",
+        addedAt: s.addedAt || ""
+      }));
+
+      // ensure addedAt exists for new items
+      data.forEach(s => { if(!s.addedAt) s.addedAt = nowISO(); });
+
+      sortData();
+      refreshUI();
+      currentIndex = data.length ? 0 : -1;
+      if(currentIndex>=0) selectSong(currentIndex);
+      else renderList();
+    }
+
+    // ---- Load from website (dropdown) ----
+    function remoteFilenameForKey(key){
+      const k = (key === "0") ? "0" : key;
+      return REMOTE_FILE_PATTERN.replace("{KEY}", k);
+    }
+
+    $("loadRemote").addEventListener("click", async ()=>{
+      const key = $("remoteKey").value;
+      const fname = remoteFilenameForKey(key);
+      const url = REMOTE_BASE_PATH + fname + "?v=" + Date.now(); // cache-bust
+
+      try{
+        const res = await fetch(url);
+        if(!res.ok) throw new Error(`HTTP ${res.status} while fetching ${url}`);
+        const text = await res.text();
+        loadFromText(text, fname);
+      }catch(err){
+        console.error(err);
+        alert("Failed to load from website.\nCheck:\n- file path\n- filename\n- GitHub Pages published\n\nDetails: " + err.message);
+      }
+    });
+
+    // ---- Import local JS file ----
+    $("jsFile").addEventListener("change", async (e)=>{
+      const file = e.target.files?.[0];
+      if(!file) return;
+      const text = await file.text();
+      try{
+        loadFromText(text, file.name);
+      }catch(err){
+        console.error(err);
+        alert("Failed to import local JS.\nDetails: " + err.message);
+      }
+    });
+
+    // ---- CSV import ----
     function parseCsv(text){
       const rows = [];
-      let i = 0, field = "", row = [], inQuotes = false;
+      let i=0, field="", row=[], inQuotes=false;
 
-      const pushField = ()=>{ row.push(field); field = ""; };
-      const pushRow = ()=>{
-        if(row.length === 1 && row[0].trim() === "") { row = []; return; }
-        rows.push(row);
-        row = [];
+      const pushField=()=>{ row.push(field); field=""; };
+      const pushRow=()=>{
+        if(row.length===1 && row[0].trim()===""){ row=[]; return; }
+        rows.push(row); row=[];
       };
 
-      while(i < text.length){
-        const c = text[i];
-
+      while(i<text.length){
+        const c=text[i];
         if(c === '"'){
-          if(inQuotes && text[i+1] === '"'){ field += '"'; i += 2; continue; }
-          inQuotes = !inQuotes; i++; continue;
+          if(inQuotes && text[i+1] === '"'){ field+='"'; i+=2; continue; }
+          inQuotes=!inQuotes; i++; continue;
         }
-        if(!inQuotes && c === ','){ pushField(); i++; continue; }
-        if(!inQuotes && c === '\n'){ pushField(); pushRow(); i++; continue; }
-        if(!inQuotes && c === '\r'){ i++; continue; }
-
-        field += c; i++;
+        if(!inQuotes && c===','){ pushField(); i++; continue; }
+        if(!inQuotes && c==='\n'){ pushField(); pushRow(); i++; continue; }
+        if(!inQuotes && c==='\r'){ i++; continue; }
+        field+=c; i++;
       }
       pushField(); pushRow();
       return rows;
@@ -702,78 +726,47 @@
 
     function csvToSongs(csvText){
       const rows = parseCsv(csvText.trim());
-      if(rows.length === 0) return [];
+      if(rows.length===0) return [];
 
       const header = rows[0].map(x => (x||"").toLowerCase().trim());
       const hasHeader = header.includes("artist") && header.includes("title");
 
-      const idx = (name)=>{
-        const i = header.indexOf(name);
-        return i >= 0 ? i : -1;
-      };
+      const idx = (name)=> header.indexOf(name);
+
+      const toSong = (artist,title,year,duration,category,style,cover)=>({
+        artist: (artist||"").trim(),
+        title: (title||"").trim(),
+        year: (year||"").trim(),
+        duration: (duration||"").trim(),
+        category: (category||"").trim() || decadeFromYear(year||"") || "",
+        style: normalizeStyles(style||""),
+        cover: (cover||"").trim() || buildCoverPath(artist,title),
+        addedAt: nowISO()
+      });
 
       if(hasHeader){
-        const aI = idx("artist");
-        const tI = idx("title");
-        const yI = idx("year");
-        const dI = idx("duration");
-        const cI = idx("category");
-        const sI = idx("style");
-        const covI = idx("cover");
-        const addI = idx("addedat");
+        const aI=idx("artist"), tI=idx("title"), yI=idx("year"), dI=idx("duration"),
+              cI=idx("category"), sI=idx("style"), covI=idx("cover"), addI=idx("addedat");
 
         return rows.slice(1).map(r=>{
-          const artist = (r[aI]||"").trim();
-          const title  = (r[tI]||"").trim();
-          const cover = (covI >= 0 ? (r[covI]||"").trim() : "") || buildCoverPath(artist, title);
-          const year = (yI >= 0 ? (r[yI]||"").trim() : "");
-
-          // if category missing but year exists, auto
-          const catRaw = (cI >= 0 ? (r[cI]||"").trim() : "");
-          const category = catRaw || decadeFromYear(year) || "";
-
-          const duration = (dI >= 0 ? (r[dI]||"").trim() : "");
-
-          return {
-            artist,
-            title,
-            year,
-            duration,
-            category,
-            style: sI >= 0 ? normalizeStyles(r[sI]) : [],
-            cover: cover || "img/default-cover.jpg",
-            addedAt: addI >= 0 ? (r[addI]||"").trim() : ""
-          };
-        }).filter(s=>s.artist || s.title);
+          const song = toSong(r[aI], r[tI], r[yI], r[dI], r[cI], r[sI], r[covI]);
+          if(addI>=0 && (r[addI]||"").trim()) song.addedAt = (r[addI]||"").trim();
+          return song;
+        }).filter(s=>s.artist||s.title);
       } else {
-        // No header: artist,title,year,duration,category,style,cover
-        return rows.map(r=>{
-          const artist = (r[0]||"").trim();
-          const title  = (r[1]||"").trim();
-          const year = (r[2]||"").trim();
-          const duration = (r[3]||"").trim();
-          const category = (r[4]||"").trim() || decadeFromYear(year) || "";
-          const style = normalizeStyles(r[5]||"");
-          const cover = (r[6]||"").trim() || buildCoverPath(artist, title);
-
-          return { artist, title, year, duration, category, style, cover, addedAt: "" };
-        }).filter(s=>s.artist || s.title);
+        return rows.map(r=>toSong(r[0],r[1],r[2],r[3],r[4],r[5],r[6]))
+          .filter(s=>s.artist||s.title);
       }
     }
 
     $("replaceFromCsv").addEventListener("click", ()=>{
       const csv = $("csv").value;
       if(!csv.trim()) return alert("Paste CSV first.");
-      const songs = csvToSongs(csv);
-
-      // ensure addedAt if missing
-      songs.forEach(s => { if(!s.addedAt) s.addedAt = nowISO(); });
-
-      data = songs;
+      data = csvToSongs(csv);
       sortData();
-      refreshCheckboxes();
+      refreshUI();
       currentIndex = data.length ? 0 : -1;
-      if(currentIndex >= 0) selectSong(currentIndex);
+      if(currentIndex>=0) selectSong(currentIndex);
       else renderList();
     });
 
@@ -783,34 +776,32 @@
       const songs = csvToSongs(csv);
 
       const key = (s)=> (s.artist||"") + "||" + (s.title||"");
-      const map = new Map(data.map(s => [key(s), s]));
+      const map = new Map(data.map(s=>[key(s), s]));
 
       songs.forEach(s=>{
         const k = key(s);
         if(map.has(k)){
-          const existing = map.get(k);
-
-          existing.year = existing.year || s.year || "";
-          existing.duration = existing.duration || s.duration || "";
-          existing.category = existing.category || s.category || "";
-          existing.style = (existing.style && existing.style.length) ? existing.style : s.style;
-          existing.cover = (existing.cover && existing.cover !== "img/default-cover.jpg") ? existing.cover : s.cover;
-          existing.addedAt = existing.addedAt || s.addedAt || "";
+          const ex = map.get(k);
+          ex.year = ex.year || s.year;
+          ex.duration = ex.duration || s.duration;
+          ex.category = ex.category || s.category;
+          ex.style = (ex.style && ex.style.length) ? ex.style : s.style;
+          ex.cover = (ex.cover && ex.cover !== "img/default-cover.jpg") ? ex.cover : s.cover;
+          ex.addedAt = ex.addedAt || s.addedAt;
         } else {
-          s.addedAt = s.addedAt || nowISO();
           map.set(k, s);
         }
       });
 
       data = Array.from(map.values());
       sortData();
-      refreshCheckboxes();
+      refreshUI();
       currentIndex = data.length ? 0 : -1;
-      if(currentIndex >= 0) selectSong(currentIndex);
+      if(currentIndex>=0) selectSong(currentIndex);
       else renderList();
     });
 
-    // ---- Export ZIP ----
+    // ---- Export (JS only) ----
     function jsStringifySongs(){
       const items = data.map(s => ({
         "artist": s.artist || "",
@@ -823,17 +814,31 @@
         "addedAt": s.addedAt || ""
       }));
 
-      return `const ${varName || "songsX"} = ${JSON.stringify(items, null, 2)};\n`;
+      const vn = varName || "songsX";
+      return `const ${vn} = ${JSON.stringify(items, null, 2)};\n`;
     }
 
+    function downloadTextFile(filename, content){
+      const blob = new Blob([content], {type:"text/javascript;charset=utf-8"});
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      a.click();
+    }
+
+    $("downloadJs").addEventListener("click", ()=>{
+      if(!varName) return alert("Load a file first (remote or local).");
+      const outName = currentFilename || (varName + ".js");
+      downloadTextFile(outName, jsStringifySongs());
+    });
+
+    // ---- Export ZIP (JS + uploaded covers) ----
     $("exportZip").addEventListener("click", async ()=>{
-      if(!varName){
-        alert("Import a songsX.js file first.");
-        return;
-      }
+      if(!varName) return alert("Load a file first (remote or local).");
 
       const zip = new JSZip();
-      zip.file(`${varName}.js`, jsStringifySongs());
+      const outName = currentFilename || (varName + ".js");
+      zip.file(outName, jsStringifySongs());
 
       for(const [path, blob] of coverBlobs.entries()){
         const p = path.startsWith("img/") ? path : `img/${path}`;
@@ -843,18 +848,19 @@
       const out = await zip.generateAsync({type:"blob"});
       const a = document.createElement("a");
       a.href = URL.createObjectURL(out);
-      a.download = `${varName}_export.zip`;
+      a.download = (varName || "songs") + "_export.zip";
       a.click();
     });
 
-    // ---- Wire buttons ----
+    // ---- wire buttons ----
     $("addNew").addEventListener("click", addNewSong);
     $("saveSong").addEventListener("click", saveCurrent);
     $("deleteSong").addEventListener("click", deleteCurrent);
     $("search").addEventListener("input", renderList);
 
-    // Init
-    refreshCheckboxes();
+    // init
+    buildDurationSelects();
+    refreshUI();
     renderList();
   </script>
 </body>
