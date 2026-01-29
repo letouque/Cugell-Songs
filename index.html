@@ -186,22 +186,27 @@
       .grid { grid-template-columns: repeat(1, 1fr); }
     }
 
+    /* ===== MODERN CUGELL THEME CARDS ===== */
     .song {
-      background: #4a3427;
-      border-radius: 10px;
-      border: 1px solid #c79b53;
+      background: linear-gradient(160deg, #3a1f5c, #22112f);
+      border-radius: 14px;
+      border: 1px solid rgba(199,155,83,0.6);
       padding: 10px;
       text-align: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
 
     .song-cover {
+      position: relative;
       width: 100%;
-      aspect-ratio: 1/1;
-      border-radius: 8px;
+      aspect-ratio: 1 / 1;
+      border-radius: 10px;
       overflow: hidden;
-      border: 1px solid #c79b53;
-      background: #2b1d16;
-      margin-bottom: 8px;
+      background: #1c1024;
+      border: 1px solid rgba(199,155,83,0.6);
     }
 
     .song-cover img {
@@ -210,22 +215,63 @@
       object-fit: cover;
     }
 
-    .song-title {
+    .year-badge {
+      position: absolute;
+      bottom: 6px;
+      left: 6px;
+      background: rgba(199,155,83,0.85);
+      color: #1c1024;
+      font-size: 12px;
       font-weight: bold;
-      font-size: 15px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .song-title {
+      margin-top: 6px;
+      font-weight: 700;
+      font-size: 15.5px;
+      letter-spacing: 0.4px;
+      color: #ffffff;
+      line-height: 1.2;
     }
 
     .song-artist {
-      font-size: 13px;
-      color: #e5d3b0;
-      margin: 4px 0;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #f0e6ff;
+      letter-spacing: 0.2px;
+      margin: 2px 0 6px;
     }
 
     .song-meta {
       font-size: 12px;
-      color: #d3c2a5;
+      color: #e2d7f0;
+      line-height: 1.4;
+    }
+
+    .song-style {
+      display: inline-block;
       margin-top: 4px;
-      line-height: 16px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(199,155,83,0.15);
+      color: #f0e6c8;
+      font-style: italic;
+      font-size: 11px;
+    }
+
+    .song-category {
+      margin-top: 3px;
+      font-size: 11px;
+      opacity: 0.85;
+    }
+
+    .song-duration {
+      margin-top: 3px;
+      font-size: 11px;
+      opacity: 0.8;
     }
 
     .small-muted { color: #bda98a; }
@@ -235,14 +281,12 @@
 <body>
   <div class="container">
 
-    <!-- Navigation -->
     <nav class="top-nav">
       <a href="index.html" class="active">Songs</a>
       <a href="soundtracks.html">Soundtracks</a>
       <a href="admin.html">Admin</a>
     </nav>
 
-    <!-- Header -->
     <div class="page-header">
       <div class="header-image">
         <img src="img/header.png" alt="Songs">
@@ -257,15 +301,11 @@
       </div>
     </div>
 
-    <!-- Controls -->
     <div class="controls">
-
-      <!-- Search -->
       <div class="search-row">
         <input type="text" id="search" placeholder="Search by title, artist, year, genre…" />
       </div>
 
-      <!-- Decades (category) -->
       <div class="filter-row">
         <span class="filter-label">Decades:</span>
         <div class="filter-group">
@@ -280,24 +320,17 @@
         </div>
       </div>
 
-      <!-- Styles (auto-generated to match Admin) -->
       <div class="filter-row">
         <span class="filter-label">Genres:</span>
         <div class="filter-group" id="styleFilters"></div>
       </div>
-
     </div>
 
     <div class="counter" id="counter"></div>
     <div id="grid" class="grid"></div>
-
   </div>
 
   <!-- ===== MULTI-FILE SONG SYSTEM ===== -->
-  <!-- IMPORTANT:
-       - songs_0.js must define: const songs0 = [...]
-       - songs_A.js must define: const songsA = [...]
-       etc. -->
   <script src="songs/songs_0.js"></script>
   <script src="songs/songs_A.js"></script>
   <script src="songs/songs_B.js"></script>
@@ -425,7 +458,6 @@
         const matchesSearch = searchTarget.includes(search);
         const matchesDecade = decades.length === 0 || decades.includes(song.category);
 
-        // AND logic (must include all selected styles)
         const matchesStyles =
           stylesSelected.length === 0 ||
           stylesSelected.every(st => styles.includes(st));
@@ -447,13 +479,18 @@
         const styles = normArray(song.style).join(", ");
 
         div.innerHTML = `
-          <div class="song-cover"><img src="${escapeHtml(cover)}" alt="${escapeHtml(title)}"></div>
+          <div class="song-cover">
+            <img src="${escapeHtml(cover)}" alt="${escapeHtml(title)}">
+            ${year ? `<div class="year-badge">${escapeHtml(year)}</div>` : ""}
+          </div>
+
           <div class="song-title">${escapeHtml(title)}</div>
           <div class="song-artist">${escapeHtml(artist)}</div>
+
           <div class="song-meta">
-            ${year ? escapeHtml(year) + " • " : ""}${escapeHtml(category)}<br>
-            ${styles ? escapeHtml(styles) + "<br>" : ""}
-            ${duration ? "Duration: " + escapeHtml(duration) : ""}
+            ${styles ? `<div class="song-style">${escapeHtml(styles)}</div>` : ""}
+            ${category ? `<div class="song-category">${escapeHtml(category)}</div>` : ""}
+            ${duration ? `<div class="song-duration">⏱ ${escapeHtml(duration)}</div>` : ""}
           </div>
         `;
 
@@ -463,20 +500,14 @@
       counter.textContent = `${filtered.length} song(s) shown`;
     }
 
-    // Bind
     document.querySelectorAll(".decade-filter").forEach(cb =>
       cb.addEventListener("change", updateGrid)
     );
     document.getElementById("search").addEventListener("input", updateGrid);
 
-    // Init
     window.__ALL_SONGS__ = getAllSongs();
     buildStyleFilters(window.__ALL_SONGS__);
     updateGrid();
   </script>
 </body>
 </html>
-
-
-
-
