@@ -77,7 +77,6 @@
       margin:0;
     }
 
-    /* ---- Recent block ---- */
     .recent-block{
       border-radius:16px;
       border:1px solid rgba(231,207,154,.18);
@@ -136,23 +135,9 @@
       background: rgba(10,6,14,.35);
     }
     .mini-cover img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .mini-title{
-      font-weight:900;
-      font-size:13px;
-      line-height:1.1;
-    }
-    .mini-artist{
-      font-size:13px;
-      color:#f7f1e3;
-      font-weight:800;
-      opacity:.95;
-      margin-top:3px;
-    }
-    .mini-meta{
-      margin-top:3px;
-      font-size:12px;
-      color: rgba(247,241,227,.80);
-    }
+    .mini-title{ font-weight:900; font-size:13px; line-height:1.1; }
+    .mini-artist{ font-size:13px; color:#f7f1e3; font-weight:800; opacity:.95; margin-top:3px; }
+    .mini-meta{ margin-top:3px; font-size:12px; color: rgba(247,241,227,.80); }
 
     @media (max-width: 700px){
       .page-header{ grid-template-columns: 1fr; text-align:center; }
@@ -160,7 +145,6 @@
       .recent-block{ margin: 0 auto; }
     }
 
-    /* ---- Controls ---- */
     .controls{
       display:flex;
       flex-direction:column;
@@ -212,7 +196,6 @@
       background: rgba(255,255,255,.08);
     }
 
-    /* Popover */
     .popover{ position:relative; }
     .popover-panel{
       position:absolute;
@@ -263,7 +246,6 @@
       margin: 6px 0 10px;
     }
 
-    /* ---- Grid cards ---- */
     .grid{
       display:grid;
       grid-template-columns: repeat(5, 1fr);
@@ -312,18 +294,8 @@
       gap:8px;
     }
 
-    .song-title{
-      font-weight:900;
-      font-size:15px;
-      line-height:1.15;
-    }
-    .song-artist{
-      font-size:14px;
-      font-weight:800;
-      color:#f7f1e3;
-      opacity:.95;
-      margin-top:-4px;
-    }
+    .song-title{ font-weight:900; font-size:15px; line-height:1.15; }
+    .song-artist{ font-size:14px; font-weight:800; opacity:.95; margin-top:-4px; }
 
     .sep{
       height:1px;
@@ -354,11 +326,7 @@
       letter-spacing:.4px;
     }
 
-    .styles{
-      font-size:12px;
-      color: rgba(247,241,227,.85);
-      line-height:1.35;
-    }
+    .styles{ font-size:12px; color: rgba(247,241,227,.85); line-height:1.35; }
 
     .loading{
       padding: 12px;
@@ -379,7 +347,6 @@
 
 <body>
   <div class="container">
-
     <nav class="top-nav">
       <a href="index.html" class="active">Songs</a>
       <a href="soundtracks.html">Soundtracks</a>
@@ -440,12 +407,18 @@
 
 <script>
   // =========================================================
-  // Google Sheets (GVIZ) — avoids CORS issues on GitHub Pages
+  // IMPORTANT: Use the *normal* spreadsheet ID URL for GVIZ:
+  //   https://docs.google.com/spreadsheets/d/<ID>/edit#gid=...
   // =========================================================
-  const SHEET_GVIZ_URL =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQmxQ841UMZvix40EVc724ODuc9DY5L5dnPGPUGABnj15H5Mm4y-0ik1hNvRM5444PL5MpClNXfP0FG/gviz/tq?tqx=out:json;responseHandler=sheetLoaded&gid=355981978";
 
-  // Expected headers in sheet (row 1):
+  const SPREADSHEET_ID = "1a8OTEw6m2IVHBDJPoswmqxOrtX7BZK9DJB1obvmWzTU"; // <- replace me
+  const SHEET_GID = "355981978";
+
+  const SHEET_GVIZ_URL =
+    "https://docs.google.com/spreadsheets/d/" + SPREADSHEET_ID +
+    "/gviz/tq?tqx=out:json;responseHandler=sheetLoaded&gid=" + SHEET_GID;
+
+  // Expected headers (row 1):
   // artist | title | year | category | style | duration | cover | addedAt
 
   function escapeHtml(s){
@@ -477,7 +450,6 @@
       const yyyy = parseInt(m[3],10);
       return new Date(Date.UTC(yyyy, mm-1, dd, 0,0,0));
     }
-
     return null;
   }
 
@@ -497,8 +469,6 @@
             const obj = {};
             headers.forEach((h, i) => obj[h] = row[i] || "");
 
-            const cover = obj.cover ? obj.cover : "img/default-cover.jpg";
-
             return {
               artist: obj.artist || "",
               title: obj.title || "",
@@ -506,8 +476,8 @@
               category: obj.category || "",
               style: normArray(obj.style || ""),
               duration: obj.duration || "",
-              cover: cover,
-              // headers are lowercased => addedAt becomes "addedat"
+              cover: obj.cover || "img/default-cover.jpg",
+              // headers lowercased => addedAt becomes "addedat"
               addedAt: obj.addedat || ""
             };
           });
@@ -525,7 +495,6 @@
     });
   }
 
-  // ------------------ state ------------------
   const state = {
     songs: [],
     selectedDecades: new Set(),
@@ -731,6 +700,12 @@
     document.getElementById("search").addEventListener("input", renderGrid);
 
     try{
+      if (SPREADSHEET_ID === "1a8OTEw6m2IVHBDJPoswmqxOrtX7BZK9DJB1obvmWzTU"){
+        status.className = "error";
+        status.textContent = "Missing SPREADSHEET_ID. Paste your Google Sheet ID (from the /d/<ID>/edit link).";
+        return;
+      }
+
       const songs = await loadSongsFromSheetGVIZ();
       state.songs = songs;
 
@@ -743,7 +718,7 @@
     } catch (e){
       console.error(e);
       status.className = "error";
-      status.textContent = "Error loading Google Sheet (GVIZ). Make sure the sheet is published + correct gid.";
+      status.textContent = "Error loading Google Sheet (GVIZ). Check SPREADSHEET_ID, gid, and sharing permissions.";
     }
   }
 
