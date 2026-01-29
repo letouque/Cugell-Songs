@@ -84,7 +84,7 @@
       background: rgba(0,0,0,.14);
       box-shadow: 0 10px 18px rgba(0,0,0,.22);
       overflow:hidden;
-      max-width: 640px;
+      max-width: 680px;
     }
     .recent-label{
       text-align:center;
@@ -144,8 +144,8 @@
     .mini-artist{
       font-size:13px;
       color:#f7f1e3;
-      font-weight:700;
-      opacity:.92;
+      font-weight:800;
+      opacity:.95;
       margin-top:3px;
     }
     .mini-meta{
@@ -213,9 +213,7 @@
     }
 
     /* Popover */
-    .popover{
-      position:relative;
-    }
+    .popover{ position:relative; }
     .popover-panel{
       position:absolute;
       top: 44px;
@@ -442,14 +440,14 @@
 
 <script>
   // =========================================================
-  // 1) Put your published CSV URL here
+  // Google Sheets (GVIZ) — avoids CORS issues on GitHub Pages
   // =========================================================
-  const SHEET_CSV_URL = "PUT_YOUR_CSV_URL_HERE";
+  const SHEET_GVIZ_URL =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQmxQ841UMZvix40EVc724ODuc9DY5L5dnPGPUGABnj15H5Mm4y-0ik1hNvRM5444PL5MpClNXfP0FG/gviz/tq?tqx=out:json;responseHandler=sheetLoaded&gid=355981978";
 
-  // Expected headers:
+  // Expected headers in sheet (row 1):
   // artist | title | year | category | style | duration | cover | addedAt
 
-  // ------------------ utilities ------------------
   function escapeHtml(s){
     return String(s ?? "")
       .replaceAll("&","&amp;")
@@ -462,7 +460,6 @@
   function normArray(val){
     if (!val) return [];
     if (Array.isArray(val)) return val;
-    // styles in sheet: Pop|Disco (or commas)
     return String(val).split(/[\|,]/g).map(v => v.trim()).filter(Boolean);
   }
 
@@ -470,11 +467,9 @@
     const str = String(s || "").trim();
     if (!str) return null;
 
-    // ISO?
     const iso = Date.parse(str);
     if (!Number.isNaN(iso)) return new Date(iso);
 
-    // dd/mm/yyyy (like your sample: 21/01/2026)
     const m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
     if (m){
       const dd = parseInt(m[1],10);
@@ -486,82 +481,48 @@
     return null;
   }
 
-  // Robust CSV parser (quotes supported) + auto delimiter
-  function parseCSV(text){
-    const rows=[];
-    let row=[];
-    let cur="";
-    let inQuotes=false;
+  function loadSongsFromSheetGVIZ(){
+    return new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => reject(new Error("GVIZ timeout")), 15000);
 
-    const sample = text.split(/\r?\n/).slice(0, 6).join("\n");
-    const delim = (sample.match(/;/g) || []).length > (sample.match(/,/g) || []).length ? ";" : ",";
+      window.sheetLoaded = (resp) => {
+        try{
+          clearTimeout(timeout);
+          const table = resp.table;
 
-    for (let i=0; i<text.length; i++){
-      const ch=text[i], next=text[i+1];
+          const headers = table.cols.map(c => (c.label || "").trim().toLowerCase());
+          const songs = table.rows.map(r => {
+            const row = r.c.map(cell => (cell && (cell.v ?? cell.f) != null ? String(cell.v ?? cell.f) : "").trim());
 
-      if (ch === '"'){
-        if (inQuotes && next === '"'){ cur += '"'; i++; }
-        else inQuotes = !inQuotes;
-        continue;
-      }
+            const obj = {};
+            headers.forEach((h, i) => obj[h] = row[i] || "");
 
-      if (!inQuotes && ch === delim){
-        row.push(cur); cur=""; continue;
-      }
+            const cover = obj.cover ? obj.cover : "img/default-cover.jpg";
 
-      if (!inQuotes && (ch === "\n" || ch === "\r")){
-        if (ch === "\r" && next === "\n") i++;
-        row.push(cur);
-        rows.push(row);
-        row=[]; cur="";
-        continue;
-      }
+            return {
+              artist: obj.artist || "",
+              title: obj.title || "",
+              year: obj.year || "",
+              category: obj.category || "",
+              style: normArray(obj.style || ""),
+              duration: obj.duration || "",
+              cover: cover,
+              // headers are lowercased => addedAt becomes "addedat"
+              addedAt: obj.addedat || ""
+            };
+          });
 
-      cur += ch;
-    }
+          resolve(songs);
+        } catch (err){
+          reject(err);
+        }
+      };
 
-    if (cur.length || row.length){
-      row.push(cur);
-      rows.push(row);
-    }
-
-    return rows.map(r => r.map(c => (c ?? "").trim()));
-  }
-
-  function mapRow(headers, row){
-    const obj = {};
-    headers.forEach((h, i) => obj[h] = (row[i] ?? "").trim());
-
-    const cover = obj.cover || "img/default-cover.jpg";
-    return {
-      artist: obj.artist || "",
-      title: obj.title || "",
-      year: obj.year || "",
-      category: obj.category || "",
-      style: normArray(obj.style || ""),
-      duration: obj.duration || "",
-      cover: cover || "img/default-cover.jpg",
-      addedAt: obj.addedAt || ""
-    };
-  }
-
-  async function loadSongsFromSheet(){
-    const res = await fetch(SHEET_CSV_URL, { cache: "no-store" });
-    if (!res.ok) throw new Error("Failed to fetch CSV. Check publish settings / URL.");
-    const csvText = await res.text();
-
-    const table = parseCSV(csvText);
-    if (table.length < 2) return [];
-
-    const headers = table[0].map(h => (h || "").trim().toLowerCase());
-    const songs = [];
-
-    for (let i=1; i<table.length; i++){
-      const row = table[i];
-      if (!row.some(c => String(c||"").trim())) continue;
-      songs.push(mapRow(headers, row));
-    }
-    return songs;
+      const s = document.createElement("script");
+      s.src = SHEET_GVIZ_URL;
+      s.onerror = () => { clearTimeout(timeout); reject(new Error("GVIZ script load error")); };
+      document.head.appendChild(s);
+    });
   }
 
   // ------------------ state ------------------
@@ -571,7 +532,6 @@
     selectedGenres: new Set()
   };
 
-  // ------------------ UI build ------------------
   const decadeOrder = ["60s Music","70s Music","80s Music","90s Music","2000s Music","2010s Music","2020s Music","Mixed Years"];
 
   function buildDecades(){
@@ -579,7 +539,7 @@
     box.innerHTML = decadeOrder.map(d => `
       <label>
         <input type="checkbox" class="decadeCheck" value="${escapeHtml(d)}">
-        ${escapeHtml(d.replace(" Music","").replace("2000s","2000s").replace("Mixed Years","Mixed"))}
+        ${escapeHtml(d.replace(" Music","").replace("Mixed Years","Mixed"))}
       </label>
     `).join("");
 
@@ -595,7 +555,7 @@
 
   function buildGenres(){
     const set = new Set();
-    state.songs.forEach(s => s.style.forEach(g => set.add(g)));
+    state.songs.forEach(s => (s.style||[]).forEach(g => set.add(g)));
 
     const genres = Array.from(set).sort((a,b)=>a.toLowerCase().localeCompare(b.toLowerCase()));
     const box = document.getElementById("genreChecks");
@@ -630,11 +590,13 @@
   function bindPopovers(){
     const decadePop = document.getElementById("decadePopover");
     const genrePop  = document.getElementById("genrePopover");
+
     document.getElementById("decadeBtn").addEventListener("click", () => {
       const isOpen = decadePop.classList.contains("open");
       openClosePopover(decadePop, !isOpen);
       openClosePopover(genrePop, false);
     });
+
     document.getElementById("genreBtn").addEventListener("click", () => {
       const isOpen = genrePop.classList.contains("open");
       openClosePopover(genrePop, !isOpen);
@@ -655,10 +617,8 @@
     renderGrid();
   }
 
-  // ------------------ filtering + render ------------------
   function matchesFilters(song){
     const search = document.getElementById("search").value.toLowerCase().trim();
-
     const searchTarget = (
       (song.title||"") + " " +
       (song.artist||"") + " " +
@@ -674,7 +634,6 @@
       state.selectedDecades.size === 0 ||
       state.selectedDecades.has(song.category);
 
-    // AND logic: must contain all selected genres
     const okGenres =
       state.selectedGenres.size === 0 ||
       Array.from(state.selectedGenres).every(g => (song.style||[]).includes(g));
@@ -730,7 +689,6 @@
   function renderRecent(){
     const strip = document.getElementById("recentStrip");
 
-    // sort by addedAt desc (supports dd/mm/yyyy or ISO)
     const withDate = state.songs
       .map(s => ({...s, __d: parseDateFlexible(s.addedAt)}))
       .filter(s => s.__d);
@@ -738,6 +696,7 @@
     withDate.sort((a,b) => b.__d - a.__d);
 
     const recent = withDate.slice(0,3);
+
     if (!recent.length){
       strip.innerHTML = `<div class="mini-card"><div>⚠ No "addedAt" dates found in sheet.</div></div>`;
       return;
@@ -763,24 +722,16 @@
     }).join("");
   }
 
-  // ------------------ init ------------------
   async function init(){
+    const status = document.getElementById("status");
     buildDecades();
     bindPopovers();
 
     document.getElementById("clearBtn").addEventListener("click", clearFilters);
     document.getElementById("search").addEventListener("input", renderGrid);
 
-    const status = document.getElementById("status");
-
     try{
-      if (!SHEET_CSV_URL || SHEET_CSV_URL.includes("https://docs.google.com/spreadsheets/d/e/2PACX-1vQmxQ841UMZvix40EVc724ODuc9DY5L5dnPGPUGABnj15H5Mm4y-0ik1hNvRM5444PL5MpClNXfP0FG/pub?output=csv")){
-        status.className = "error";
-        status.textContent = "Missing SHEET_CSV_URL. Replace it with your Google Sheets CSV publish link.";
-        return;
-      }
-
-      const songs = await loadSongsFromSheet();
+      const songs = await loadSongsFromSheetGVIZ();
       state.songs = songs;
 
       status.remove();
@@ -789,10 +740,10 @@
       updateCounts();
       renderRecent();
       renderGrid();
-    }catch(e){
+    } catch (e){
       console.error(e);
       status.className = "error";
-      status.textContent = "Error loading Google Sheet CSV. Check that the sheet is published as CSV and public.";
+      status.textContent = "Error loading Google Sheet (GVIZ). Make sure the sheet is published + correct gid.";
     }
   }
 
