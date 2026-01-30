@@ -9,7 +9,7 @@
     body{
       margin:0; padding:0;
       font-family:"Trebuchet MS", Arial, sans-serif;
-      background: radial-gradient(circle at top, #55415f 0, #1c1024 45%, #07050b 100%);
+      background: radial-gradient(circle at top, #4c2d63 0, #1b0f29 45%, #07050b 100%);
       color:#f7f1e3;
     }
     .container{
@@ -73,7 +73,7 @@
       background: rgba(0,0,0,.14);
       box-shadow: 0 10px 18px rgba(0,0,0,.22);
       overflow:hidden;
-      max-width: 680px;
+      max-width: 720px;
     }
     .recent-label{
       text-align:center;
@@ -280,37 +280,13 @@
     }
     .styles{ font-size:12px; color: rgba(247,241,227,.85); line-height:1.35; }
 
-    .loading{
-      padding: 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(231,207,154,.22);
-      background: rgba(0,0,0,.18);
-      margin: 10px 0 14px;
-    }
-    .error{
-      padding: 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,120,120,.35);
-      background: rgba(255,80,80,.10);
-      margin: 10px 0 14px;
-    }
-    .hint{
-      margin-top:8px;
+    .footer-link{
+      text-align:center;
+      margin-top:18px;
+      opacity:.8;
       font-size:12px;
-      opacity:.9;
-      line-height:1.35;
     }
-    code{
-      background: rgba(255,255,255,.08);
-      border:1px solid rgba(231,207,154,.18);
-      padding:2px 6px;
-      border-radius:8px;
-      font-size:12px;
-      display:inline-block;
-      max-width:100%;
-      overflow:auto;
-      white-space:nowrap;
-    }
+    .footer-link a{ color: rgba(231,207,154,.95); text-decoration:none; border-bottom:1px dashed rgba(231,207,154,.55); }
   </style>
 </head>
 
@@ -367,431 +343,324 @@
       </div>
     </div>
 
-    <div id="status" class="loading">Loading songs from Google Sheets…</div>
-
     <div class="counter" id="counter"></div>
     <div id="grid" class="grid"></div>
+
+    <div class="footer-link">
+      Need to edit the list? <a href="admin.html">Open Admin</a>
+    </div>
   </div>
 
-<script>
-  // =========================================================
-  // CONFIG
-  // =========================================================
-  const SPREADSHEET_ID = "1a8OTEw6m2IVHBDJPoswmqxOrtX7BZK9DJB1obvmWzTU";
+  <!-- ===== MULTI-FILE SONG SYSTEM =====
+       IMPORTANT NAMING:
+       - songs_0.js must define: const songs0 = [...]
+       - songs_A.js must define: const songsA = [...]
+       etc. -->
+  <script src="songs/songs_0.js"></script>
+  <script src="songs/songs_A.js"></script>
+  <script src="songs/songs_B.js"></script>
+  <script src="songs/songs_C.js"></script>
+  <script src="songs/songs_D.js"></script>
+  <script src="songs/songs_E.js"></script>
+  <script src="songs/songs_F.js"></script>
+  <script src="songs/songs_G.js"></script>
+  <script src="songs/songs_H.js"></script>
+  <script src="songs/songs_I.js"></script>
+  <script src="songs/songs_J.js"></script>
+  <script src="songs/songs_K.js"></script>
+  <script src="songs/songs_L.js"></script>
+  <script src="songs/songs_M.js"></script>
+  <script src="songs/songs_N.js"></script>
+  <script src="songs/songs_O.js"></script>
+  <script src="songs/songs_P.js"></script>
+  <script src="songs/songs_Q.js"></script>
+  <script src="songs/songs_R.js"></script>
+  <script src="songs/songs_S.js"></script>
+  <script src="songs/songs_T.js"></script>
+  <script src="songs/songs_U.js"></script>
+  <script src="songs/songs_V.js"></script>
+  <script src="songs/songs_W.js"></script>
+  <script src="songs/songs_X.js"></script>
+  <script src="songs/songs_Y.js"></script>
+  <script src="songs/songs_Z.js"></script>
 
-  // IMPORTANT: put the gid of the tab that contains your songs
-  // You can copy it from the URL when you click the tab: ...#gid=XXXX
-  const SHEET_GID = "355981978";
+  <script>
+    const decadeOrder = ["60s Music","70s Music","80s Music","90s Music","2000s Music","2010s Music","2020s Music","Mixed Years"];
 
-  // Your published CSV link (works when sheet is "Publish to the web")
-  // If you don't use publish, GVIZ can still work, but CSV export often needs publish.
-  const PUBLISHED_CSV_URL =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQmxQ841UMZvix40EVc724ODuc9DY5L5dnPGPUGABnj15H5Mm4y-0ik1hNvRM5444PL5MpClNXfP0FG/pub?gid=355981978&single=true&output=csv";
+    const state = {
+      songs: [],
+      selectedDecades: new Set(),
+      selectedGenres: new Set()
+    };
 
-  // =========================================================
-  // LOADERS
-  // =========================================================
-  function escapeHtml(s){
-    return String(s ?? "")
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
-  }
-
-  function normArray(val){
-    if (!val) return [];
-    if (Array.isArray(val)) return val;
-    return String(val).split(/[\|,]/g).map(v => v.trim()).filter(Boolean);
-  }
-
-  function parseDateFlexible(s){
-    const str = String(s || "").trim();
-    if (!str) return null;
-
-    const iso = Date.parse(str);
-    if (!Number.isNaN(iso)) return new Date(iso);
-
-    const m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-    if (m){
-      const dd = parseInt(m[1],10);
-      const mm = parseInt(m[2],10);
-      const yyyy = parseInt(m[3],10);
-      return new Date(Date.UTC(yyyy, mm-1, dd, 0,0,0));
+    function escapeHtml(s){
+      return String(s ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
     }
-    return null;
-  }
 
-  function parseCSV(text){
-    // simple CSV parser supporting quotes
-    const rows = [];
-    let row = [];
-    let cur = "";
-    let inQuotes = false;
-
-    for (let i=0; i<text.length; i++){
-      const ch = text[i];
-      const next = text[i+1];
-
-      if (ch === '"' && inQuotes && next === '"'){
-        cur += '"'; i++; continue;
-      }
-      if (ch === '"'){
-        inQuotes = !inQuotes; continue;
-      }
-      if (ch === ',' && !inQuotes){
-        row.push(cur); cur = ""; continue;
-      }
-      if ((ch === '\n' || ch === '\r') && !inQuotes){
-        if (ch === '\r' && next === '\n') i++;
-        row.push(cur);
-        if (row.some(v => String(v).trim() !== "")) rows.push(row);
-        row = [];
-        cur = "";
-        continue;
-      }
-      cur += ch;
+    function normArray(val){
+      if (!val) return [];
+      if (Array.isArray(val)) return val;
+      return String(val).split(/[\|,]/g).map(v => v.trim()).filter(Boolean);
     }
-    row.push(cur);
-    if (row.some(v => String(v).trim() !== "")) rows.push(row);
 
-    return rows;
-  }
+    function parseDateFlexible(s){
+      const str = String(s || "").trim();
+      if (!str) return null;
+      const iso = Date.parse(str);
+      if (!Number.isNaN(iso)) return new Date(iso);
+      const m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      if (m){
+        const dd = parseInt(m[1],10);
+        const mm = parseInt(m[2],10);
+        const yyyy = parseInt(m[3],10);
+        return new Date(Date.UTC(yyyy, mm-1, dd, 0,0,0));
+      }
+      return null;
+    }
 
-  function songsFromObjects(objs){
-    return objs.map(o => ({
-      artist: o.artist || "",
-      title: o.title || "",
-      year: o.year || "",
-      category: o.category || "",
-      style: normArray(o.style || ""),
-      duration: o.duration || "",
-      cover: o.cover || "img/default-cover.jpg",
-      addedAt: o.addedat || o.addedAt || o.added_at || ""
-    }));
-  }
+    function getAllSongs(){
+      return [
+        ...(typeof songs0 !== "undefined" ? songs0 : []),
+        ...(typeof songsA !== "undefined" ? songsA : []),
+        ...(typeof songsB !== "undefined" ? songsB : []),
+        ...(typeof songsC !== "undefined" ? songsC : []),
+        ...(typeof songsD !== "undefined" ? songsD : []),
+        ...(typeof songsE !== "undefined" ? songsE : []),
+        ...(typeof songsF !== "undefined" ? songsF : []),
+        ...(typeof songsG !== "undefined" ? songsG : []),
+        ...(typeof songsH !== "undefined" ? songsH : []),
+        ...(typeof songsI !== "undefined" ? songsI : []),
+        ...(typeof songsJ !== "undefined" ? songsJ : []),
+        ...(typeof songsK !== "undefined" ? songsK : []),
+        ...(typeof songsL !== "undefined" ? songsL : []),
+        ...(typeof songsM !== "undefined" ? songsM : []),
+        ...(typeof songsN !== "undefined" ? songsN : []),
+        ...(typeof songsO !== "undefined" ? songsO : []),
+        ...(typeof songsP !== "undefined" ? songsP : []),
+        ...(typeof songsQ !== "undefined" ? songsQ : []),
+        ...(typeof songsR !== "undefined" ? songsR : []),
+        ...(typeof songsS !== "undefined" ? songsS : []),
+        ...(typeof songsT !== "undefined" ? songsT : []),
+        ...(typeof songsU !== "undefined" ? songsU : []),
+        ...(typeof songsV !== "undefined" ? songsV : []),
+        ...(typeof songsW !== "undefined" ? songsW : []),
+        ...(typeof songsX !== "undefined" ? songsX : []),
+        ...(typeof songsY !== "undefined" ? songsY : []),
+        ...(typeof songsZ !== "undefined" ? songsZ : []),
+      ].map(s => ({
+        artist: s.artist || "",
+        title: s.title || "",
+        year: s.year || "",
+        category: s.category || "",
+        style: normArray(s.style),
+        duration: s.duration || "",
+        cover: s.cover || "img/default-cover.jpg",
+        addedAt: s.addedAt || ""
+      }));
+    }
 
-  function loadSongsViaGVIZ(){
-    return new Promise((resolve, reject) => {
-      const url =
-        "https://docs.google.com/spreadsheets/d/" + SPREADSHEET_ID +
-        "/gviz/tq?tqx=out:json;responseHandler=sheetLoaded&gid=" + SHEET_GID;
+    function buildDecades(){
+      const box = document.getElementById("decadeChecks");
+      box.innerHTML = decadeOrder.map(d => `
+        <label>
+          <input type="checkbox" class="decadeCheck" value="${escapeHtml(d)}">
+          ${escapeHtml(d.replace(" Music","").replace("Mixed Years","Mixed"))}
+        </label>
+      `).join("");
 
-      const timeout = setTimeout(() => reject(new Error("GVIZ timeout")), 15000);
-
-      window.sheetLoaded = (resp) => {
-        try{
-          clearTimeout(timeout);
-          const table = resp.table;
-          const headers = table.cols.map(c => (c.label || "").trim().toLowerCase());
-
-          if (!headers.some(h => h)){
-            throw new Error("GVIZ returned empty headers.");
-          }
-
-          const objs = table.rows.map(r => {
-            const row = r.c.map(cell => (cell && (cell.v ?? cell.f) != null ? String(cell.v ?? cell.f) : "").trim());
-            const obj = {};
-            headers.forEach((h, i) => obj[h] = row[i] || "");
-            return obj;
-          });
-
-          resolve(songsFromObjects(objs));
-        } catch (e){
-          reject(e);
-        }
-      };
-
-      const s = document.createElement("script");
-      s.src = url;
-      s.onerror = () => { clearTimeout(timeout); reject(new Error("GVIZ script load error")); };
-      document.head.appendChild(s);
-    });
-  }
-
-  async function loadSongsViaCSV(){
-    // Use AllOrigins to avoid CORS on GitHub Pages
-    const proxied = "https://api.allorigins.win/raw?url=" + encodeURIComponent(PUBLISHED_CSV_URL);
-    const res = await fetch(proxied, { cache: "no-store" });
-    if (!res.ok) throw new Error("CSV fetch failed: " + res.status);
-
-    const csvText = await res.text();
-    const rows = parseCSV(csvText);
-
-    if (rows.length < 2) throw new Error("CSV seems empty.");
-
-    const headers = rows[0].map(h => String(h || "").trim().toLowerCase());
-    const objs = rows.slice(1).map(r => {
-      const obj = {};
-      headers.forEach((h, i) => obj[h] = (r[i] ?? "").trim());
-      return obj;
-    });
-
-    return songsFromObjects(objs);
-  }
-
-  // =========================================================
-  // UI + FILTERS
-  // =========================================================
-  const state = {
-    songs: [],
-    selectedDecades: new Set(),
-    selectedGenres: new Set()
-  };
-
-  const decadeOrder = ["60s Music","70s Music","80s Music","90s Music","2000s Music","2010s Music","2020s Music","Mixed Years"];
-
-  function buildDecades(){
-    const box = document.getElementById("decadeChecks");
-    box.innerHTML = decadeOrder.map(d => `
-      <label>
-        <input type="checkbox" class="decadeCheck" value="${escapeHtml(d)}">
-        ${escapeHtml(d.replace(" Music","").replace("Mixed Years","Mixed"))}
-      </label>
-    `).join("");
-
-    box.querySelectorAll("input").forEach(cb => {
-      cb.addEventListener("change", () => {
-        if (cb.checked) state.selectedDecades.add(cb.value);
-        else state.selectedDecades.delete(cb.value);
-        updateCounts();
-        renderGrid();
+      box.querySelectorAll("input").forEach(cb => {
+        cb.addEventListener("change", () => {
+          if (cb.checked) state.selectedDecades.add(cb.value);
+          else state.selectedDecades.delete(cb.value);
+          updateCounts();
+          renderGrid();
+        });
       });
-    });
-  }
-
-  function buildGenres(){
-    const set = new Set();
-    state.songs.forEach(s => (s.style||[]).forEach(g => set.add(g)));
-
-    const genres = Array.from(set).sort((a,b)=>a.toLowerCase().localeCompare(b.toLowerCase()));
-    const box = document.getElementById("genreChecks");
-
-    box.innerHTML = genres.map(g => `
-      <label>
-        <input type="checkbox" class="genreCheck" value="${escapeHtml(g)}">
-        ${escapeHtml(g)}
-      </label>
-    `).join("");
-
-    box.querySelectorAll("input").forEach(cb => {
-      cb.addEventListener("change", () => {
-        if (cb.checked) state.selectedGenres.add(cb.value);
-        else state.selectedGenres.delete(cb.value);
-        updateCounts();
-        renderGrid();
-      });
-    });
-  }
-
-  function updateCounts(){
-    document.getElementById("decadeCount").textContent = String(state.selectedDecades.size);
-    document.getElementById("genreCount").textContent = String(state.selectedGenres.size);
-  }
-
-  function openClosePopover(pop, open){
-    if (open) pop.classList.add("open");
-    else pop.classList.remove("open");
-  }
-
-  function bindPopovers(){
-    const decadePop = document.getElementById("decadePopover");
-    const genrePop  = document.getElementById("genrePopover");
-
-    document.getElementById("decadeBtn").addEventListener("click", () => {
-      const isOpen = decadePop.classList.contains("open");
-      openClosePopover(decadePop, !isOpen);
-      openClosePopover(genrePop, false);
-    });
-
-    document.getElementById("genreBtn").addEventListener("click", () => {
-      const isOpen = genrePop.classList.contains("open");
-      openClosePopover(genrePop, !isOpen);
-      openClosePopover(decadePop, false);
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!decadePop.contains(e.target)) openClosePopover(decadePop, false);
-      if (!genrePop.contains(e.target)) openClosePopover(genrePop, false);
-    });
-  }
-
-  function clearFilters(){
-    state.selectedDecades.clear();
-    state.selectedGenres.clear();
-    document.querySelectorAll(".decadeCheck, .genreCheck").forEach(cb => cb.checked = false);
-    updateCounts();
-    renderGrid();
-  }
-
-  function matchesFilters(song){
-    const search = document.getElementById("search").value.toLowerCase().trim();
-    const searchTarget = (
-      (song.title||"") + " " +
-      (song.artist||"") + " " +
-      (song.year||"") + " " +
-      (song.category||"") + " " +
-      (song.style||[]).join(" ") + " " +
-      (song.duration||"")
-    ).toLowerCase();
-
-    const okSearch = !search || searchTarget.includes(search);
-
-    const okDecade =
-      state.selectedDecades.size === 0 ||
-      state.selectedDecades.has(song.category);
-
-    const okGenres =
-      state.selectedGenres.size === 0 ||
-      Array.from(state.selectedGenres).every(g => (song.style||[]).includes(g));
-
-    return okSearch && okDecade && okGenres;
-  }
-
-  function renderGrid(){
-    const grid = document.getElementById("grid");
-    const counter = document.getElementById("counter");
-
-    const filtered = state.songs.filter(matchesFilters);
-
-    grid.innerHTML = "";
-    filtered.forEach(song => {
-      const cover = song.cover || "img/default-cover.jpg";
-      const styles = (song.style||[]).join(", ");
-
-      const yearDecade = [
-        song.year ? escapeHtml(song.year) : "",
-        song.category ? escapeHtml(song.category) : ""
-      ].filter(Boolean).join(" • ");
-
-      const dur = song.duration ? escapeHtml(song.duration) : "";
-
-      const card = document.createElement("div");
-      card.className = "song";
-      card.innerHTML = `
-        <div class="song-cover">
-          <img src="${escapeHtml(cover)}" alt="${escapeHtml(song.title)}"
-               onerror="this.onerror=null;this.src='img/default-cover.jpg';">
-        </div>
-        <div class="song-body">
-          <div class="song-title">${escapeHtml(song.title)}</div>
-          <div class="song-artist">${escapeHtml(song.artist)}</div>
-
-          <div class="sep"></div>
-
-          <div class="meta-row">
-            <span class="ribbon">${yearDecade || "&nbsp;"}</span>
-            <span>${dur ? "⏱ " + dur : "&nbsp;"}</span>
-          </div>
-
-          ${styles ? `<div class="sep"></div><div class="styles">${escapeHtml(styles)}</div>` : ""}
-        </div>
-      `;
-      grid.appendChild(card);
-    });
-
-    counter.textContent = `${filtered.length} song(s) shown`;
-  }
-
-  function renderRecent(){
-    const strip = document.getElementById("recentStrip");
-
-    const withDate = state.songs
-      .map(s => ({...s, __d: parseDateFlexible(s.addedAt)}))
-      .filter(s => s.__d);
-
-    withDate.sort((a,b) => b.__d - a.__d);
-    const recent = withDate.slice(0,3);
-
-    if (!recent.length){
-      strip.innerHTML = `
-        <div class="mini-card" style="grid-template-columns:1fr;">
-          <div>
-            ⚠ No <b>addedAt</b> dates found in the sheet (or format not recognized).
-          </div>
-        </div>
-      `;
-      return;
     }
 
-    strip.innerHTML = recent.map(s => {
-      const cover = s.cover || "img/default-cover.jpg";
-      const dateLabel = s.__d ? s.__d.toISOString().slice(0,10) : "";
-      const yd = [s.year, s.category].filter(Boolean).join(" • ");
-      return `
-        <div class="mini-card">
-          <div class="mini-cover">
-            <img src="${escapeHtml(cover)}" alt="${escapeHtml(s.title)}"
+    function buildGenres(){
+      const set = new Set();
+      state.songs.forEach(s => (s.style||[]).forEach(g => set.add(g)));
+
+      const genres = Array.from(set).sort((a,b)=>a.toLowerCase().localeCompare(b.toLowerCase()));
+      const box = document.getElementById("genreChecks");
+
+      box.innerHTML = genres.map(g => `
+        <label>
+          <input type="checkbox" class="genreCheck" value="${escapeHtml(g)}">
+          ${escapeHtml(g)}
+        </label>
+      `).join("");
+
+      box.querySelectorAll("input").forEach(cb => {
+        cb.addEventListener("change", () => {
+          if (cb.checked) state.selectedGenres.add(cb.value);
+          else state.selectedGenres.delete(cb.value);
+          updateCounts();
+          renderGrid();
+        });
+      });
+    }
+
+    function updateCounts(){
+      document.getElementById("decadeCount").textContent = String(state.selectedDecades.size);
+      document.getElementById("genreCount").textContent = String(state.selectedGenres.size);
+    }
+
+    function openClosePopover(pop, open){
+      if (open) pop.classList.add("open");
+      else pop.classList.remove("open");
+    }
+
+    function bindPopovers(){
+      const decadePop = document.getElementById("decadePopover");
+      const genrePop  = document.getElementById("genrePopover");
+
+      document.getElementById("decadeBtn").addEventListener("click", () => {
+        const isOpen = decadePop.classList.contains("open");
+        openClosePopover(decadePop, !isOpen);
+        openClosePopover(genrePop, false);
+      });
+
+      document.getElementById("genreBtn").addEventListener("click", () => {
+        const isOpen = genrePop.classList.contains("open");
+        openClosePopover(genrePop, !isOpen);
+        openClosePopover(decadePop, false);
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!decadePop.contains(e.target)) openClosePopover(decadePop, false);
+        if (!genrePop.contains(e.target)) openClosePopover(genrePop, false);
+      });
+    }
+
+    function clearFilters(){
+      state.selectedDecades.clear();
+      state.selectedGenres.clear();
+      document.querySelectorAll(".decadeCheck, .genreCheck").forEach(cb => cb.checked = false);
+      updateCounts();
+      renderGrid();
+    }
+
+    function matchesFilters(song){
+      const search = document.getElementById("search").value.toLowerCase().trim();
+      const searchTarget = (
+        (song.title||"") + " " +
+        (song.artist||"") + " " +
+        (song.year||"") + " " +
+        (song.category||"") + " " +
+        (song.style||[]).join(" ") + " " +
+        (song.duration||"")
+      ).toLowerCase();
+
+      const okSearch = !search || searchTarget.includes(search);
+
+      const okDecade =
+        state.selectedDecades.size === 0 ||
+        state.selectedDecades.has(song.category);
+
+      const okGenres =
+        state.selectedGenres.size === 0 ||
+        Array.from(state.selectedGenres).every(g => (song.style||[]).includes(g));
+
+      return okSearch && okDecade && okGenres;
+    }
+
+    function renderGrid(){
+      const grid = document.getElementById("grid");
+      const counter = document.getElementById("counter");
+
+      const filtered = state.songs.filter(matchesFilters);
+
+      grid.innerHTML = "";
+      filtered.forEach(song => {
+        const cover = song.cover || "img/default-cover.jpg";
+        const styles = (song.style||[]).join(", ");
+        const yearDecade = [song.year, song.category].filter(Boolean).join(" • ");
+        const dur = song.duration ? song.duration : "";
+
+        const card = document.createElement("div");
+        card.className = "song";
+        card.innerHTML = `
+          <div class="song-cover">
+            <img src="${escapeHtml(cover)}" alt="${escapeHtml(song.title)}"
                  onerror="this.onerror=null;this.src='img/default-cover.jpg';">
           </div>
-          <div>
-            <div class="mini-title">${escapeHtml(s.title)}</div>
-            <div class="mini-artist">${escapeHtml(s.artist)}</div>
-            <div class="mini-meta">${escapeHtml(yd)}${yd ? " • " : ""}${escapeHtml(dateLabel)}</div>
+          <div class="song-body">
+            <div class="song-title">${escapeHtml(song.title)}</div>
+            <div class="song-artist">${escapeHtml(song.artist)}</div>
+
+            <div class="sep"></div>
+
+            <div class="meta-row">
+              <span class="ribbon">${escapeHtml(yearDecade || " ")}</span>
+              <span>${dur ? "⏱ " + escapeHtml(dur) : "&nbsp;"}</span>
+            </div>
+
+            ${styles ? `<div class="sep"></div><div class="styles">${escapeHtml(styles)}</div>` : ""}
           </div>
-        </div>
-      `;
-    }).join("");
-  }
+        `;
+        grid.appendChild(card);
+      });
 
-  // =========================================================
-  // INIT
-  // =========================================================
-  async function init(){
-    const status = document.getElementById("status");
+      counter.textContent = `${filtered.length} song(s) shown`;
+    }
 
+    function renderRecent(){
+      const strip = document.getElementById("recentStrip");
+      const withDate = state.songs
+        .map(s => ({...s, __d: parseDateFlexible(s.addedAt)}))
+        .filter(s => s.__d);
+
+      withDate.sort((a,b) => b.__d - a.__d);
+      const recent = withDate.slice(0,3);
+
+      if (!recent.length){
+        strip.innerHTML = `
+          <div class="mini-card" style="grid-template-columns:1fr;">
+            <div><b>No recent items</b> (missing addedAt in songs files)</div>
+          </div>
+        `;
+        return;
+      }
+
+      strip.innerHTML = recent.map(s => {
+        const cover = s.cover || "img/default-cover.jpg";
+        const dateLabel = s.__d ? s.__d.toISOString().slice(0,10) : "";
+        const yd = [s.year, s.category].filter(Boolean).join(" • ");
+        return `
+          <div class="mini-card">
+            <div class="mini-cover">
+              <img src="${escapeHtml(cover)}" alt="${escapeHtml(s.title)}"
+                   onerror="this.onerror=null;this.src='img/default-cover.jpg';">
+            </div>
+            <div>
+              <div class="mini-title">${escapeHtml(s.title)}</div>
+              <div class="mini-artist">${escapeHtml(s.artist)}</div>
+              <div class="mini-meta">${escapeHtml(yd)}${yd ? " • " : ""}${escapeHtml(dateLabel)}</div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // Init
+    state.songs = getAllSongs();
     buildDecades();
+    buildGenres();
     bindPopovers();
 
     document.getElementById("clearBtn").addEventListener("click", clearFilters);
     document.getElementById("search").addEventListener("input", renderGrid);
 
-    // 1) Try GVIZ
-    try{
-      const songs = await loadSongsViaGVIZ();
-      state.songs = songs;
-      status.remove();
-      buildGenres();
-      updateCounts();
-      renderRecent();
-      renderGrid();
-      return;
-    } catch (e){
-      console.warn("GVIZ failed, fallback to CSV.", e);
-    }
-
-    // 2) Fallback CSV
-    try{
-      status.textContent = "GVIZ failed — loading from published CSV…";
-      const songs = await loadSongsViaCSV();
-      state.songs = songs;
-      status.remove();
-      buildGenres();
-      updateCounts();
-      renderRecent();
-      renderGrid();
-      return;
-    } catch (e){
-      console.error(e);
-      status.className = "error";
-      status.innerHTML = `
-        <b>Could not load the sheet.</b><br>
-        GVIZ failed and CSV fallback failed too.<br>
-        <div class="hint">
-          Check these:<br>
-          • Your tab gid is correct: <code>${escapeHtml(SHEET_GID)}</code><br>
-          • Published CSV URL works in browser: <code>${escapeHtml(PUBLISHED_CSV_URL)}</code><br>
-          • If CSV opens in browser but still fails here, it can be a temporary proxy issue (AllOrigins).<br>
-          <br>
-          Console error: <code>${escapeHtml(String(e && e.message ? e.message : e))}</code>
-        </div>
-      `;
-    }
-  }
-
-  init();
-</script>
-
+    updateCounts();
+    renderRecent();
+    renderGrid();
+  </script>
 </body>
 </html>
