@@ -12,7 +12,6 @@
       background: radial-gradient(circle at top, #55415f 0, #1c1024 45%, #07050b 100%);
       color:#f7f1e3;
     }
-
     .container{
       max-width: 1300px;
       margin: 26px auto 50px;
@@ -23,7 +22,6 @@
       border: 1px solid rgba(231,207,154,.22);
       backdrop-filter: blur(6px);
     }
-
     .top-nav{
       display:flex;
       justify-content:center;
@@ -66,16 +64,8 @@
     }
     .header-image img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-    .header-right{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-    .header-title{
-      font-size: 28px;
-      letter-spacing:1px;
-      margin:0;
-    }
+    .header-right{ display:flex; flex-direction:column; gap:10px; }
+    .header-title{ font-size: 28px; letter-spacing:1px; margin:0; }
 
     .recent-block{
       border-radius:16px;
@@ -112,9 +102,7 @@
       gap:10px;
       padding:10px;
     }
-    @media (max-width: 900px){
-      .recent-strip{ grid-template-columns: 1fr; }
-    }
+    @media (max-width: 900px){ .recent-strip{ grid-template-columns: 1fr; } }
 
     .mini-card{
       display:grid;
@@ -145,12 +133,7 @@
       .recent-block{ margin: 0 auto; }
     }
 
-    .controls{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      margin: 14px 0 14px;
-    }
+    .controls{ display:flex; flex-direction:column; gap:12px; margin: 14px 0 14px; }
     .search-row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
     .search-row input{
       padding: 10px 12px;
@@ -163,12 +146,7 @@
       outline:none;
     }
 
-    .filter-bar{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
+    .filter-bar{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
     .pill{
       cursor:pointer;
       user-select:none;
@@ -191,10 +169,7 @@
       border:1px solid rgba(231,207,154,.18);
       background: rgba(0,0,0,.15);
     }
-    .pill.clear{
-      border-color: rgba(255,255,255,.20);
-      background: rgba(255,255,255,.08);
-    }
+    .pill.clear{ border-color: rgba(255,255,255,.20); background: rgba(255,255,255,.08); }
 
     .popover{ position:relative; }
     .popover-panel{
@@ -222,11 +197,7 @@
       margin: 2px 0 10px;
       text-transform: uppercase;
     }
-    .checks{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-    }
+    .checks{ display:flex; flex-wrap:wrap; gap:8px; }
     .checks label{
       display:inline-flex;
       align-items:center;
@@ -240,17 +211,9 @@
     }
     .checks input{ margin:0; }
 
-    .counter{
-      font-size:13px;
-      color: rgba(247,241,227,.82);
-      margin: 6px 0 10px;
-    }
+    .counter{ font-size:13px; color: rgba(247,241,227,.82); margin: 6px 0 10px; }
 
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 15px;
-    }
+    .grid{ display:grid; grid-template-columns: repeat(5, 1fr); gap: 15px; }
     @media (max-width: 1200px){ .grid{ grid-template-columns: repeat(4,1fr); } }
     @media (max-width: 1000px){ .grid{ grid-template-columns: repeat(3,1fr); } }
     @media (max-width: 700px){ .grid{ grid-template-columns: repeat(2,1fr); } }
@@ -265,7 +228,6 @@
       box-shadow: 0 12px 22px rgba(0,0,0,.35);
       overflow:hidden;
     }
-
     .song-cover{
       width:100%;
       aspect-ratio:1/1;
@@ -274,8 +236,7 @@
       position:relative;
     }
     .song-cover img{
-      width:100%;
-      height:100%;
+      width:100%; height:100%;
       object-fit:cover;
       display:block;
       filter: saturate(1.05) contrast(1.05);
@@ -286,14 +247,7 @@
       pointer-events:none;
       box-shadow: inset 0 0 0 2px rgba(0,0,0,.15);
     }
-
-    .song-body{
-      padding: 10px 12px 12px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-
+    .song-body{ padding: 10px 12px 12px; display:flex; flex-direction:column; gap:8px; }
     .song-title{ font-weight:900; font-size:15px; line-height:1.15; }
     .song-artist{ font-size:14px; font-weight:800; opacity:.95; margin-top:-4px; }
 
@@ -302,7 +256,6 @@
       background: linear-gradient(90deg, transparent, rgba(231,207,154,.28), transparent);
       margin: 2px 0;
     }
-
     .meta-row{
       display:flex;
       justify-content:space-between;
@@ -311,7 +264,6 @@
       color: rgba(247,241,227,.86);
       align-items:center;
     }
-
     .ribbon{
       display:inline-flex;
       align-items:center;
@@ -324,8 +276,8 @@
       color:#2a1540;
       font-weight:900;
       letter-spacing:.4px;
+      white-space:nowrap;
     }
-
     .styles{ font-size:12px; color: rgba(247,241,227,.85); line-height:1.35; }
 
     .loading{
@@ -342,6 +294,23 @@
       background: rgba(255,80,80,.10);
       margin: 10px 0 14px;
     }
+    .hint{
+      margin-top:8px;
+      font-size:12px;
+      opacity:.9;
+      line-height:1.35;
+    }
+    code{
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(231,207,154,.18);
+      padding:2px 6px;
+      border-radius:8px;
+      font-size:12px;
+      display:inline-block;
+      max-width:100%;
+      overflow:auto;
+      white-space:nowrap;
+    }
   </style>
 </head>
 
@@ -356,7 +325,6 @@
       <div class="header-image">
         <img src="img/header.png" alt="Songs">
       </div>
-
       <div class="header-right">
         <h1 class="header-title">Cugell’s Songs</h1>
 
@@ -407,19 +375,22 @@
 
 <script>
   // =========================================================
-  // Google Sheets (GVIZ) via <script> to avoid CORS on GitHub Pages
+  // CONFIG
   // =========================================================
-
   const SPREADSHEET_ID = "1a8OTEw6m2IVHBDJPoswmqxOrtX7BZK9DJB1obvmWzTU";
+
+  // IMPORTANT: put the gid of the tab that contains your songs
+  // You can copy it from the URL when you click the tab: ...#gid=XXXX
   const SHEET_GID = "355981978";
 
-  const SHEET_GVIZ_URL =
-    "https://docs.google.com/spreadsheets/d/" + SPREADSHEET_ID +
-    "/gviz/tq?tqx=out:json;responseHandler=sheetLoaded&gid=" + SHEET_GID;
+  // Your published CSV link (works when sheet is "Publish to the web")
+  // If you don't use publish, GVIZ can still work, but CSV export often needs publish.
+  const PUBLISHED_CSV_URL =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQmxQ841UMZvix40EVc724ODuc9DY5L5dnPGPUGABnj15H5Mm4y-0ik1hNvRM5444PL5MpClNXfP0FG/pub?gid=355981978&single=true&output=csv";
 
-  // Expected headers (row 1):
-  // artist | title | year | category | style | duration | cover | addedAt
-
+  // =========================================================
+  // LOADERS
+  // =========================================================
   function escapeHtml(s){
     return String(s ?? "")
       .replaceAll("&","&amp;")
@@ -452,53 +423,117 @@
     return null;
   }
 
-  function loadSongsFromSheetGVIZ(){
+  function parseCSV(text){
+    // simple CSV parser supporting quotes
+    const rows = [];
+    let row = [];
+    let cur = "";
+    let inQuotes = false;
+
+    for (let i=0; i<text.length; i++){
+      const ch = text[i];
+      const next = text[i+1];
+
+      if (ch === '"' && inQuotes && next === '"'){
+        cur += '"'; i++; continue;
+      }
+      if (ch === '"'){
+        inQuotes = !inQuotes; continue;
+      }
+      if (ch === ',' && !inQuotes){
+        row.push(cur); cur = ""; continue;
+      }
+      if ((ch === '\n' || ch === '\r') && !inQuotes){
+        if (ch === '\r' && next === '\n') i++;
+        row.push(cur);
+        if (row.some(v => String(v).trim() !== "")) rows.push(row);
+        row = [];
+        cur = "";
+        continue;
+      }
+      cur += ch;
+    }
+    row.push(cur);
+    if (row.some(v => String(v).trim() !== "")) rows.push(row);
+
+    return rows;
+  }
+
+  function songsFromObjects(objs){
+    return objs.map(o => ({
+      artist: o.artist || "",
+      title: o.title || "",
+      year: o.year || "",
+      category: o.category || "",
+      style: normArray(o.style || ""),
+      duration: o.duration || "",
+      cover: o.cover || "img/default-cover.jpg",
+      addedAt: o.addedat || o.addedAt || o.added_at || ""
+    }));
+  }
+
+  function loadSongsViaGVIZ(){
     return new Promise((resolve, reject) => {
+      const url =
+        "https://docs.google.com/spreadsheets/d/" + SPREADSHEET_ID +
+        "/gviz/tq?tqx=out:json;responseHandler=sheetLoaded&gid=" + SHEET_GID;
+
       const timeout = setTimeout(() => reject(new Error("GVIZ timeout")), 15000);
 
       window.sheetLoaded = (resp) => {
         try{
           clearTimeout(timeout);
-
-          if (!resp || resp.status !== "ok" || !resp.table){
-            reject(new Error("GVIZ returned non-ok response"));
-            return;
-          }
-
           const table = resp.table;
           const headers = table.cols.map(c => (c.label || "").trim().toLowerCase());
 
-          const songs = table.rows.map(r => {
-            const row = r.c.map(cell => (cell && (cell.v ?? cell.f) != null ? String(cell.v ?? cell.f) : "").trim());
+          if (!headers.some(h => h)){
+            throw new Error("GVIZ returned empty headers.");
+          }
 
+          const objs = table.rows.map(r => {
+            const row = r.c.map(cell => (cell && (cell.v ?? cell.f) != null ? String(cell.v ?? cell.f) : "").trim());
             const obj = {};
             headers.forEach((h, i) => obj[h] = row[i] || "");
-
-            return {
-              artist: obj.artist || "",
-              title: obj.title || "",
-              year: obj.year || "",
-              category: obj.category || "",
-              style: normArray(obj.style || ""),
-              duration: obj.duration || "",
-              cover: obj.cover || "img/default-cover.jpg",
-              addedAt: obj.addedat || ""
-            };
+            return obj;
           });
 
-          resolve(songs);
-        } catch (err){
-          reject(err);
+          resolve(songsFromObjects(objs));
+        } catch (e){
+          reject(e);
         }
       };
 
       const s = document.createElement("script");
-      s.src = SHEET_GVIZ_URL;
+      s.src = url;
       s.onerror = () => { clearTimeout(timeout); reject(new Error("GVIZ script load error")); };
       document.head.appendChild(s);
     });
   }
 
+  async function loadSongsViaCSV(){
+    // Use AllOrigins to avoid CORS on GitHub Pages
+    const proxied = "https://api.allorigins.win/raw?url=" + encodeURIComponent(PUBLISHED_CSV_URL);
+    const res = await fetch(proxied, { cache: "no-store" });
+    if (!res.ok) throw new Error("CSV fetch failed: " + res.status);
+
+    const csvText = await res.text();
+    const rows = parseCSV(csvText);
+
+    if (rows.length < 2) throw new Error("CSV seems empty.");
+
+    const headers = rows[0].map(h => String(h || "").trim().toLowerCase());
+    const objs = rows.slice(1).map(r => {
+      const obj = {};
+      headers.forEach((h, i) => obj[h] = (r[i] ?? "").trim());
+      return obj;
+    });
+
+    return songsFromObjects(objs);
+  }
+
+  // =========================================================
+  // UI + FILTERS
+  // =========================================================
   const state = {
     songs: [],
     selectedDecades: new Set(),
@@ -667,11 +702,16 @@
       .filter(s => s.__d);
 
     withDate.sort((a,b) => b.__d - a.__d);
-
     const recent = withDate.slice(0,3);
 
     if (!recent.length){
-      strip.innerHTML = `<div class="mini-card"><div>⚠ No "addedAt" dates found in sheet (column: addedAt).</div></div>`;
+      strip.innerHTML = `
+        <div class="mini-card" style="grid-template-columns:1fr;">
+          <div>
+            ⚠ No <b>addedAt</b> dates found in the sheet (or format not recognized).
+          </div>
+        </div>
+      `;
       return;
     }
 
@@ -695,34 +735,63 @@
     }).join("");
   }
 
+  // =========================================================
+  // INIT
+  // =========================================================
   async function init(){
     const status = document.getElementById("status");
+
     buildDecades();
     bindPopovers();
 
     document.getElementById("clearBtn").addEventListener("click", clearFilters);
     document.getElementById("search").addEventListener("input", renderGrid);
 
+    // 1) Try GVIZ
     try{
-      const songs = await loadSongsFromSheetGVIZ();
+      const songs = await loadSongsViaGVIZ();
       state.songs = songs;
-
       status.remove();
-
       buildGenres();
       updateCounts();
       renderRecent();
       renderGrid();
+      return;
+    } catch (e){
+      console.warn("GVIZ failed, fallback to CSV.", e);
+    }
+
+    // 2) Fallback CSV
+    try{
+      status.textContent = "GVIZ failed — loading from published CSV…";
+      const songs = await loadSongsViaCSV();
+      state.songs = songs;
+      status.remove();
+      buildGenres();
+      updateCounts();
+      renderRecent();
+      renderGrid();
+      return;
     } catch (e){
       console.error(e);
       status.className = "error";
-      status.textContent =
-        "Error loading Google Sheet (GVIZ). " +
-        "Make sure: Share = Anyone with the link (Viewer) AND the gid is correct.";
+      status.innerHTML = `
+        <b>Could not load the sheet.</b><br>
+        GVIZ failed and CSV fallback failed too.<br>
+        <div class="hint">
+          Check these:<br>
+          • Your tab gid is correct: <code>${escapeHtml(SHEET_GID)}</code><br>
+          • Published CSV URL works in browser: <code>${escapeHtml(PUBLISHED_CSV_URL)}</code><br>
+          • If CSV opens in browser but still fails here, it can be a temporary proxy issue (AllOrigins).<br>
+          <br>
+          Console error: <code>${escapeHtml(String(e && e.message ? e.message : e))}</code>
+        </div>
+      `;
     }
   }
 
   init();
 </script>
+
 </body>
 </html>
