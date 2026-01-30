@@ -1,15 +1,5 @@
 const songsB = [
   {
-    "artist": "",
-    "title": "",
-    "duration": "",
-    "year": "",
-    "style": [],
-    "category": "80s Music",
-    "cover": "img/default-cover.jpg",
-    "addedAt": "2026-01-30T15:14:48.590Z"
-  },
-  {
     "artist": "B-52s",
     "title": "Love Shack",
     "duration": "05:21",
@@ -269,6 +259,18 @@ const songsB = [
     "category": "80s Music",
     "cover": "img/Bonnie Tyler - Holding outta hero.jpg",
     "addedAt": "2026-01-30T15:14:05.675Z"
+  },
+  {
+    "artist": "Bruno Mars",
+    "title": "Locked out of heaven",
+    "duration": "04:00",
+    "year": "2012",
+    "style": [
+      "Pop"
+    ],
+    "category": "2010s Music",
+    "cover": "img/default-cover.jpg",
+    "addedAt": "2026-01-30T15:14:48.590Z"
   },
   {
     "artist": "BTS",
