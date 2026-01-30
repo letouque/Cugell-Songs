@@ -407,11 +407,10 @@
 
 <script>
   // =========================================================
-  // IMPORTANT: Use the *normal* spreadsheet ID URL for GVIZ:
-  //   https://docs.google.com/spreadsheets/d/<ID>/edit#gid=...
+  // Google Sheets (GVIZ) via <script> to avoid CORS on GitHub Pages
   // =========================================================
 
-  const SPREADSHEET_ID = "1a8OTEw6m2IVHBDJPoswmqxOrtX7BZK9DJB1obvmWzTU"; // <- replace me
+  const SPREADSHEET_ID = "1a8OTEw6m2IVHBDJPoswmqxOrtX7BZK9DJB1obvmWzTU";
   const SHEET_GID = "355981978";
 
   const SHEET_GVIZ_URL =
@@ -460,9 +459,15 @@
       window.sheetLoaded = (resp) => {
         try{
           clearTimeout(timeout);
-          const table = resp.table;
 
+          if (!resp || resp.status !== "ok" || !resp.table){
+            reject(new Error("GVIZ returned non-ok response"));
+            return;
+          }
+
+          const table = resp.table;
           const headers = table.cols.map(c => (c.label || "").trim().toLowerCase());
+
           const songs = table.rows.map(r => {
             const row = r.c.map(cell => (cell && (cell.v ?? cell.f) != null ? String(cell.v ?? cell.f) : "").trim());
 
@@ -477,7 +482,6 @@
               style: normArray(obj.style || ""),
               duration: obj.duration || "",
               cover: obj.cover || "img/default-cover.jpg",
-              // headers lowercased => addedAt becomes "addedat"
               addedAt: obj.addedat || ""
             };
           });
@@ -667,7 +671,7 @@
     const recent = withDate.slice(0,3);
 
     if (!recent.length){
-      strip.innerHTML = `<div class="mini-card"><div>⚠ No "addedAt" dates found in sheet.</div></div>`;
+      strip.innerHTML = `<div class="mini-card"><div>⚠ No "addedAt" dates found in sheet (column: addedAt).</div></div>`;
       return;
     }
 
@@ -700,12 +704,6 @@
     document.getElementById("search").addEventListener("input", renderGrid);
 
     try{
-      if (SPREADSHEET_ID === "1a8OTEw6m2IVHBDJPoswmqxOrtX7BZK9DJB1obvmWzTU"){
-        status.className = "error";
-        status.textContent = "Missing SPREADSHEET_ID. Paste your Google Sheet ID (from the /d/<ID>/edit link).";
-        return;
-      }
-
       const songs = await loadSongsFromSheetGVIZ();
       state.songs = songs;
 
@@ -718,7 +716,9 @@
     } catch (e){
       console.error(e);
       status.className = "error";
-      status.textContent = "Error loading Google Sheet (GVIZ). Check SPREADSHEET_ID, gid, and sharing permissions.";
+      status.textContent =
+        "Error loading Google Sheet (GVIZ). " +
+        "Make sure: Share = Anyone with the link (Viewer) AND the gid is correct.";
     }
   }
 
