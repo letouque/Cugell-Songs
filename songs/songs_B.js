@@ -269,7 +269,7 @@ const songsB = [
       "Pop"
     ],
     "category": "2010s Music",
-    "cover": "img/default-cover.jpg",
+    "cover": "img/Bruno Mars - Locked out of heaven.jpg",
     "addedAt": "2026-01-30T15:14:48.590Z"
   },
   {
