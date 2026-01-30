@@ -2,7 +2,7 @@ const songsA = [
   {
     "artist": "ABBA",
     "title": "Gimme ! Gimme ! Gimme !",
-    "duration": "00:00",
+    "duration": "03:07",
     "year": "1979",
     "style": [
       "Disco",
@@ -15,11 +15,11 @@ const songsA = [
   {
     "artist": "ABBA",
     "title": "Mammamia",
-    "duration": "3 min 28",
-    "year": "",
+    "duration": "03:28",
+    "year": "1975",
     "style": [
-      "Pop",
-      "Disco"
+      "Disco",
+      "Pop"
     ],
     "category": "70s Music",
     "cover": "img/ABBA - Mammamia.jpg",
@@ -28,7 +28,7 @@ const songsA = [
   {
     "artist": "AC/DC",
     "title": "Back in Black",
-    "duration": "00:00",
+    "duration": "04:18",
     "year": "1980",
     "style": [
       "Hard Rock",
@@ -41,11 +41,11 @@ const songsA = [
   {
     "artist": "Ace Of Base",
     "title": "All that she wants",
-    "duration": "3 min 22",
-    "year": "",
+    "duration": "03:22",
+    "year": "1992",
     "style": [
-      "Pop",
-      "Dance"
+      "Dance",
+      "Pop"
     ],
     "category": "90s Music",
     "cover": "img/Ace Of Base - All that she wants.jpg",
@@ -54,8 +54,8 @@ const songsA = [
   {
     "artist": "Ace Of Base",
     "title": "Happy Nation",
-    "duration": "3 min 36",
-    "year": "",
+    "duration": "03:36",
+    "year": "1992",
     "style": [
       "Pop"
     ],
@@ -66,8 +66,8 @@ const songsA = [
   {
     "artist": "Ace Of Base",
     "title": "The Sign",
-    "duration": "3 min 06",
-    "year": "",
+    "duration": "03:06",
+    "year": "1993",
     "style": [
       "Pop"
     ],
@@ -78,8 +78,8 @@ const songsA = [
   {
     "artist": "Aha",
     "title": "Take on me",
-    "duration": "3 min 42",
-    "year": "",
+    "duration": "03:42",
+    "year": "1985",
     "style": [
       "Pop"
     ],
@@ -90,8 +90,8 @@ const songsA = [
   {
     "artist": "Air",
     "title": "Kelly watch the stars",
-    "duration": "3 min 42",
-    "year": "",
+    "duration": "03:42",
+    "year": "1998",
     "style": [
       "Electronic"
     ],
@@ -102,8 +102,8 @@ const songsA = [
   {
     "artist": "Alan Parson's Project",
     "title": "Eye in the sky",
-    "duration": "4 min 25",
-    "year": "",
+    "duration": "04:25",
+    "year": "1982",
     "style": [
       "Rock"
     ],
@@ -114,8 +114,8 @@ const songsA = [
   {
     "artist": "Alannah Myles",
     "title": "Black Velvet",
-    "duration": "4 min 39",
-    "year": "",
+    "duration": "04:39",
+    "year": "1989",
     "style": [
       "Rock"
     ],
@@ -126,8 +126,8 @@ const songsA = [
   {
     "artist": "Alice Deejay",
     "title": "Better off alone",
-    "duration": "3 min 32",
-    "year": "",
+    "duration": "03:32",
+    "year": "1998",
     "style": [
       "Dance"
     ],
@@ -138,8 +138,8 @@ const songsA = [
   {
     "artist": "Alicia Keys",
     "title": "No one",
-    "duration": "4 min 08",
-    "year": "",
+    "duration": "04:08",
+    "year": "2007",
     "style": [],
     "category": "2000s Music",
     "cover": "img/Alicia Keys - No one.jpg",
@@ -148,8 +148,8 @@ const songsA = [
   {
     "artist": "Alizee",
     "title": "Moi Lolita",
-    "duration": "4 min 26",
-    "year": "",
+    "duration": "04:26",
+    "year": "2000",
     "style": [
       "French Pop"
     ],
@@ -160,8 +160,8 @@ const songsA = [
   {
     "artist": "All Saints",
     "title": "Lady Marmalade",
-    "duration": "",
-    "year": "",
+    "duration": "04:02",
+    "year": "1998",
     "style": [
       "Pop"
     ],
@@ -172,8 +172,8 @@ const songsA = [
   {
     "artist": "All Saints",
     "title": "Pure Shores",
-    "duration": "4 min 27",
-    "year": "",
+    "duration": "04:27",
+    "year": "2000",
     "style": [
       "Pop"
     ],
@@ -184,8 +184,8 @@ const songsA = [
   {
     "artist": "Alphaville",
     "title": "Big in Japan",
-    "duration": "4 min 46",
-    "year": "",
+    "duration": "04:46",
+    "year": "1984",
     "style": [
       "New Wave"
     ],
@@ -196,8 +196,8 @@ const songsA = [
   {
     "artist": "Alphaville",
     "title": "Forever Young",
-    "duration": "3 min 49",
-    "year": "",
+    "duration": "03:49",
+    "year": "1984",
     "style": [
       "New Wave"
     ],
@@ -208,8 +208,8 @@ const songsA = [
   {
     "artist": "Amy Winehouse",
     "title": "Back to Black",
-    "duration": "3 min 56",
-    "year": "",
+    "duration": "03:56",
+    "year": "2006",
     "style": [
       "Soul"
     ],
@@ -220,8 +220,8 @@ const songsA = [
   {
     "artist": "Amy Winehouse",
     "title": "You know I'm no good",
-    "duration": "3 min 34",
-    "year": "",
+    "duration": "03:34",
+    "year": "2007",
     "style": [
       "Soul"
     ],
@@ -233,29 +233,17 @@ const songsA = [
     "artist": "Andrea Bocelli",
     "title": "Vivo por Ella",
     "duration": "",
-    "year": "",
+    "year": "1995",
     "style": [],
-    "category": "",
-    "cover": "img/Andrea Bocelli - Vivo per Lei.jpg",
-    "addedAt": "2026-01-28T13:26:40.824Z"
-  },
-  {
-    "artist": "Animals",
-    "title": "House of the rising sun",
-    "duration": "4 min 39",
-    "year": "",
-    "style": [
-      "Rock"
-    ],
     "category": "60s Music",
-    "cover": "img/Animals - House of the rising sun.jpg",
+    "cover": "img/Andrea Bocelli - Vivo per Lei.jpg",
     "addedAt": "2026-01-28T13:26:40.824Z"
   },
   {
     "artist": "Anita Ward",
     "title": "Ring My Bell",
-    "duration": "3 min 26",
-    "year": "",
+    "duration": "03:26",
+    "year": "1979",
     "style": [
       "Disco"
     ],
@@ -266,8 +254,8 @@ const songsA = [
   {
     "artist": "Ann Lee",
     "title": "2 Times",
-    "duration": "3 min 48",
-    "year": "",
+    "duration": "03:48",
+    "year": "1999",
     "style": [
       "Dance-Pop"
     ],
@@ -278,8 +266,8 @@ const songsA = [
   {
     "artist": "Arctic Monkeys",
     "title": "505",
-    "duration": "4 min 10",
-    "year": "",
+    "duration": "04:10",
+    "year": "2007",
     "style": [
       "Indie Rock"
     ],
@@ -290,8 +278,8 @@ const songsA = [
   {
     "artist": "Artemas",
     "title": "I like the way you kiss me",
-    "duration": "2 min 18",
-    "year": "",
+    "duration": "02:18",
+    "year": "2024",
     "style": [
       "Pop"
     ],
@@ -302,8 +290,8 @@ const songsA = [
   {
     "artist": "Avicii",
     "title": "Levels",
-    "duration": "2 min 57",
-    "year": "",
+    "duration": "02:57",
+    "year": "2011",
     "style": [
       "Electronic"
     ],
@@ -314,13 +302,25 @@ const songsA = [
   {
     "artist": "Awolnation",
     "title": "Sail",
-    "duration": "4 min 00",
-    "year": "",
+    "duration": "04:00",
+    "year": "2011",
     "style": [
       "Alternative Rock"
     ],
     "category": "2010s Music",
     "cover": "img/Awolnation - Sail.jpg",
+    "addedAt": "2026-01-28T13:26:40.824Z"
+  },
+  {
+    "artist": "The Animals",
+    "title": "House of the rising sun",
+    "duration": "04:39",
+    "year": "1964",
+    "style": [
+      "Rock"
+    ],
+    "category": "60s Music",
+    "cover": "img/Animals - House of the rising sun.jpg",
     "addedAt": "2026-01-28T13:26:40.824Z"
   }
 ];
