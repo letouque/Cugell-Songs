@@ -1,173 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cugell – Admin</title>
 
 <style>
     body{
-        margin:0; padding:0;
-        font-family:"Trebuchet MS", sans-serif;
+        margin:0;
+        padding:0;
+        font-family:"Trebuchet MS", Arial, sans-serif;
         background: radial-gradient(circle at top, #4c2d63 0, #1b0f29 45%, #07050b 100%);
         color:#f7f1e3;
     }
-
     .container{
-        max-width: 1300px;
-        margin: 25px auto 40px;
-        padding: 22px;
-        background: rgba(30,18,40,.55);
-        border-radius: 18px;
+        max-width: 1200px;
+        margin: 25px auto;
+        padding: 20px;
+        background: rgba(20,12,26,.55);
+        border-radius: 14px;
+        border: 1px solid rgba(231,207,154,.22);
+        box-shadow: 0 0 25px rgba(0,0,0,0.55);
         backdrop-filter: blur(6px);
-        border: 1px solid rgba(231,207,154,.35);
-        box-shadow: 0 0 25px rgba(0,0,0,.65);
     }
 
-    nav{
+    .top-nav{
         display:flex;
+        gap:15px;
         justify-content:center;
-        gap:14px;
-        margin-bottom:20px;
+        margin-bottom:15px;
     }
-    nav a{
+    .top-nav a{
         text-decoration:none;
         color:#f7f1e3;
-        padding:7px 16px;
-        border-radius:999px;
         border:1px solid rgba(231,207,154,.35);
+        padding:6px 14px;
+        border-radius:999px;
         background: rgba(10,6,14,.35);
         font-size:14px;
     }
-    nav a.active{
-        background: linear-gradient(180deg,#f1e4c4,#c79b53);
+    .top-nav a.active{
+        background: linear-gradient(180deg, rgba(241,228,196,.95), rgba(199,155,83,.82));
         color:#2a1540;
+        border-color: rgba(231,207,154,.50);
         font-weight:900;
     }
 
-    h1{ margin-top:0; font-size:26px; }
-    .subtitle{ opacity:.85; font-size:13px; margin-bottom:16px; }
+    h2{ margin-top:0; }
 
     .card{
-        background: rgba(0,0,0,.18);
-        border:1px solid rgba(231,207,154,.25);
+        background: rgba(0,0,0,.13);
         border-radius:14px;
-        padding:16px;
+        padding:14px;
+        border:1px solid rgba(231,207,154,.25);
         margin-bottom:18px;
-        box-shadow: 0 6px 14px rgba(0,0,0,.35);
     }
 
-    .row{
-        display:flex;
-        flex-wrap:wrap;
-        gap:14px;
-        align-items:center;
-    }
-
-    label{
-        font-size:13px;
-        opacity:.85;
-    }
-    input, select, textarea{
+    label{ display:block; font-size:12px; margin-bottom:4px; opacity:.9; }
+    input, select{
         width:100%;
-        padding:9px 12px;
-        border-radius:10px;
-        border:1px solid rgba(231,207,154,.35);
-        background: rgba(15,10,22,.45);
+        padding:9px 10px;
+        border-radius:8px;
+        border:1px solid rgba(231,207,154,.30);
+        background: rgba(10,6,14,.35);
         color:#f7f1e3;
         font-size:14px;
+        margin-bottom:10px;
+        box-sizing: border-box;
     }
-
-    textarea{ min-height:120px; resize:vertical; }
 
     .btn{
-        cursor:pointer;
-        padding:9px 14px;
+        padding:8px 16px;
         border-radius:999px;
         border:1px solid rgba(231,207,154,.35);
-        background: rgba(255,255,255,.08);
+        background: rgba(10,6,14,.35);
         color:#f7f1e3;
-        font-size:13px;
-        display:inline-flex;
-        align-items:center;
-        gap:8px;
-        user-select:none;
-    }
-    .btn.primary{
-        background: linear-gradient(180deg,#f1e4c4,#c79b53);
-        color:#2a1540;
-        font-weight:900;
-    }
-    .btn.danger{
-        background: rgba(255,0,0,.15);
-        border-color: rgba(255,100,100,.5);
-    }
-
-    .list-box{
-        max-height:520px;
-        overflow:auto;
-        border-radius:14px;
-        border:1px solid rgba(231,207,154,.25);
-        background: rgba(10,6,14,.25);
-    }
-
-    .song-row{
-        padding:10px 14px;
-        border-bottom:1px solid rgba(231,207,154,.18);
         cursor:pointer;
     }
-    .song-row:hover{ background: rgba(83,54,96,.22); }
-    .song-row.active{ background: rgba(83,54,96,.40); }
-
-    .song-title{ font-weight:900; }
-    .song-meta{ font-size:12px; opacity:.75; }
-
-    .grid2{
-        display:grid;
-        grid-template-columns: 1fr 1fr;
-        gap:18px;
-    }
-    @media(max-width:900px){
-        .grid2{ grid-template-columns: 1fr; }
-    }
-
-    .chip{
-        display:inline-flex;
-        align-items:center;
-        gap:6px;
-        padding:5px 10px;
-        border-radius:999px;
-        border:1px solid rgba(231,207,154,.25);
-        background: rgba(83,54,96,.2);
-        font-size:13px;
-    }
-
-    .cover-preview{
-        display:grid;
-        grid-template-columns:120px 1fr;
-        gap:10px;
-    }
-    .cover-img-box{
-        width:120px; height:120px;
-        border-radius:14px;
-        overflow:hidden;
-        border:1px solid rgba(231,207,154,.25);
-    }
-    .cover-img-box img{
-        width:100%; height:100%; object-fit:cover;
+    .btn.primary{
+        background: linear-gradient(180deg, rgba(241,228,196,.95), rgba(199,155,83,.82));
+        color:#2a1540;
+        font-weight:900;
     }
 
     .status{
-        margin-top:14px;
-        padding:10px 14px;
-        border-radius:12px;
-        border:1px solid rgba(231,207,154,.25);
-        background: rgba(0,0,0,.28);
-        font-size:13px;
+        padding:10px;
+        border-radius:10px;
+        border:1px solid rgba(231,207,154,.35);
+        background: rgba(10,6,14,.28);
+        margin-top:10px;
+        font-size:14px;
     }
     .status.error{
-        background: rgba(255,60,60,.18);
-        border-color: rgba(255,120,120,.45);
+        background: rgba(255,80,80,.18);
+        border-color: rgba(255,120,120,.35);
     }
 </style>
 </head>
@@ -175,556 +101,546 @@
 <body>
 <div class="container">
 
-<nav>
-    <a href="index.html">Songs</a>
-    <a href="soundtracks.html">Soundtracks</a>
-    <a class="active">Admin</a>
-</nav>
+    <nav class="top-nav">
+        <a href="index.html">Songs</a>
+        <a href="soundtracks.html">Soundtracks</a>
+        <a href="admin.html" class="active">Admin</a>
+    </nav>
 
-<h1>Admin – Edit Songs (GitHub Connected)</h1>
-<div class="subtitle">
-    Modification en direct sur GitHub sans téléchargement ni upload manuel.
-</div>
+    <h2>Admin – GitHub Integration</h2>
 
-<div class="card">
-    <h3>1. GitHub Access</h3>
+    <div class="card">
+        <label><b>GitHub Token (Never stored)</b></label>
+        <input id="tokenInput" type="password" placeholder="github_pat_....">
 
-    <div class="row">
-        <div style="flex:1 1 200px;">
-            <label>GitHub Token (secret)</label>
-            <input type="password" id="gh_token" placeholder="ghp_xxxxxxxxxxxx">
-        </div>
+        <button class="btn" id="testTokenBtn">🔍 Test Token</button>
 
-        <div style="flex:1 1 140px;">
-            <label>Owner</label>
-            <input type="text" id="gh_owner" value="letouque">
-        </div>
-
-        <div style="flex:1 1 160px;">
-            <label>Repository</label>
-            <input type="text" id="gh_repo" value="Cugell-Songs">
-        </div>
-
-        <div style="flex:1 1 120px;">
-            <label>Branch</label>
-            <input type="text" id="gh_branch" value="main">
-        </div>
-
-        <div>
-            <label>&nbsp;</label>
-            <button class="btn primary" id="connectBtn">Connect</button>
-        </div>
+        <div id="tokenStatus" class="status">Enter your token and click Test.</div>
     </div>
 
-    <div id="status" class="status">Waiting for connection…</div>
-</div>
-<!-- PART 2 / 3 -->
-<div class="card">
-    <h3>2. Select songs_#.js file</h3>
+    <script>
+    /* --- FIXED CONFIG (OPTION A) --- */
+    const GH_OWNER = "letouque";
+    const GH_REPO = "Cugell-Songs";
+    const GH_BRANCH = "main";
+    const GH_PATH = "songs"; // folder
+    </script>
+<!-- PART 2 / 3 – SONG EDITOR -->
 
-    <div class="row">
-        <div style="flex:1 1 140px;">
+<div class="card">
+    <h2>2. Select File</h2>
+
+    <div class="row" style="display:flex; gap:15px; flex-wrap:wrap;">
+        <div>
             <label>Letter</label>
-            <select id="letterSelect"></select>
+            <select id="letterSelect" style="min-width:120px;"></select>
         </div>
 
         <div>
             <label>&nbsp;</label>
-            <button class="btn" id="loadGithubBtn">Load from GitHub</button>
+            <button class="btn primary" id="loadFromGitHubBtn">📥 Load from GitHub</button>
         </div>
 
         <div>
             <label>&nbsp;</label>
-            <button class="btn" id="saveGithubBtn">Save to GitHub</button>
+            <button class="btn" id="saveToGitHubBtn" disabled>💾 Save to GitHub</button>
         </div>
     </div>
+
+    <div id="fileStatus" class="status">Choose a letter to load songs.</div>
 </div>
 
-<div class="grid2">
+<div class="card" style="display:flex; gap:20px; flex-wrap:wrap;">
 
-    <!-- LEFT: list -->
-    <div class="card">
-        <div class="row" style="justify-content:space-between;">
-            <h3 style="margin:0;">Songs in file</h3>
-            <button class="btn" id="addNewBtn">+ Add song</button>
+    <!-- LEFT: SONG LIST -->
+    <div style="flex:1 1 300px;">
+        <h3>Songs in file</h3>
+
+        <input id="searchList" placeholder="Search…" style="margin-bottom:10px; width:100%;">
+
+        <div class="list-box" id="songsList" 
+             style="max-height:500px; overflow:auto; border:1px solid rgba(231,207,154,.25); border-radius:8px;">
         </div>
 
-        <input type="text" id="searchList" placeholder="Search…" style="margin:12px 0;">
-
-        <div class="list-box" id="songsList"></div>
+        <button class="btn" id="addSongBtn" style="margin-top:10px;">+ Add Song</button>
     </div>
 
-    <!-- RIGHT: editor -->
-    <div class="card">
-        <h3>Edit song</h3>
+    <!-- RIGHT: EDITOR -->
+    <div style="flex:1 1 420px;">
+        <h3>Editor</h3>
 
-        <div class="row">
-            <div style="flex:1 1 200px;">
-                <label>Title</label>
-                <input id="fTitle">
-            </div>
-            <div style="flex:1 1 200px;">
-                <label>Artist</label>
-                <input id="fArtist">
-            </div>
-        </div>
+        <label>Title</label>
+        <input id="fTitle">
 
-        <div class="row" style="margin-top:10px;">
-            <div style="flex:1 1 120px;">
+        <label>Artist</label>
+        <input id="fArtist">
+
+        <div style="display:flex; gap:10px;">
+            <div style="flex:1;">
                 <label>Year</label>
                 <input id="fYear" type="number" min="1900" max="2100">
             </div>
 
-            <div style="flex:1 1 200px;">
+            <div style="flex:1;">
                 <label>Decade</label>
                 <select id="fCategory"></select>
             </div>
-
-            <div style="flex:1 1 200px;">
-                <label>Duration (mm:ss)</label>
-                <input id="fDuration" placeholder="03:28">
-            </div>
         </div>
 
-        <div style="margin-top:12px;">
-            <label>Styles (genres)</label>
-            <div id="styleChips" class="chips"></div>
+        <label>Duration (mm:ss)</label>
+        <input id="fDuration" placeholder="03:28">
 
-            <div class="row" style="margin-top:8px;">
-                <input id="newStyle" placeholder="Add new style…" style="flex:1;">
-                <button class="btn" id="addStyleBtn">Add</button>
-            </div>
+        <hr style="border-color:rgba(231,207,154,.2); margin:14px 0;">
+
+        <label>Styles (Genres)</label>
+        <div id="styleChips" class="chips" style="margin-bottom:8px;"></div>
+
+        <div style="display:flex; gap:10px;">
+            <input id="newStyle" placeholder="Add new style…" style="flex:1;">
+            <button class="btn" id="addStyleBtn">Add</button>
         </div>
 
-        <div style="margin-top:14px;">
-            <label>Cover path</label>
-            <input id="fCover" placeholder="img/Artist - Title.jpg">
+        <hr style="border-color:rgba(231,207,154,.2); margin:14px 0;">
 
-            <div class="cover-preview" style="margin-top:10px;">
-                <div class="cover-img-box">
-                    <img id="coverPreview" src="img/default-cover.jpg">
+        <label>Cover path</label>
+        <input id="fCover" placeholder="img/Artist - Title.jpg">
+
+        <div style="display:flex; gap:12px; align-items:center;">
+            <div class="cover-img-box" style="
+                width:120px; height:120px; 
+                overflow:hidden; border-radius:10px;
+                border:1px solid rgba(231,207,154,.35);
+                background:rgba(0,0,0,.3);
+            ">
+                <img id="coverPreview" src="img/default-cover.jpg"
+                     style="width:100%; height:100%; object-fit:cover;">
+            </div>
+
+            <div style="flex:1;">
+                <input type="file" id="coverFile" accept="image/*">
+
+                <button class="btn" id="downloadCoverBtn" disabled style="margin-top:6px;">
+                    Download renamed cover
+                </button>
+
+                <div style="font-size:12px; opacity:.8; margin-top:5px;">
+                    Suggested name: <code id="suggestedCoverName">Artist - Title.jpg</code>
                 </div>
-                <div>
-                    <label>Upload preview</label>
-                    <input type="file" id="coverFile" accept="image/*">
-
-                    <button class="btn" id="downloadCoverBtn" disabled
-                        style="margin-top:8px;">Download renamed cover</button>
-
-                    <div class="status" style="margin-top:8px; font-size:12px; opacity:.8;">
-                        Suggested name: <code id="suggestedCover">Artist - Title.jpg</code>
-                    </div>
-                </div>
             </div>
         </div>
 
-        <div class="row" style="margin-top:16px; justify-content:space-between;">
+        <hr style="border-color:rgba(231,207,154,.2); margin:14px 0;">
+
+        <div style="display:flex; justify-content:space-between;">
             <button class="btn primary" id="saveLocalBtn">Save (Local)</button>
-            <button class="btn danger" id="deleteBtn">Delete</button>
+            <button class="btn danger" id="deleteSongBtn">Delete</button>
         </div>
     </div>
 </div>
+
 <script>
-/* ============================================================
-   CONFIG
-   ============================================================ */
-const GITHUB_USER = "letouque";
-const GITHUB_REPO = "Cugell-Songs";
-const GITHUB_BRANCH = "main";
+/* ============================== */
+/*         PART 2 JS LOGIC        */
+/* ============================== */
 
-// ⚠️ MET TON TOKEN ICI (PRIVATE) OU JE TE FAIS UN CHAMP HTML INPUT
-let GITHUB_TOKEN = "";  // <-- À REMPLIR par toi
+let TOKEN = "";
+let CURRENT_LETTER = "A";
+let CURRENT_FILENAME = "";
+let CURRENT_VARNAME = "";
+let CURRENT_SHA = null;
+let CURRENT_SONGS = [];
+let SELECTED_INDEX = -1;
 
+const DECADES = [
+    "60s Music","70s Music","80s Music","90s Music",
+    "2000s Music","2010s Music","2020s Music","Mixed Years"
+];
 
-/* ============================================================
-   STATE
-   ============================================================ */
-let state = {
-    letter: "A",
-    varName: "songsA",
-    fileName: "songs_A.js",
-    songs: [],
-    selectedIndex: -1,
-    coverBlob: null,
-};
+let MASTER_STYLES = [
+    "Pop","Rock","Soft Rock","Disco","Synthpop","New Wave","Pop Rock",
+    "Alternative Rock","Electronic","Dance","Hip Hop","Soul","R&B",
+    "French Pop","Indie Pop","Indie Rock","Punk Rock","Hard Rock",
+    "Classical","Soundtrack"
+];
 
-/* ============================================================
-   TOOLS
-   ============================================================ */
-const $ = (id) => document.getElementById(id);
+function $(id){ return document.getElementById(id); }
 
-const escapeHtml = (txt) =>
-    String(txt || "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+/* --- Fill dropdowns --- */
+(function initSelectors(){
+    $("letterSelect").innerHTML = 
+        ["0","A","B","C","D","E","F","G","H","I","J","K","L","M",
+         "N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+        .map(l => `<option>${l}</option>`).join("");
 
-const slug = (s) =>
-    String(s || "")
-        .replace(/[\/\\:*?"<>|]/g, "")
-        .trim();
+    $("letterSelect").value = "A";
 
-/** Extract array from loaded JS */
-function parseJsArray(code, varName) {
-    try {
-        const fn = new Function(code + `; return ${varName};`);
-        const arr = fn();
-        if (!Array.isArray(arr)) throw "Invalid array";
-        return arr;
-    } catch (e) {
-        console.error(e);
-        throw new Error("Cannot extract " + varName + " from JS file");
-    }
-}
+    $("fCategory").innerHTML = DECADES
+        .map(d => `<option>${d}</option>`).join("");
+})();
+<!-- PART 3 / 3 – GITHUB API + SAVE SYSTEM -->
+<script>
 
-/* ============================================================== 
-   LOAD songs_#.js FROM GITHUB
-   ============================================================== */
-async function githubLoadFile() {
-    const path = `songs/${state.fileName}`;
-    const url = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${path}`;
+/* ===============================================
+    TOKEN HANDLING
+   =============================================== */
 
-    $("status").className = "status";
-    $("status").innerHTML = `Loading <code>${path}</code> from GitHub…`;
-
-    const res = await fetch(url);
-
-    if (!res.ok) {
-        $("status").className = "status error";
-        $("status").textContent = "Could not load from GitHub.";
-        return;
+$("testTokenBtn").addEventListener("click", async () => {
+    TOKEN = $("tokenInput").value.trim();
+    
+    if (!TOKEN) {
+        return setTokenStatus("❌ Please enter a token.", true);
     }
 
-    const text = await res.text();
+    setTokenStatus("⏳ Testing token…");
 
     try {
-        state.songs = parseJsArray(text, state.varName);
-    } catch (e) {
-        $("status").className = "status error";
-        $("status").textContent = "Parsing error: " + e;
-        return;
-    }
-
-    // Normalize songs
-    state.songs = state.songs.map((s) => ({
-        artist: s.artist || "",
-        title: s.title || "",
-        year: s.year || "",
-        duration: s.duration || "",
-        category: s.category || "",
-        style: Array.isArray(s.style) ? s.style : [],
-        cover: s.cover || "img/default-cover.jpg",
-        addedAt: s.addedAt || new Date().toISOString(),
-    }));
-
-    state.selectedIndex = -1;
-
-    renderList();
-    clearEditor();
-
-    $("status").className = "status";
-    $("status").innerHTML = `Loaded <b>${state.fileName}</b> from GitHub (${state.songs.length} songs).`;
-}
-
-/* ============================================================== 
-   SAVE TO GITHUB (commit)
-   ============================================================== */
-async function githubSaveFile() {
-    if (!GITHUB_TOKEN) {
-        alert("⚠️ No GitHub token set. I can add a field so you can paste it.");
-        return;
-    }
-
-    const path = `songs/${state.fileName}`;
-
-    // Format JS output
-    const jsText = `const ${state.varName} = ${JSON.stringify(state.songs, null, 2)};\n`;
-
-    // Base64 encode
-    const base64 = btoa(unescape(encodeURIComponent(jsText)));
-
-    // Get the current file SHA
-    const metaRes = await fetch(
-        `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${path}`,
-        {
-            headers: { Authorization: `token ${GITHUB_TOKEN}` },
-        }
-    );
-
-    const meta = await metaRes.json();
-    const sha = meta.sha;
-
-    // Commit request
-    const body = {
-        message: `Update ${state.fileName}`,
-        content: base64,
-        sha,
-        branch: GITHUB_BRANCH,
-    };
-
-    $("status").innerHTML = "Committing to GitHub…";
-
-    const res = await fetch(
-        `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${path}`,
-        {
-            method: "PUT",
+        const testUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}`;
+        const res = await fetch(testUrl, {
             headers: {
-                Authorization: `token ${GITHUB_TOKEN}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-        }
-    );
-
-    if (!res.ok) {
-        const t = await res.text();
-        $("status").className = "status error";
-        $("status").textContent = "GitHub error: " + t;
-        return;
-    }
-
-    $("status").className = "status";
-    $("status").innerHTML = `Saved <b>${state.fileName}</b> to GitHub.`;
-}
-
-/* ============================================================== 
-   RENDER LIST
-   ============================================================== */
-function renderList() {
-    const q = $("searchList").value.toLowerCase();
-    const box = $("songsList");
-
-    const filtered = state.songs
-        .map((s, i) => ({ s, i }))
-        .filter(({ s }) => {
-            const hay = (s.artist + " " + s.title).toLowerCase();
-            return hay.includes(q);
+                "Authorization": `Bearer ${TOKEN}`,
+                "Accept": "application/vnd.github+json"
+            }
         });
 
-    box.innerHTML = filtered
-        .map(
-            ({ s, i }) => `
-        <div class="list-item ${i === state.selectedIndex ? "active" : ""}" 
-             data-i="${i}">
-            <b>${escapeHtml(s.title)}</b><br>
-            <span style="opacity:.8">${escapeHtml(s.artist)}</span>
-        </div>
-    `
-        )
-        .join("");
+        if (!res.ok) {
+            return setTokenStatus("❌ Token invalid or insufficient permissions.", true);
+        }
 
-    box.querySelectorAll(".list-item").forEach((el) =>
-        el.addEventListener("click", () => {
-            selectSong(parseInt(el.dataset.i));
+        setTokenStatus("✅ Token is valid and has repo access!");
+    }
+    catch (err) {
+        setTokenStatus("❌ Connection error: " + err.message, true);
+    }
+});
+
+function setTokenStatus(msg, error=false){
+    const el = $("tokenStatus");
+    el.textContent = msg;
+    el.className = "status" + (error ? " error" : "");
+}
+
+
+/* ===============================================
+    GITHUB API UTILS
+   =============================================== */
+
+async function githubGetFile(path){
+    if (!TOKEN) throw new Error("Token missing.");
+
+    const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}`;
+
+    const res = await fetch(url, {
+        headers: {
+            "Authorization": `Bearer ${TOKEN}`,
+            "Accept": "application/vnd.github+json"
+        }
+    });
+
+    if (!res.ok) {
+        const err = await res.json().catch(()=>({}));
+        throw new Error(`GitHub GET failed: ${res.status}\n${JSON.stringify(err)}`);
+    }
+
+    return await res.json();
+}
+
+async function githubPutFile(path, contentBase64, sha){
+    if (!TOKEN) throw new Error("Token missing.");
+    
+    const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`;
+
+    const body = {
+        message: `Update ${path}`,
+        content: contentBase64,
+        branch: GH_BRANCH
+    };
+
+    if (sha) body.sha = sha;
+
+    const res = await fetch(url, {
+        method: "PUT",
+        headers: {
+            "Authorization": `Bearer ${TOKEN}`,
+            "Accept": "application/vnd.github+json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    });
+
+    if (!res.ok) {
+        const err = await res.json().catch(()=>({}));
+        throw new Error(`GitHub PUT failed: ${res.status}\n${JSON.stringify(err)}`);
+    }
+
+    return await res.json();
+}
+
+
+/* ===============================================
+    FILE SELECTION
+   =============================================== */
+
+$("letterSelect").addEventListener("change", () => {
+    CURRENT_LETTER = $("letterSelect").value;
+    CURRENT_FILENAME = CURRENT_LETTER === "0" ? "songs_0.js" : `songs_${CURRENT_LETTER}.js`;
+    CURRENT_VARNAME  = CURRENT_LETTER === "0" ? "songs0"     : `songs${CURRENT_LETTER}`;
+
+    $("fileStatus").textContent = `Selected file: ${CURRENT_FILENAME}`;
+});
+
+/* initial file */
+$("letterSelect").dispatchEvent(new Event("change"));
+
+
+/* ===============================================
+    LOAD FROM GITHUB
+   =============================================== */
+
+$("loadFromGitHubBtn").addEventListener("click", async () => {
+
+    if (!TOKEN) return alert("Enter token first.");
+
+    $("fileStatus").textContent = "⏳ Loading from GitHub…";
+
+    const path = `${GH_PATH}/${CURRENT_FILENAME}`;
+
+    try {
+        const file = await githubGetFile(path);
+
+        CURRENT_SHA = file.sha;
+
+        const decoded = atob(file.content.replace(/\n/g,""));
+        CURRENT_SONGS = parseSongs(decoded);
+
+        SELECTED_INDEX = -1;
+
+        renderSongsList();
+        clearEditor();
+
+        $("saveToGitHubBtn").disabled = false;
+        $("fileStatus").textContent = `✅ Loaded ${CURRENT_FILENAME} (${CURRENT_SONGS.length} songs)`;
+    }
+    catch (err) {
+        $("fileStatus").textContent = "❌ " + err.message;
+    }
+});
+
+
+/* ===============================================
+    PARSE JS FILE → ARRAY
+   =============================================== */
+
+function parseSongs(jsText){
+    try {
+        const fn = new Function(jsText + `\nreturn ${CURRENT_VARNAME};`);
+        const arr = fn();
+
+        if (!Array.isArray(arr)) throw new Error("Variable not found: " + CURRENT_VARNAME);
+
+        return arr;
+    }
+    catch (err){
+        throw new Error("Parsing error: " + err.message);
+    }
+}
+
+
+/* ===============================================
+    RENDER SONG LIST
+   =============================================== */
+
+function renderSongsList(){
+    const list = $("songsList");
+    const q = $("searchList").value.toLowerCase().trim();
+
+    list.innerHTML = CURRENT_SONGS.map((s, i) => {
+        const match = `${s.title} ${s.artist}`.toLowerCase().includes(q);
+        if (!match && q) return "";
+
+        return `
+            <div class="song-row ${i===SELECTED_INDEX?'active':''}" data-i="${i}"
+                style="padding:8px; border-bottom:1px solid rgba(255,255,255,.15); cursor:pointer;">
+                <div><b>${s.title}</b></div>
+                <div style="opacity:.8;">${s.artist}</div>
+            </div>`;
+    }).join("");
+
+    list.querySelectorAll(".song-row").forEach(row =>
+        row.addEventListener("click", () => {
+            SELECTED_INDEX = parseInt(row.dataset.i, 10);
+            loadSongIntoEditor();
+            renderSongsList();
         })
     );
 }
 
-/* ============================================================== 
-   EDITOR MANAGEMENT
-   ============================================================== */
-function clearEditor() {
+$("searchList").addEventListener("input", renderSongsList);
+
+
+/* ===============================================
+    EDITOR
+   =============================================== */
+
+function clearEditor(){
     $("fTitle").value = "";
     $("fArtist").value = "";
     $("fYear").value = "";
     $("fDuration").value = "";
+    $("fCategory").value = DECADES[0];
     $("fCover").value = "img/default-cover.jpg";
+
     $("coverPreview").src = "img/default-cover.jpg";
+    $("downloadCoverBtn").disabled = true;
 
     renderStyles([]);
 }
 
-function selectSong(i) {
-    state.selectedIndex = i;
-    renderList();
+function loadSongIntoEditor(){
+    const s = CURRENT_SONGS[SELECTED_INDEX];
+    if (!s) return;
 
-    const s = state.songs[i];
-    $("fTitle").value = s.title;
-    $("fArtist").value = s.artist;
-    $("fYear").value = s.year;
-    $("fDuration").value = s.duration;
-    $("fCover").value = s.cover;
+    $("fTitle").value = s.title || "";
+    $("fArtist").value = s.artist || "";
+    $("fYear").value = s.year || "";
+    $("fDuration").value = s.duration || "";
+    $("fCategory").value = s.category || "";
+    $("fCover").value = s.cover || "img/default-cover.jpg";
 
-    $("coverPreview").src = s.cover;
-    $("suggestedCover").textContent = slug(s.artist) + " - " + slug(s.title) + ".jpg";
+    $("coverPreview").src = s.cover || "img/default-cover.jpg";
 
-    renderStyles(s.style);
+    renderStyles(s.style || []);
 }
 
-/* ============================================================== 
-   SAVE LOCAL
-   ============================================================== */
-function saveLocal() {
-    if (state.selectedIndex < 0) return;
-
-    const s = state.songs[state.selectedIndex];
-    s.title = $("fTitle").value.trim();
-    s.artist = $("fArtist").value.trim();
-    s.year = $("fYear").value.trim();
-    s.duration = $("fDuration").value.trim();
-    s.cover = $("fCover").value.trim();
-
-    s.style = Array.from(document.querySelectorAll(".styleCheck:checked")).map(
-        (x) => x.value
-    );
-
-    renderList();
-    $("status").textContent = "Saved locally. Export or Save to GitHub.";
-}
-
-/* ============================================================== 
-   STYLES
-   ============================================================== */
-let masterStyles = [
-    "Pop",
-    "Rock",
-    "Disco",
-    "Hip Hop",
-    "Electronic",
-    "Indie",
-    "Soul",
-    "New Wave",
-    "Soundtrack",
-];
-
-function renderStyles(selected) {
-    const box = $("styleChips");
-    box.innerHTML = masterStyles
-        .map(
-            (st) => `
+function renderStyles(selected){
+    $("styleChips").innerHTML = MASTER_STYLES.map(st => `
         <label class="chip">
-            <input type="checkbox" class="styleCheck" value="${escapeHtml(st)}"
-                ${selected.includes(st) ? "checked" : ""}>
-            ${escapeHtml(st)}
+            <input type="checkbox" value="${st}" ${selected.includes(st)?"checked":""}>
+            ${st}
         </label>
-        `
-        )
-        .join("");
+    `).join("");
 }
 
-/* ============================================================== 
-   ADD STYLE
-   ============================================================== */
-$("addStyleBtn").onclick = () => {
-    const st = $("newStyle").value.trim();
-    if (!st) return;
-    if (!masterStyles.includes(st)) masterStyles.push(st);
-    $("newStyle").value = "";
-    renderStyles([]);
-};
+$("addStyleBtn").addEventListener("click", () => {
+    const val = $("newStyle").value.trim();
+    if (!val) return;
 
-/* ============================================================== 
-   ADD NEW SONG
-   ============================================================== */
-$("addNewBtn").onclick = () => {
-    state.songs.push({
-        artist: "",
-        title: "",
-        year: "",
-        duration: "",
-        category: "",
-        style: [],
-        cover: "img/default-cover.jpg",
-        addedAt: new Date().toISOString(),
+    if (!MASTER_STYLES.includes(val)) MASTER_STYLES.push(val);
+
+    $("newStyle").value = "";
+
+    const selected = Array.from(document.querySelectorAll("#styleChips input:checked"))
+        .map(x => x.value);
+
+    renderStyles([...selected, val]);
+});
+
+
+/* ===============================================
+    LOCAL SAVE
+   =============================================== */
+
+$("saveLocalBtn").addEventListener("click", () => {
+    if (SELECTED_INDEX < 0) return alert("Select a song first.");
+
+    CURRENT_SONGS[SELECTED_INDEX] = {
+        title: $("fTitle").value.trim(),
+        artist: $("fArtist").value.trim(),
+        year: $("fYear").value.trim(),
+        duration: $("fDuration").value.trim(),
+        category: $("fCategory").value,
+        cover: $("fCover").value.trim(),
+        style: Array.from(document.querySelectorAll("#styleChips input:checked"))
+                .map(x => x.value)
+    };
+
+    renderSongsList();
+});
+
+
+$("deleteSongBtn").addEventListener("click", () => {
+    if (SELECTED_INDEX < 0) return;
+
+    if (!confirm("Delete this song?")) return;
+
+    CURRENT_SONGS.splice(SELECTED_INDEX, 1);
+    SELECTED_INDEX = -1;
+
+    renderSongsList();
+    clearEditor();
+});
+
+
+$("addSongBtn").addEventListener("click", () => {
+    CURRENT_SONGS.push({
+        title:"", artist:"", year:"", duration:"",
+        category:"80s Music", cover:"img/default-cover.jpg",
+        style:[]
     });
 
-    state.selectedIndex = state.songs.length - 1;
-    renderList();
-    selectSong(state.selectedIndex);
-};
+    SELECTED_INDEX = CURRENT_SONGS.length-1;
 
-/* ============================================================== 
-   DELETE SONG
-   ============================================================== */
-$("deleteBtn").onclick = () => {
-    if (state.selectedIndex < 0) return;
-    state.songs.splice(state.selectedIndex, 1);
-    state.selectedIndex = -1;
-    renderList();
-    clearEditor();
-};
+    renderSongsList();
+    loadSongIntoEditor();
+});
 
-/* ============================================================== 
-   EXPORT JS
-   ============================================================== */
-$("exportBtn").onclick = () => {
-    const js = `const ${state.varName} = ${JSON.stringify(
-        state.songs,
-        null,
-        2
-    )};\n`;
-    const blob = new Blob([js], { type: "application/javascript" });
 
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = state.fileName;
-    a.click();
-};
+/* ===============================================
+    COVER HANDLING
+   =============================================== */
 
-/* ============================================================== 
-   COVER UPLOAD
-   ============================================================== */
-$("coverFile").onchange = (e) => {
-    const f = e.target.files[0];
-    if (!f) return;
+$("coverFile").addEventListener("change", e => {
+    const file = e.target.files[0];
+    if (!file) return;
 
-    const url = URL.createObjectURL(f);
-    $("coverPreview").src = url;
-    state.coverBlob = f;
-
+    $("coverPreview").src = URL.createObjectURL(file);
     $("downloadCoverBtn").disabled = false;
-    $("suggestedCover").textContent =
-        slug($("fArtist").value) + " - " + slug($("fTitle").value) + ".jpg";
-};
 
-$("downloadCoverBtn").onclick = () => {
-    if (!state.coverBlob) return;
+    const name = slugCover(
+        $("fArtist").value,
+        $("fTitle").value
+    );
 
-    const filename =
-        slug($("fArtist").value) + " - " + slug($("fTitle").value) + ".jpg";
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(state.coverBlob);
-    a.download = filename;
-    a.click();
+    $("suggestedCoverName").textContent = name;
+});
 
-    $("fCover").value = "img/" + filename;
-};
-
-/* ============================================================== 
-   UI WIRING
-   ============================================================== */
-function rebuildLetterSelect() {
-    const letters = ["0", ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
-    $("letterSelect").innerHTML = letters
-        .map((l) => `<option value="${l}">${l}</option>`)
-        .join("");
-    $("letterSelect").value = state.letter;
+function slugCover(a, t){
+    return `${a || "Unknown"} - ${t || "Untitled"}.jpg`
+        .replace(/[*?"<>:|\\\/]/g, "");
 }
 
-$("letterSelect").onchange = () => {
-    const L = $("letterSelect").value;
-    state.letter = L;
-    state.varName = L === "0" ? "songs0" : "songs" + L;
-    state.fileName = L === "0" ? "songs_0.js" : `songs_${L}.js`;
 
-    renderList();
-    clearEditor();
-};
+/* ===============================================
+    SAVE TO GITHUB (PUT API)
+   =============================================== */
 
-$("searchList").oninput = renderList;
-$("saveLocalBtn").onclick = saveLocal;
-$("loadGithubBtn").onclick = githubLoadFile;
-$("saveGithubBtn").onclick = githubSaveFile;
+$("saveToGitHubBtn").addEventListener("click", async () => {
 
+    if (!TOKEN) return alert("Enter your token first.");
 
-/* ============================================================== 
-   INITIALIZE
-   ============================================================== */
-rebuildLetterSelect();
-renderList();
-clearEditor();
-$("status").textContent = "Ready.";
+    $("fileStatus").textContent = "⏳ Saving to GitHub…";
+
+    try {
+        const jsContent =
+            `const ${CURRENT_VARNAME} = ` +
+            JSON.stringify(CURRENT_SONGS, null, 2) +
+            ";\n";
+
+        const base64 = btoa(unescape(encodeURIComponent(jsContent)));
+
+        const path = `${GH_PATH}/${CURRENT_FILENAME}`;
+
+        const result = await githubPutFile(path, base64, CURRENT_SHA);
+
+        CURRENT_SHA = result.content.sha;
+
+        $("fileStatus").textContent = "✅ Saved to GitHub successfully!";
+    }
+    catch (err) {
+        $("fileStatus").textContent = "❌ " + err.message;
+    }
+});
+
 </script>
 
+</body>
+</html>
