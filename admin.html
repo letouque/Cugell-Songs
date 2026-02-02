@@ -1,646 +1,644 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cugell – Admin</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cugell – Admin (Songs)</title>
 <style>
-    body{
-        margin:0;
-        padding:0;
-        font-family:"Trebuchet MS", Arial, sans-serif;
-        background: radial-gradient(circle at top, #4c2d63 0, #1b0f29 45%, #07050b 100%);
-        color:#f7f1e3;
-    }
-    .container{
-        max-width: 1200px;
-        margin: 25px auto;
-        padding: 20px;
-        background: rgba(20,12,26,.55);
-        border-radius: 14px;
-        border: 1px solid rgba(231,207,154,.22);
-        box-shadow: 0 0 25px rgba(0,0,0,0.55);
-        backdrop-filter: blur(6px);
-    }
-
-    .top-nav{
-        display:flex;
-        gap:15px;
-        justify-content:center;
-        margin-bottom:15px;
-    }
-    .top-nav a{
-        text-decoration:none;
-        color:#f7f1e3;
-        border:1px solid rgba(231,207,154,.35);
-        padding:6px 14px;
-        border-radius:999px;
-        background: rgba(10,6,14,.35);
-        font-size:14px;
-    }
-    .top-nav a.active{
-        background: linear-gradient(180deg, rgba(241,228,196,.95), rgba(199,155,83,.82));
-        color:#2a1540;
-        border-color: rgba(231,207,154,.50);
-        font-weight:900;
-    }
-
-    h2{ margin-top:0; }
-
-    .card{
-        background: rgba(0,0,0,.13);
-        border-radius:14px;
-        padding:14px;
-        border:1px solid rgba(231,207,154,.25);
-        margin-bottom:18px;
-    }
-
-    label{ display:block; font-size:12px; margin-bottom:4px; opacity:.9; }
-    input, select{
-        width:100%;
-        padding:9px 10px;
-        border-radius:8px;
-        border:1px solid rgba(231,207,154,.30);
-        background: rgba(10,6,14,.35);
-        color:#f7f1e3;
-        font-size:14px;
-        margin-bottom:10px;
-        box-sizing: border-box;
-    }
-
-    .btn{
-        padding:8px 16px;
-        border-radius:999px;
-        border:1px solid rgba(231,207,154,.35);
-        background: rgba(10,6,14,.35);
-        color:#f7f1e3;
-        cursor:pointer;
-    }
-    .btn.primary{
-        background: linear-gradient(180deg, rgba(241,228,196,.95), rgba(199,155,83,.82));
-        color:#2a1540;
-        font-weight:900;
-    }
-
-    .status{
-        padding:10px;
-        border-radius:10px;
-        border:1px solid rgba(231,207,154,.35);
-        background: rgba(10,6,14,.28);
-        margin-top:10px;
-        font-size:14px;
-    }
-    .status.error{
-        background: rgba(255,80,80,.18);
-        border-color: rgba(255,120,120,.35);
-    }
+body{margin:0;padding:0;font-family:"Trebuchet MS",Arial,sans-serif;background:radial-gradient(circle at top,#4c2d63 0,#1b0f29 45%,#07050b 100%);color:#f7f1e3}
+.container{max-width:1300px;margin:26px auto 50px;padding:18px;background:rgba(20,12,26,.55);border-radius:18px;box-shadow:0 0 25px rgba(0,0,0,.65);border:1px solid rgba(231,207,154,.22);backdrop-filter:blur(6px)}
+.top-nav{display:flex;justify-content:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.top-nav a{text-decoration:none;color:#f7f1e3;font-size:14px;padding:7px 14px;border-radius:999px;border:1px solid rgba(231,207,154,.35);background:rgba(10,6,14,.35)}
+.top-nav a.active{background:linear-gradient(180deg,rgba(241,228,196,.95),rgba(199,155,83,.82));color:#2a1540;font-weight:900;border-color:rgba(231,207,154,.50)}
+h1{margin:8px 0 4px;font-size:24px}
+.sub{opacity:.85;font-size:13px;margin-bottom:14px;line-height:1.35}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.card{border-radius:16px;border:1px solid rgba(231,207,154,.22);background:rgba(0,0,0,.14);box-shadow:0 10px 18px rgba(0,0,0,.22);padding:14px}
+label{font-size:12px;opacity:.9;display:block;margin-bottom:6px}
+input[type=text],input[type=number],select,textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(231,207,154,.30);background:rgba(10,6,14,.35);color:#f7f1e3;outline:none;font-size:14px;box-sizing:border-box}
+textarea{min-height:120px;resize:vertical}
+.btn{cursor:pointer;user-select:none;border-radius:999px;padding:9px 14px;border:1px solid rgba(231,207,154,.26);background:rgba(10,6,14,.28);color:#f7f1e3;font-size:13px;display:inline-flex;align-items:center;gap:8px}
+.btn.primary{background:linear-gradient(180deg,rgba(241,228,196,.95),rgba(199,155,83,.82));color:#2a1540;font-weight:900;border-color:rgba(231,207,154,.45)}
+.btn.danger{border-color:rgba(255,120,120,.35);background:rgba(255,80,80,.12)}
+.grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}
+@media (max-width:980px){.grid2{grid-template-columns:1fr}}
+.songs-list{max-height:520px;overflow:auto;border-radius:14px;border:1px solid rgba(231,207,154,.18);background:rgba(10,6,14,.20)}
+.song-row{padding:10px 12px;border-bottom:1px solid rgba(231,207,154,.12);cursor:pointer}
+.song-row:hover{background:rgba(83,54,96,.18)}
+.song-row.active{background:rgba(83,54,96,.28)}
+.song-row .t{font-weight:900}
+.song-row .a{opacity:.9}
+.song-row .m{opacity:.75;font-size:12px;margin-top:2px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:720px){.form-grid{grid-template-columns:1fr}}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border-radius:999px;padding:6px 10px;border:1px solid rgba(231,207,154,.20);background:rgba(83,54,96,.16);font-size:13px;display:inline-flex;align-items:center;gap:8px}
+.chip input{margin:0}
+.cover-preview{display:grid;grid-template-columns:120px 1fr;gap:10px;align-items:center}
+.cover-box{width:120px;height:120px;border-radius:14px;overflow:hidden;border:1px solid rgba(231,207,154,.22);background:rgba(10,6,14,.35)}
+.cover-box img{width:100%;height:100%;object-fit:cover;display:block}
+.muted{opacity:.75;font-size:12px;line-height:1.35}
+.status{margin-top:10px;padding:10px 12px;border-radius:12px;border:1px solid rgba(231,207,154,.18);background:rgba(0,0,0,.14);font-size:13px;opacity:.95}
+.status.error{border-color:rgba(255,120,120,.35);background:rgba(255,80,80,.12)}
+code{background:rgba(255,255,255,.08);border:1px solid rgba(231,207,154,.18);padding:2px 6px;border-radius:8px;font-size:12px;display:inline-block;max-width:100%;overflow:auto;white-space:nowrap}
+hr.sep{border:0;border-top:1px solid rgba(231,207,154,.18);margin:12px 0}
 </style>
 </head>
-
 <body>
 <div class="container">
-
-    <nav class="top-nav">
-        <a href="index.html">Songs</a>
-        <a href="soundtracks.html">Soundtracks</a>
-        <a href="admin.html" class="active">Admin</a>
-    </nav>
-
-    <h2>Admin – GitHub Integration</h2>
-
+  <nav class="top-nav">
+    <a href="index.html">Songs</a>
+    <a href="soundtracks.html">Soundtracks</a>
+    <a href="admin.html" class="active">Admin</a>
+  </nav>
+  <h1>Admin – Edit Songs Files</h1>
+  <div class="sub">
+    This page can <b>load</b> your <code>songs/songs_#.js</code>, let you edit songs (including multi-style), and <b>save directly to GitHub</b> using a token you paste each time.
+    <br><b>Rule:</b> <code>songs_0.js</code> must define <code>const songs0 = [...]</code>.
+  </div>
+  <div class="card">
+    <div class="row">
+      <div style="min-width:260px;flex:1 1 260px">
+        <label>GitHub token (not saved)</label>
+        <input type="password" id="tokenInput" placeholder="Paste token (classic or fine-grained)">
+        <div class="row" style="margin-top:8px">
+          <button class="btn" id="testTokenBtn">Test token</button>
+          <button class="btn primary" id="saveToGitHubBtn" disabled>Save to GitHub</button>
+          <span class="muted" id="tokenHint">Token is kept in memory only.</span>
+        </div>
+        <div id="tokenStatus" class="status" style="margin-top:10px">Token not set.</div>
+      </div>
+      <div style="min-width:260px;flex:1 1 260px">
+        <label>Repo settings</label>
+        <div class="muted">
+          Owner: <code id="ghOwner"></code> &nbsp; Repo: <code id="ghRepo"></code> &nbsp; Branch: <code id="ghBranch"></code><br>
+          Folder: <code id="ghPath"></code>
+        </div>
+      </div>
+      <div style="min-width:240px;flex:1 1 240px">
+        <label>Choose file letter</label>
+        <select id="letterSelect"></select>
+        <div class="muted" style="margin-top:6px">Current file: <code id="currentFile">songs/songs_A.js</code></div>
+      </div>
+      <div style="min-width:220px;flex:1 1 220px">
+        <label>Load</label>
+        <div class="row">
+          <button class="btn" id="loadFromGitHubBtn" disabled>Load from GitHub</button>
+          <button class="btn" id="loadFromSiteBtn">Load from site</button>
+        </div>
+      </div>
+      <div style="min-width:260px;flex:1 1 260px">
+        <label>Or import local file</label>
+        <input type="file" id="localFile" accept=".js">
+      </div>
+      <div style="min-width:240px;flex:1 1 240px">
+        <label>Search in this file</label>
+        <input type="text" id="listSearch" placeholder="Search title / artist / year / genre…">
+      </div>
+      <div>
+        <label>&nbsp;</label>
+        <button class="btn" id="exportBtn" disabled>Export .js</button>
+      </div>
+    </div>
+    <div id="status" class="status">Ready.</div>
+  </div>
+  <div class="grid2" style="margin-top:12px">
     <div class="card">
-        <label><b>GitHub Token (Never stored)</b></label>
-        <input id="tokenInput" type="password" placeholder="github_pat_....">
-
-        <button class="btn" id="testTokenBtn">🔍 Test Token</button>
-
-        <div id="tokenStatus" class="status">Enter your token and click Test.</div>
+      <div class="row" style="justify-content:space-between">
+        <div style="font-weight:900">Songs in file</div>
+        <button class="btn" id="addNewBtn" disabled>+ Add Song</button>
+      </div>
+      <div class="muted" style="margin:8px 0 10px">Click a song to edit. Sorting/export is always by <b>Artist → Title</b>.</div>
+      <div class="songs-list" id="songsList"></div>
     </div>
-
-    <script>
-    /* --- FIXED CONFIG (OPTION A) --- */
-    const GH_OWNER = "letouque";
-    const GH_REPO = "Cugell-Songs";
-    const GH_BRANCH = "main";
-    const GH_PATH = "songs"; // folder
-    </script>
-<!-- PART 2 / 3 – SONG EDITOR -->
-
-<div class="card">
-    <h2>2. Select File</h2>
-
-    <div class="row" style="display:flex; gap:15px; flex-wrap:wrap;">
+    <div class="card">
+      <div style="font-weight:900;margin-bottom:10px">Editor</div>
+      <div class="form-grid">
         <div>
-            <label>Letter</label>
-            <select id="letterSelect" style="min-width:120px;"></select>
+          <label>Title</label>
+          <input type="text" id="fTitle">
         </div>
-
         <div>
+          <label>Artist</label>
+          <input type="text" id="fArtist">
+        </div>
+        <div>
+          <label>Year (exact)</label>
+          <input type="number" id="fYear" min="0" max="9999" placeholder="e.g. 1975">
+        </div>
+        <div>
+          <label>Decade category</label>
+          <select id="fCategory"></select>
+        </div>
+        <div>
+          <label>Duration (mm:ss)</label>
+          <div class="row" style="gap:8px">
+            <select id="fMin" style="max-width:110px"></select>
+            <select id="fSec" style="max-width:110px"></select>
+            <input type="text" id="fDuration" placeholder="or type 3:28" style="flex:1 1 140px">
+          </div>
+          <div class="muted" style="margin-top:6px">Tip: use dropdowns; it auto-fills mm:ss.</div>
+        </div>
+        <div>
+          <label>Added at (hidden on public page)</label>
+          <input type="text" id="fAddedAt" readonly>
+        </div>
+      </div>
+      <hr class="sep">
+      <div>
+        <label>Genres / styles (multi-select)</label>
+        <div class="chips" id="styleChips"></div>
+        <div class="row" style="margin-top:10px">
+          <div style="flex:1 1 240px">
+            <label>Add new style</label>
+            <input type="text" id="newStyle" placeholder="e.g. Synthpop">
+          </div>
+          <div>
             <label>&nbsp;</label>
-            <button class="btn primary" id="loadFromGitHubBtn">📥 Load from GitHub</button>
+            <button class="btn" id="addStyleBtn">Add style</button>
+          </div>
         </div>
-
-        <div>
-            <label>&nbsp;</label>
-            <button class="btn" id="saveToGitHubBtn" disabled>💾 Save to GitHub</button>
+      </div>
+      <hr class="sep">
+      <div>
+        <label>Cover path (in img/)</label>
+        <input type="text" id="fCover" placeholder="img/Artist - Title.jpg">
+        <div class="cover-preview" style="margin-top:10px">
+          <div class="cover-box">
+            <img id="coverImg" src="img/default-cover.jpg" alt="cover preview" onerror="this.onerror=null;this.src='img/default-cover.jpg';">
+          </div>
+          <div>
+            <div class="muted">Optional: pick an image file to preview, and download it renamed for your <code>img/</code> folder.</div>
+            <div class="row" style="margin-top:8px">
+              <input type="file" id="coverFile" accept="image/*">
+              <button class="btn" id="downloadCoverBtn" disabled>Download renamed cover</button>
+            </div>
+            <div class="muted" style="margin-top:6px">Suggested filename = <code id="suggestedCoverName">Artist - Title.jpg</code></div>
+          </div>
         </div>
+      </div>
+      <div class="row" style="margin-top:14px;justify-content:space-between">
+        <button class="btn" id="saveBtn" disabled>Save changes</button>
+        <button class="btn danger" id="deleteBtn" disabled>Delete song</button>
+      </div>
     </div>
-
-    <div id="fileStatus" class="status">Choose a letter to load songs.</div>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <div style="font-weight:900">Bulk (optional) – Import CSV into current file</div>
+    <div class="muted" style="margin:8px 0 10px">
+      Paste CSV with headers: <code>artist,title,year,category,style,duration,cover,addedAt</code><br>
+      style can be separated by <code>|</code> or comma.
+    </div>
+    <textarea id="csvBox" placeholder="artist,title,year,category,style,duration,cover,addedAt"></textarea>
+    <div class="row" style="margin-top:10px">
+      <button class="btn" id="importCsvBtn" disabled>Import CSV (replace file content)</button>
+      <button class="btn" id="exportCsvBtn" disabled>Export CSV</button>
+    </div>
+  </div>
 </div>
-
-<div class="card" style="display:flex; gap:20px; flex-wrap:wrap;">
-
-    <!-- LEFT: SONG LIST -->
-    <div style="flex:1 1 300px;">
-        <h3>Songs in file</h3>
-
-        <input id="searchList" placeholder="Search…" style="margin-bottom:10px; width:100%;">
-
-        <div class="list-box" id="songsList" 
-             style="max-height:500px; overflow:auto; border:1px solid rgba(231,207,154,.25); border-radius:8px;">
-        </div>
-
-        <button class="btn" id="addSongBtn" style="margin-top:10px;">+ Add Song</button>
-    </div>
-
-    <!-- RIGHT: EDITOR -->
-    <div style="flex:1 1 420px;">
-        <h3>Editor</h3>
-
-        <label>Title</label>
-        <input id="fTitle">
-
-        <label>Artist</label>
-        <input id="fArtist">
-
-        <div style="display:flex; gap:10px;">
-            <div style="flex:1;">
-                <label>Year</label>
-                <input id="fYear" type="number" min="1900" max="2100">
-            </div>
-
-            <div style="flex:1;">
-                <label>Decade</label>
-                <select id="fCategory"></select>
-            </div>
-        </div>
-
-        <label>Duration (mm:ss)</label>
-        <input id="fDuration" placeholder="03:28">
-
-        <hr style="border-color:rgba(231,207,154,.2); margin:14px 0;">
-
-        <label>Styles (Genres)</label>
-        <div id="styleChips" class="chips" style="margin-bottom:8px;"></div>
-
-        <div style="display:flex; gap:10px;">
-            <input id="newStyle" placeholder="Add new style…" style="flex:1;">
-            <button class="btn" id="addStyleBtn">Add</button>
-        </div>
-
-        <hr style="border-color:rgba(231,207,154,.2); margin:14px 0;">
-
-        <label>Cover path</label>
-        <input id="fCover" placeholder="img/Artist - Title.jpg">
-
-        <div style="display:flex; gap:12px; align-items:center;">
-            <div class="cover-img-box" style="
-                width:120px; height:120px; 
-                overflow:hidden; border-radius:10px;
-                border:1px solid rgba(231,207,154,.35);
-                background:rgba(0,0,0,.3);
-            ">
-                <img id="coverPreview" src="img/default-cover.jpg"
-                     style="width:100%; height:100%; object-fit:cover;">
-            </div>
-
-            <div style="flex:1;">
-                <input type="file" id="coverFile" accept="image/*">
-
-                <button class="btn" id="downloadCoverBtn" disabled style="margin-top:6px;">
-                    Download renamed cover
-                </button>
-
-                <div style="font-size:12px; opacity:.8; margin-top:5px;">
-                    Suggested name: <code id="suggestedCoverName">Artist - Title.jpg</code>
-                </div>
-            </div>
-        </div>
-
-        <hr style="border-color:rgba(231,207,154,.2); margin:14px 0;">
-
-        <div style="display:flex; justify-content:space-between;">
-            <button class="btn primary" id="saveLocalBtn">Save (Local)</button>
-            <button class="btn danger" id="deleteSongBtn">Delete</button>
-        </div>
-    </div>
-</div>
-
 <script>
-/* ============================== */
-/*         PART 2 JS LOGIC        */
-/* ============================== */
-
-let TOKEN = "";
-let CURRENT_LETTER = "A";
-let CURRENT_FILENAME = "";
-let CURRENT_VARNAME = "";
-let CURRENT_SHA = null;
-let CURRENT_SONGS = [];
-let SELECTED_INDEX = -1;
-
-const DECADES = [
-    "60s Music","70s Music","80s Music","90s Music",
-    "2000s Music","2010s Music","2020s Music","Mixed Years"
-];
-
-let MASTER_STYLES = [
-    "Pop","Rock","Soft Rock","Disco","Synthpop","New Wave","Pop Rock",
-    "Alternative Rock","Electronic","Dance","Hip Hop","Soul","R&B",
-    "French Pop","Indie Pop","Indie Rock","Punk Rock","Hard Rock",
-    "Classical","Soundtrack"
-];
-
-function $(id){ return document.getElementById(id); }
-
-/* --- Fill dropdowns --- */
-(function initSelectors(){
-    $("letterSelect").innerHTML = 
-        ["0","A","B","C","D","E","F","G","H","I","J","K","L","M",
-         "N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-        .map(l => `<option>${l}</option>`).join("");
-
-    $("letterSelect").value = "A";
-
-    $("fCategory").innerHTML = DECADES
-        .map(d => `<option>${d}</option>`).join("");
-})();
-<!-- PART 3 / 3 – GITHUB API + SAVE SYSTEM -->
-<script>
-
-/* ===============================================
-    TOKEN HANDLING
-   =============================================== */
-
-$("testTokenBtn").addEventListener("click", async () => {
-    TOKEN = $("tokenInput").value.trim();
-    
-    if (!TOKEN) {
-        return setTokenStatus("❌ Please enter a token.", true);
-    }
-
-    setTokenStatus("⏳ Testing token…");
-
-    try {
-        const testUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}`;
-        const res = await fetch(testUrl, {
-            headers: {
-                "Authorization": `Bearer ${TOKEN}`,
-                "Accept": "application/vnd.github+json"
-            }
-        });
-
-        if (!res.ok) {
-            return setTokenStatus("❌ Token invalid or insufficient permissions.", true);
-        }
-
-        setTokenStatus("✅ Token is valid and has repo access!");
-    }
-    catch (err) {
-        setTokenStatus("❌ Connection error: " + err.message, true);
-    }
-});
-
-function setTokenStatus(msg, error=false){
-    const el = $("tokenStatus");
-    el.textContent = msg;
-    el.className = "status" + (error ? " error" : "");
+/* ===========================
+   CONFIG (EDIT THESE)
+=========================== */
+const GH_OWNER="letouque";
+const GH_REPO="Cugell-Songs";
+const GH_BRANCH="main";
+const GH_PATH="songs";
+/* ===========================
+   STATE / HELPERS
+=========================== */
+const decadeOrder=["60s Music","70s Music","80s Music","90s Music","2000s Music","2010s Music","2020s Music","Mixed Years"];
+const letters=["0","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+let TOKEN=""; // in-memory only
+let CURRENT_SHA="";
+let CURRENT_FILENAME="songs_A.js";
+let CURRENT_VARNAME="songsA";
+let masterStyles=["Pop","Rock","Soft Rock","Disco","Synthpop","New Wave","Pop Rock","Alternative Rock","Electronic","Dance","Hip Hop","Soul","R&B","French Pop","Indie Pop","Indie Rock","Punk Rock","Hard Rock","Classical","Soundtrack"];
+const state={letter:"A",songs:[],selectedIndex:-1,coverBlob:null};
+function $(id){return document.getElementById(id);}
+function escapeHtml(s){return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");}
+function normArray(val){if(!val)return[];if(Array.isArray(val))return val;return String(val).split(/[|,]/g).map(v=>v.trim()).filter(Boolean);}
+function setStatus(msg,isError=false){const el=$("status");el.className="status"+(isError?" error":"");el.innerHTML=msg;}
+function setTokenStatus(msg,isError=false){const el=$("tokenStatus");el.className="status"+(isError?" error":"");el.textContent=msg;}
+function computeVarName(letter){return letter==="0"?"songs0":"songs"+letter;}
+function computeFileName(letter){return letter==="0"?"songs_0.js":`songs_${letter}.js`;}
+/* UTF-8 → Base64 (GitHub-safe) */
+function utf8ToBase64(str){
+  const bytes=new TextEncoder().encode(str);
+  let bin="";
+  bytes.forEach(b=>bin+=String.fromCharCode(b));
+  return btoa(bin);
 }
-
-
-/* ===============================================
-    GITHUB API UTILS
-   =============================================== */
-
+function slugCoverName(artist,title){
+  const clean=s=>String(s||"").replaceAll("/","-").replaceAll("\\","-").replaceAll(":","").replaceAll("*","").replaceAll("?","").replaceAll('"',"").replaceAll("<","").replaceAll(">","").replaceAll("|","").trim();
+  const a=clean(artist)||"Unknown Artist";
+  const t=clean(title)||"Unknown Title";
+  return `${a} - ${t}.jpg`;
+}
+function parseDurationFlexible(str){
+  const t=String(str||"").trim();
+  if(!t)return"";
+  const m1=t.match(/^(\d+)\s*min\s*(\d+)\s*$/i);
+  if(m1){const mm=parseInt(m1[1],10),ss=parseInt(m1[2],10);return String(mm).padStart(2,"0")+":"+String(ss).padStart(2,"0");}
+  const m2=t.match(/^(\d{1,2}):(\d{2})$/);
+  if(m2){return String(parseInt(m2[1],10)).padStart(2,"0")+":"+String(parseInt(m2[2],10)).padStart(2,"0");}
+  return t;
+}
+function sanitizeSong(s){
+  const out={
+    artist:String(s.artist||""),
+    title:String(s.title||""),
+    duration:parseDurationFlexible(s.duration||""),
+    year:String(s.year||""),
+    style:normArray(s.style||[]),
+    category:String(s.category||""),
+    cover:String(s.cover||"img/default-cover.jpg"),
+    addedAt:s.addedAt?String(s.addedAt):new Date().toISOString()
+  };
+  out.style.forEach(st=>{if(st && !masterStyles.some(x=>x.toLowerCase()===st.toLowerCase())) masterStyles.push(st);});
+  masterStyles=masterStyles.filter(Boolean).sort((a,b)=>a.toLowerCase().localeCompare(b.toLowerCase()));
+  return out;
+}
+function sortSongs(){
+  state.songs.sort((a,b)=>{
+    const aa=(a.artist||"").toLowerCase(),bb=(b.artist||"").toLowerCase();
+    if(aa!==bb)return aa.localeCompare(bb);
+    return (a.title||"").toLowerCase().localeCompare((b.title||"").toLowerCase());
+  });
+}
+/* Evaluate a songs_#.js and return array */
+function parseSongsFromJs(code,varName){
+  const fn=new Function(code+`; return (typeof ${varName} !== "undefined") ? ${varName} : null;`);
+  const arr=fn();
+  if(!arr || !Array.isArray(arr)) throw new Error("Could not find array variable: "+varName);
+  return arr.map(sanitizeSong);
+}
+/* ===========================
+   GITHUB API
+=========================== */
+async function ghFetch(url,opts={}){
+  const headers=Object.assign({
+    "Accept":"application/vnd.github+json",
+    "X-GitHub-Api-Version":"2022-11-28"
+  }, opts.headers||{});
+  if(TOKEN) headers["Authorization"]="Bearer "+TOKEN;
+  const res=await fetch(url,Object.assign({},opts,{headers}));
+  return res;
+}
+async function testToken(){
+  if(!TOKEN){setTokenStatus("Enter a token first.",true);return false;}
+  setTokenStatus("Testing token…");
+  const url=`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}`;
+  const res=await ghFetch(url);
+  if(!res.ok){setTokenStatus("Invalid token OR no access to repo.",true);return false;}
+  setTokenStatus("✅ Token valid. You can Load/Save from GitHub.");
+  $("loadFromGitHubBtn").disabled=false;
+  $("saveToGitHubBtn").disabled=false;
+  return true;
+}
 async function githubGetFile(path){
-    if (!TOKEN) throw new Error("Token missing.");
-
-    const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}`;
-
-    const res = await fetch(url, {
-        headers: {
-            "Authorization": `Bearer ${TOKEN}`,
-            "Accept": "application/vnd.github+json"
-        }
-    });
-
-    if (!res.ok) {
-        const err = await res.json().catch(()=>({}));
-        throw new Error(`GitHub GET failed: ${res.status}\n${JSON.stringify(err)}`);
-    }
-
-    return await res.json();
+  const url=`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}`;
+  const res=await ghFetch(url);
+  if(!res.ok) throw new Error("GET failed "+res.status);
+  return await res.json();
 }
-
-async function githubPutFile(path, contentBase64, sha){
-    if (!TOKEN) throw new Error("Token missing.");
-    
-    const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`;
-
-    const body = {
-        message: `Update ${path}`,
-        content: contentBase64,
-        branch: GH_BRANCH
-    };
-
-    if (sha) body.sha = sha;
-
-    const res = await fetch(url, {
-        method: "PUT",
-        headers: {
-            "Authorization": `Bearer ${TOKEN}`,
-            "Accept": "application/vnd.github+json",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(body)
-    });
-
-    if (!res.ok) {
-        const err = await res.json().catch(()=>({}));
-        throw new Error(`GitHub PUT failed: ${res.status}\n${JSON.stringify(err)}`);
-    }
-
-    return await res.json();
+async function githubPutFile(path,contentBase64,sha){
+  const url=`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`;
+  const body={message:`Update ${path}`,content:contentBase64,branch:GH_BRANCH};
+  if(sha) body.sha=sha;
+  const res=await ghFetch(url,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+  if(!res.ok){
+    const txt=await res.text();
+    throw new Error("PUT failed "+res.status+" – "+txt.slice(0,180));
+  }
+  return await res.json();
 }
-
-
-/* ===============================================
-    FILE SELECTION
-   =============================================== */
-
-$("letterSelect").addEventListener("change", () => {
-    CURRENT_LETTER = $("letterSelect").value;
-    CURRENT_FILENAME = CURRENT_LETTER === "0" ? "songs_0.js" : `songs_${CURRENT_LETTER}.js`;
-    CURRENT_VARNAME  = CURRENT_LETTER === "0" ? "songs0"     : `songs${CURRENT_LETTER}`;
-
-    $("fileStatus").textContent = `Selected file: ${CURRENT_FILENAME}`;
-});
-
-/* initial file */
-$("letterSelect").dispatchEvent(new Event("change"));
-
-
-/* ===============================================
-    LOAD FROM GITHUB
-   =============================================== */
-
-$("loadFromGitHubBtn").addEventListener("click", async () => {
-
-    if (!TOKEN) return alert("Enter token first.");
-
-    $("fileStatus").textContent = "⏳ Loading from GitHub…";
-
-    const path = `${GH_PATH}/${CURRENT_FILENAME}`;
-
-    try {
-        const file = await githubGetFile(path);
-
-        CURRENT_SHA = file.sha;
-
-        const decoded = atob(file.content.replace(/\n/g,""));
-        CURRENT_SONGS = parseSongs(decoded);
-
-        SELECTED_INDEX = -1;
-
-        renderSongsList();
-        clearEditor();
-
-        $("saveToGitHubBtn").disabled = false;
-        $("fileStatus").textContent = `✅ Loaded ${CURRENT_FILENAME} (${CURRENT_SONGS.length} songs)`;
-    }
-    catch (err) {
-        $("fileStatus").textContent = "❌ " + err.message;
-    }
-});
-
-
-/* ===============================================
-    PARSE JS FILE → ARRAY
-   =============================================== */
-
-function parseSongs(jsText){
-    try {
-        const fn = new Function(jsText + `\nreturn ${CURRENT_VARNAME};`);
-        const arr = fn();
-
-        if (!Array.isArray(arr)) throw new Error("Variable not found: " + CURRENT_VARNAME);
-
-        return arr;
-    }
-    catch (err){
-        throw new Error("Parsing error: " + err.message);
-    }
+/* ===========================
+   UI RENDERING
+=========================== */
+function fillLetterSelect(){
+  const sel=$("letterSelect");
+  sel.innerHTML=letters.map(l=>`<option value="${l}">${l}</option>`).join("");
+  sel.value=state.letter;
 }
-
-
-/* ===============================================
-    RENDER SONG LIST
-   =============================================== */
-
-function renderSongsList(){
-    const list = $("songsList");
-    const q = $("searchList").value.toLowerCase().trim();
-
-    list.innerHTML = CURRENT_SONGS.map((s, i) => {
-        const match = `${s.title} ${s.artist}`.toLowerCase().includes(q);
-        if (!match && q) return "";
-
-        return `
-            <div class="song-row ${i===SELECTED_INDEX?'active':''}" data-i="${i}"
-                style="padding:8px; border-bottom:1px solid rgba(255,255,255,.15); cursor:pointer;">
-                <div><b>${s.title}</b></div>
-                <div style="opacity:.8;">${s.artist}</div>
-            </div>`;
-    }).join("");
-
-    list.querySelectorAll(".song-row").forEach(row =>
-        row.addEventListener("click", () => {
-            SELECTED_INDEX = parseInt(row.dataset.i, 10);
-            loadSongIntoEditor();
-            renderSongsList();
-        })
-    );
+function fillDecades(){
+  $("fCategory").innerHTML=decadeOrder.map(d=>`<option value="${escapeHtml(d)}">${escapeHtml(d)}</option>`).join("");
 }
-
-$("searchList").addEventListener("input", renderSongsList);
-
-
-/* ===============================================
-    EDITOR
-   =============================================== */
-
+function fillDurationPickers(){
+  $("fMin").innerHTML=Array.from({length:31},(_,i)=>`<option value="${i}">${String(i).padStart(2,"0")}</option>`).join("");
+  $("fSec").innerHTML=Array.from({length:60},(_,i)=>`<option value="${i}">${String(i).padStart(2,"0")}</option>`).join("");
+}
+function durationFromPickers(){
+  const m=parseInt($("fMin").value||"0",10),s=parseInt($("fSec").value||"0",10);
+  return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+function enableEditors(on){
+  ["exportBtn","addNewBtn","saveBtn","deleteBtn","importCsvBtn","exportCsvBtn"].forEach(id=>$(id).disabled=!on);
+}
+function renderList(){
+  const box=$("songsList");
+  const q=$("listSearch").value.toLowerCase().trim();
+  const filtered=state.songs.map((s,idx)=>({s,idx})).filter(({s})=>{
+    if(!q)return true;
+    const hay=`${s.artist} ${s.title} ${s.year} ${s.category} ${(s.style||[]).join(" ")} ${s.duration}`.toLowerCase();
+    return hay.includes(q);
+  });
+  box.innerHTML=filtered.map(({s,idx})=>{
+    const active=idx===state.selectedIndex?" active":"";
+    const meta=[s.year,s.category,s.duration].filter(Boolean).join(" • ");
+    return `<div class="song-row${active}" data-idx="${idx}"><div class="t">${escapeHtml(s.title||"(untitled)")}</div><div class="a">${escapeHtml(s.artist||"(unknown artist)")}</div><div class="m">${escapeHtml(meta)}</div></div>`;
+  }).join("");
+  box.querySelectorAll(".song-row").forEach(row=>{
+    row.addEventListener("click",()=>selectSong(parseInt(row.getAttribute("data-idx"),10)));
+  });
+}
+function renderStyles(selectedArr){
+  const selected=new Set((selectedArr||[]).map(s=>String(s)));
+  (selectedArr||[]).forEach(st=>{if(st && !masterStyles.some(x=>x.toLowerCase()===String(st).toLowerCase())) masterStyles.push(String(st));});
+  masterStyles=masterStyles.filter(Boolean).sort((a,b)=>a.toLowerCase().localeCompare(b.toLowerCase()));
+  $("styleChips").innerHTML=masterStyles.map(st=>{
+    const checked=selected.has(st)?"checked":"";
+    return `<label class="chip"><input type="checkbox" class="styleCheck" value="${escapeHtml(st)}" ${checked}>${escapeHtml(st)}</label>`;
+  }).join("");
+}
 function clearEditor(){
-    $("fTitle").value = "";
-    $("fArtist").value = "";
-    $("fYear").value = "";
-    $("fDuration").value = "";
-    $("fCategory").value = DECADES[0];
-    $("fCover").value = "img/default-cover.jpg";
-
-    $("coverPreview").src = "img/default-cover.jpg";
-    $("downloadCoverBtn").disabled = true;
-
-    renderStyles([]);
+  $("fTitle").value=""; $("fArtist").value=""; $("fYear").value="";
+  $("fCategory").value=decadeOrder[0];
+  $("fDuration").value=""; $("fMin").value="0"; $("fSec").value="0";
+  $("fAddedAt").value=""; $("fCover").value="img/default-cover.jpg";
+  $("coverImg").src="img/default-cover.jpg";
+  state.coverBlob=null; $("downloadCoverBtn").disabled=true;
+  $("suggestedCoverName").textContent="Artist - Title.jpg";
+  renderStyles([]);
 }
-
-function loadSongIntoEditor(){
-    const s = CURRENT_SONGS[SELECTED_INDEX];
-    if (!s) return;
-
-    $("fTitle").value = s.title || "";
-    $("fArtist").value = s.artist || "";
-    $("fYear").value = s.year || "";
-    $("fDuration").value = s.duration || "";
-    $("fCategory").value = s.category || "";
-    $("fCover").value = s.cover || "img/default-cover.jpg";
-
-    $("coverPreview").src = s.cover || "img/default-cover.jpg";
-
-    renderStyles(s.style || []);
+function selectSong(idx){
+  state.selectedIndex=idx;
+  renderList();
+  const s=state.songs[idx]; if(!s)return;
+  $("fTitle").value=s.title||""; $("fArtist").value=s.artist||"";
+  $("fYear").value=s.year||""; $("fCategory").value=s.category||decadeOrder[0];
+  const dur=parseDurationFlexible(s.duration||""); $("fDuration").value=dur;
+  const m=dur.match(/^(\d{2}):(\d{2})$/);
+  if(m){$("fMin").value=String(parseInt(m[1],10)); $("fSec").value=String(parseInt(m[2],10));} else {$("fMin").value="0"; $("fSec").value="0";}
+  $("fAddedAt").value=s.addedAt||"";
+  $("fCover").value=s.cover||"img/default-cover.jpg";
+  $("coverImg").src=s.cover||"img/default-cover.jpg";
+  $("coverImg").onerror=function(){this.onerror=null;this.src="img/default-cover.jpg";};
+  $("suggestedCoverName").textContent=slugCoverName(s.artist,s.title);
+  renderStyles(s.style||[]);
 }
-
-function renderStyles(selected){
-    $("styleChips").innerHTML = MASTER_STYLES.map(st => `
-        <label class="chip">
-            <input type="checkbox" value="${st}" ${selected.includes(st)?"checked":""}>
-            ${st}
-        </label>
-    `).join("");
+function gatherEditorSong(){
+  const title=$("fTitle").value.trim();
+  const artist=$("fArtist").value.trim();
+  const year=String($("fYear").value||"").trim();
+  const category=$("fCategory").value||"";
+  const cover=$("fCover").value.trim()||"img/default-cover.jpg";
+  let duration=parseDurationFlexible($("fDuration").value.trim());
+  if(!duration){duration=durationFromPickers(); if(duration==="00:00")duration="";}
+  const addedAt=$("fAddedAt").value.trim()||new Date().toISOString();
+  const styles=Array.from(document.querySelectorAll(".styleCheck:checked")).map(x=>String(x.value||"").trim()).filter(Boolean);
+  return sanitizeSong({artist,title,year,category,style:styles,duration,cover,addedAt});
 }
-
-$("addStyleBtn").addEventListener("click", () => {
-    const val = $("newStyle").value.trim();
-    if (!val) return;
-
-    if (!MASTER_STYLES.includes(val)) MASTER_STYLES.push(val);
-
-    $("newStyle").value = "";
-
-    const selected = Array.from(document.querySelectorAll("#styleChips input:checked"))
-        .map(x => x.value);
-
-    renderStyles([...selected, val]);
-});
-
-
-/* ===============================================
-    LOCAL SAVE
-   =============================================== */
-
-$("saveLocalBtn").addEventListener("click", () => {
-    if (SELECTED_INDEX < 0) return alert("Select a song first.");
-
-    CURRENT_SONGS[SELECTED_INDEX] = {
-        title: $("fTitle").value.trim(),
-        artist: $("fArtist").value.trim(),
-        year: $("fYear").value.trim(),
-        duration: $("fDuration").value.trim(),
-        category: $("fCategory").value,
-        cover: $("fCover").value.trim(),
-        style: Array.from(document.querySelectorAll("#styleChips input:checked"))
-                .map(x => x.value)
-    };
-
-    renderSongsList();
-});
-
-
-$("deleteSongBtn").addEventListener("click", () => {
-    if (SELECTED_INDEX < 0) return;
-
-    if (!confirm("Delete this song?")) return;
-
-    CURRENT_SONGS.splice(SELECTED_INDEX, 1);
-    SELECTED_INDEX = -1;
-
-    renderSongsList();
-    clearEditor();
-});
-
-
-$("addSongBtn").addEventListener("click", () => {
-    CURRENT_SONGS.push({
-        title:"", artist:"", year:"", duration:"",
-        category:"80s Music", cover:"img/default-cover.jpg",
-        style:[]
+function saveSongLocal(){
+  if(state.selectedIndex<0){setStatus("No song selected. Use <b>Add Song</b> first.",true);return;}
+  const updated=gatherEditorSong();
+  if(!updated.title || !updated.artist){setStatus("Please fill at least <b>Title</b> and <b>Artist</b>.",true);return;}
+  state.songs[state.selectedIndex]=updated;
+  sortSongs();
+  const key=(updated.artist+"||"+updated.title).toLowerCase();
+  state.selectedIndex=state.songs.findIndex(s=>(s.artist+"||"+s.title).toLowerCase()===key);
+  renderList(); selectSong(state.selectedIndex);
+  setStatus("Saved (local). Export or Save to GitHub.");
+}
+function addNewSong(){
+  const now=new Date().toISOString();
+  state.songs.push(sanitizeSong({artist:"",title:"",duration:"",year:"",style:[],category:"80s Music",cover:"img/default-cover.jpg",addedAt:now}));
+  sortSongs();
+  state.selectedIndex=state.songs.findIndex(x=>x.addedAt===now);
+  renderList(); selectSong(state.selectedIndex);
+  setStatus("New song added (local). Fill fields then Save.");
+}
+function deleteSong(){
+  if(state.selectedIndex<0)return;
+  const s=state.songs[state.selectedIndex];
+  if(!confirm(`Delete:\n${s.artist} – ${s.title} ?`)) return;
+  state.songs.splice(state.selectedIndex,1);
+  state.selectedIndex=-1;
+  renderList(); clearEditor();
+  setStatus("Deleted (local). Export or Save to GitHub.");
+}
+/* ===========================
+   LOAD / SAVE
+=========================== */
+async function loadFromSite(){
+  const url=`${GH_PATH}/${CURRENT_FILENAME}`;
+  setStatus(`Loading from site: <code>${escapeHtml(url)}</code> …`);
+  const res=await fetch(url,{cache:"no-store"});
+  if(!res.ok) throw new Error(`Fetch failed (${res.status}) for ${url}`);
+  const code=await res.text();
+  state.songs=parseSongsFromJs(code,CURRENT_VARNAME);
+  CURRENT_SHA=""; // unknown
+  sortSongs(); state.selectedIndex=-1;
+  renderList(); clearEditor();
+  enableEditors(true);
+  setStatus(`Loaded <b>${CURRENT_FILENAME}</b> from site (${state.songs.length} songs).`);
+}
+async function loadFromGitHub(){
+  if(!TOKEN){setStatus("Token missing. Paste token then Test.",true);return;}
+  setStatus(`Loading from GitHub: <code>${escapeHtml(GH_PATH+"/"+CURRENT_FILENAME)}</code> …`);
+  const data=await githubGetFile(`${GH_PATH}/${CURRENT_FILENAME}`);
+  CURRENT_SHA=data.sha||"";
+  const code=atob((data.content||"").replace(/\n/g,""));
+  state.songs=parseSongsFromJs(code,CURRENT_VARNAME);
+  sortSongs(); state.selectedIndex=-1;
+  renderList(); clearEditor();
+  enableEditors(true);
+  setStatus(`Loaded <b>${CURRENT_FILENAME}</b> from GitHub (${state.songs.length} songs).`);
+}
+function exportJs(){
+  sortSongs();
+  const js=`const ${CURRENT_VARNAME} = ${JSON.stringify(state.songs,null,2)};\n`;
+  const blob=new Blob([js],{type:"application/javascript;charset=utf-8"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download=CURRENT_FILENAME;
+  document.body.appendChild(a); a.click(); a.remove();
+  setStatus(`Exported <b>${CURRENT_FILENAME}</b>. Upload it back to <code>${GH_PATH}/${CURRENT_FILENAME}</code> if needed.`);
+}
+async function saveToGitHub(){
+  if(!TOKEN){setStatus("Token missing. Paste token then Test.",true);return;}
+  if(!CURRENT_SHA){setStatus("No SHA found. Load file from GitHub first (not from site) before saving.",true);return;}
+  sortSongs();
+  const js=`const ${CURRENT_VARNAME} = ${JSON.stringify(state.songs,null,2)};\n`;
+  const base64=utf8ToBase64(js);
+  setStatus("Saving to GitHub…");
+  const result=await githubPutFile(`${GH_PATH}/${CURRENT_FILENAME}`,base64,CURRENT_SHA);
+  CURRENT_SHA=result.content && result.content.sha ? result.content.sha : CURRENT_SHA;
+  setStatus(`✅ Saved <b>${CURRENT_FILENAME}</b> to GitHub.`);
+}
+/* ===========================
+   COVER TOOLS
+=========================== */
+function onCoverPicked(file){
+  if(!file) return;
+  $("coverImg").src=URL.createObjectURL(file);
+  state.coverBlob=file;
+  $("suggestedCoverName").textContent=slugCoverName($("fArtist").value.trim(),$("fTitle").value.trim());
+  $("downloadCoverBtn").disabled=false;
+}
+function downloadCover(){
+  if(!state.coverBlob) return;
+  const suggested=slugCoverName($("fArtist").value.trim(),$("fTitle").value.trim());
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(state.coverBlob);
+  a.download=suggested;
+  document.body.appendChild(a); a.click(); a.remove();
+  $("fCover").value="img/"+suggested;
+  setStatus(`Cover downloaded as <b>${escapeHtml(suggested)}</b>. Put it in <code>img/</code> and upload to GitHub.`);
+}
+/* ===========================
+   CSV BULK
+=========================== */
+function parseCSV(text){
+  const rows=[]; let row=[]; let cur=""; let inQuotes=false;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i],next=text[i+1];
+    if(ch=='"' && inQuotes && next=='"'){cur+='"';i++;continue;}
+    if(ch=='"'){inQuotes=!inQuotes;continue;}
+    if(ch=="," && !inQuotes){row.push(cur);cur="";continue;}
+    if((ch=="\n"||ch=="\r") && !inQuotes){
+      if(ch=="\r" && next=="\n") i++;
+      row.push(cur);
+      if(row.some(v=>String(v).trim()!=="")) rows.push(row);
+      row=[];cur="";continue;
+    }
+    cur+=ch;
+  }
+  row.push(cur);
+  if(row.some(v=>String(v).trim()!=="")) rows.push(row);
+  return rows;
+}
+function importCSVReplace(){
+  const text=$("csvBox").value.trim();
+  if(!text) return setStatus("CSV box is empty.",true);
+  try{
+    const rows=parseCSV(text);
+    if(rows.length<2) throw new Error("CSV needs header + at least one row.");
+    const headers=rows[0].map(h=>String(h||"").trim().toLowerCase());
+    const objs=rows.slice(1).map(r=>{const o={}; headers.forEach((h,i)=>o[h]=(r[i]??"").trim()); return o;});
+    state.songs=objs.map(o=>sanitizeSong({
+      artist:o.artist||"",title:o.title||"",year:o.year||"",category:o.category||"",
+      style:o.style||"",duration:o.duration||"",cover:o.cover||"img/default-cover.jpg",
+      addedAt:o.addedat||o.addedAt||""
+    }));
+    sortSongs(); state.selectedIndex=-1;
+    renderList(); clearEditor();
+    setStatus(`CSV imported. Current file now has <b>${state.songs.length}</b> songs. Save/Export to apply.`);
+  }catch(e){
+    setStatus("CSV import error: "+escapeHtml(e.message||String(e)),true);
+  }
+}
+function exportCSV(){
+  sortSongs();
+  const headers=["artist","title","year","category","style","duration","cover","addedAt"];
+  const lines=[headers.join(",")];
+  for(const s of state.songs){
+    const row=[s.artist,s.title,s.year,s.category,(s.style||[]).join(" | "),s.duration,s.cover,s.addedAt].map(v=>{
+      const x=String(v??"");
+      if(x.includes(",")||x.includes('"')||x.includes("\n")) return `"${x.replaceAll('"','""')}"`;
+      return x;
     });
-
-    SELECTED_INDEX = CURRENT_SONGS.length-1;
-
-    renderSongsList();
-    loadSongIntoEditor();
-});
-
-
-/* ===============================================
-    COVER HANDLING
-   =============================================== */
-
-$("coverFile").addEventListener("change", e => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    $("coverPreview").src = URL.createObjectURL(file);
-    $("downloadCoverBtn").disabled = false;
-
-    const name = slugCover(
-        $("fArtist").value,
-        $("fTitle").value
-    );
-
-    $("suggestedCoverName").textContent = name;
-});
-
-function slugCover(a, t){
-    return `${a || "Unknown"} - ${t || "Untitled"}.jpg`
-        .replace(/[*?"<>:|\\\/]/g, "");
+    lines.push(row.join(","));
+  }
+  const blob=new Blob([lines.join("\n")],{type:"text/csv;charset=utf-8"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download=`songs_${state.letter}.csv`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setStatus("CSV exported.");
 }
-
-
-/* ===============================================
-    SAVE TO GITHUB (PUT API)
-   =============================================== */
-
-$("saveToGitHubBtn").addEventListener("click", async () => {
-
-    if (!TOKEN) return alert("Enter your token first.");
-
-    $("fileStatus").textContent = "⏳ Saving to GitHub…";
-
-    try {
-        const jsContent =
-            `const ${CURRENT_VARNAME} = ` +
-            JSON.stringify(CURRENT_SONGS, null, 2) +
-            ";\n";
-
-        const base64 = btoa(unescape(encodeURIComponent(jsContent)));
-
-        const path = `${GH_PATH}/${CURRENT_FILENAME}`;
-
-        const result = await githubPutFile(path, base64, CURRENT_SHA);
-
-        CURRENT_SHA = result.content.sha;
-
-        $("fileStatus").textContent = "✅ Saved to GitHub successfully!";
-    }
-    catch (err) {
-        $("fileStatus").textContent = "❌ " + err.message;
-    }
-});
-
+/* ===========================
+   LETTER SWITCH
+=========================== */
+function updateLetter(letter){
+  state.letter=letter;
+  CURRENT_VARNAME=computeVarName(letter);
+  CURRENT_FILENAME=computeFileName(letter);
+  $("currentFile").textContent=`${GH_PATH}/${CURRENT_FILENAME}`;
+  state.songs=[]; state.selectedIndex=-1;
+  $("songsList").innerHTML="";
+  clearEditor();
+  enableEditors(false);
+  setStatus(`Selected <b>${CURRENT_FILENAME}</b> (${CURRENT_VARNAME}). Load it from GitHub / site, or import local.`);
+}
+/* ===========================
+   INIT + EVENTS
+=========================== */
+(function init(){
+  $("ghOwner").textContent=GH_OWNER;
+  $("ghRepo").textContent=GH_REPO;
+  $("ghBranch").textContent=GH_BRANCH;
+  $("ghPath").textContent=GH_PATH;
+  fillLetterSelect(); fillDecades(); fillDurationPickers();
+  updateLetter("A");
+  $("letterSelect").addEventListener("change",e=>updateLetter(e.target.value));
+  $("listSearch").addEventListener("input",renderList);
+  $("testTokenBtn").addEventListener("click",()=>{
+    TOKEN=$("tokenInput").value.trim();
+    testToken().catch(err=>setTokenStatus("❌ "+err.message,true));
+  });
+  $("loadFromGitHubBtn").addEventListener("click",()=>loadFromGitHub().catch(err=>setStatus("Load error: "+escapeHtml(err.message),true)));
+  $("loadFromSiteBtn").addEventListener("click",()=>loadFromSite().catch(err=>setStatus("Load error: "+escapeHtml(err.message),true)));
+  $("localFile").addEventListener("change",e=>{
+    const f=e.target.files && e.target.files[0];
+    if(!f) return;
+    const reader=new FileReader();
+    reader.onload=()=>{
+      try{
+        state.songs=parseSongsFromJs(String(reader.result||""),CURRENT_VARNAME);
+        CURRENT_SHA="";
+        sortSongs(); state.selectedIndex=-1;
+        renderList(); clearEditor();
+        enableEditors(true);
+        setStatus(`Imported local <b>${escapeHtml(f.name)}</b> → ${state.songs.length} songs.`);
+      }catch(err){
+        setStatus("Import error: "+escapeHtml(err.message||String(err)),true);
+      }
+    };
+    reader.readAsText(f);
+  });
+  $("addNewBtn").addEventListener("click",addNewSong);
+  $("saveBtn").addEventListener("click",saveSongLocal);
+  $("deleteBtn").addEventListener("click",deleteSong);
+  $("exportBtn").addEventListener("click",exportJs);
+  $("saveToGitHubBtn").addEventListener("click",()=>saveToGitHub().catch(err=>setStatus("Save error: "+escapeHtml(err.message),true)));
+  $("addStyleBtn").addEventListener("click",()=>{
+    const st=$("newStyle").value.trim();
+    if(!st) return;
+    if(!masterStyles.some(x=>x.toLowerCase()===st.toLowerCase())) masterStyles.push(st);
+    masterStyles=masterStyles.filter(Boolean).sort((a,b)=>a.toLowerCase().localeCompare(b.toLowerCase()));
+    $("newStyle").value="";
+    const selected=Array.from(document.querySelectorAll(".styleCheck:checked")).map(x=>x.value);
+    renderStyles(selected);
+    setStatus(`Style added: <b>${escapeHtml(st)}</b> (this session).`);
+  });
+  function syncDuration(){ $("fDuration").value=durationFromPickers(); }
+  $("fMin").addEventListener("change",syncDuration);
+  $("fSec").addEventListener("change",syncDuration);
+  function refreshSuggested(){ $("suggestedCoverName").textContent=slugCoverName($("fArtist").value.trim(),$("fTitle").value.trim()); }
+  $("fTitle").addEventListener("input",refreshSuggested);
+  $("fArtist").addEventListener("input",refreshSuggested);
+  $("coverFile").addEventListener("change",e=>onCoverPicked(e.target.files && e.target.files[0]));
+  $("downloadCoverBtn").addEventListener("click",downloadCover);
+  $("importCsvBtn").addEventListener("click",()=>{
+    if(!confirm("This will REPLACE the current file content in memory. Continue?")) return;
+    importCSVReplace();
+  });
+  $("exportCsvBtn").addEventListener("click",exportCSV);
+  // enable Save button only after token test
+  $("loadFromGitHubBtn").disabled=true;
+  $("saveToGitHubBtn").disabled=true;
+})();
 </script>
-
 </body>
 </html>
