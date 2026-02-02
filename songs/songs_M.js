@@ -56,7 +56,7 @@ const songsM = [
       "Pop"
     ],
     "category": "2010s Music",
-    "cover": "img/default-cover.jpg",
+    "cover": "img/Maroon 5 - Memories.jpg",
     "addedAt": "2026-02-02T03:09:00.687Z"
   },
   {
